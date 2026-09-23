@@ -1,0 +1,30 @@
+[chb01] 42 files, 72993 windows (40.6 h), 7 seizures, 0 skipped, 294s  | total 294s
+[chb02] 36 files, 63479 windows (35.3 h), 3 seizures, 0 skipped, 255s  | total 548s
+[chb03] 38 files, 68403 windows (38.0 h), 7 seizures, 0 skipped, 344s  | total 892s
+[chb04] 42 files, 280914 windows (156.1 h), 4 seizures, 0 skipped, 1117s  | total 2009s
+[chb05] 39 files, 70205 windows (39.0 h), 5 seizures, 0 skipped, 257s  | total 2266s
+[chb06] 18 files, 120122 windows (66.7 h), 10 seizures, 0 skipped, 448s  | total 2715s
+[chb07] 19 files, 120693 windows (67.1 h), 3 seizures, 0 skipped, 447s  | total 3161s
+[chb08] 20 files, 36011 windows (20.0 h), 5 seizures, 0 skipped, 136s  | total 3297s
+[chb09] 19 files, 122165 windows (67.9 h), 4 seizures, 0 skipped, 466s  | total 3763s
+[chb10] 25 files, 90041 windows (50.0 h), 7 seizures, 0 skipped, 335s  | total 4098s
+[chb11] 35 files, 62628 windows (34.8 h), 3 seizures, 0 skipped, 231s  | total 4329s
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:50: RuntimeWarning: divide by zero encountered in divide
+  gain = (pmax - pmin) / (dmax - dmin)
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:51: RuntimeWarning: invalid value encountered in multiply
+  offset = pmin - gain * dmin
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:60: RuntimeWarning: invalid value encountered in multiply
+  signals[label] = block * gain[i] + offset[i]
+[chb12] 21 files, 37237 windows (20.7 h), 27 seizures, 3 skipped, 138s  | total 4467s
+[chb13] 33 files, 59400 windows (33.0 h), 12 seizures, 0 skipped, 220s  | total 4688s
+[chb14] 26 files, 46800 windows (26.0 h), 8 seizures, 0 skipped, 183s  | total 4871s
+[chb15] 40 files, 72017 windows (40.0 h), 20 seizures, 0 skipped, 275s  | total 5146s
+[chb16] 19 files, 34200 windows (19.0 h), 10 seizures, 0 skipped, 126s  | total 5271s
+[chb17] 21 files, 37812 windows (21.0 h), 3 seizures, 0 skipped, 135s  | total 5407s
+[chb18] 36 files, 64142 windows (35.6 h), 6 seizures, 0 skipped, 233s  | total 5640s
+[chb19] 30 files, 53873 windows (29.9 h), 3 seizures, 0 skipped, 199s  | total 5839s
+[chb20] 29 files, 49682 windows (27.6 h), 8 seizures, 0 skipped, 183s  | total 6022s
+[chb21] 33 files, 59094 windows (32.8 h), 4 seizures, 0 skipped, 219s  | total 6240s
+[chb22] 31 files, 55805 windows (31.0 h), 3 seizures, 0 skipped, 202s  | total 6443s
+[chb23] 9 files, 47804 windows (26.6 h), 7 seizures, 0 skipped, 178s  | total 6621s
+[chb24] 22 files, 38333 windows (21.3 h), 16 seizures, 0 skipped, 142s  | total 6763s

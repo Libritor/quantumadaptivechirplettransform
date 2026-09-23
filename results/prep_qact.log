@@ -1,0 +1,51 @@
+[chbmit] chb01: 219 ictal, 219 interictal epochs
+[chbmit] chb02: 85 ictal, 85 interictal epochs
+[chbmit] chb03: 195 ictal, 195 interictal epochs
+[chbmit] chb04: 184 ictal, 184 interictal epochs
+[chbmit] chb05: 278 ictal, 278 interictal epochs
+[chbmit] chb06: 75 ictal, 75 interictal epochs
+[chbmit] chb07: 162 ictal, 162 interictal epochs
+[chbmit] chb08: 459 ictal, 459 interictal epochs
+[chbmit] chb09: 135 ictal, 135 interictal epochs
+[chbmit] chb10: 217 ictal, 217 interictal epochs
+[chbmit] chb11: 403 ictal, 403 interictal epochs
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:50: RuntimeWarning: divide by zero encountered in divide
+  gain = (pmax - pmin) / (dmax - dmin)
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:51: RuntimeWarning: invalid value encountered in multiply
+  offset = pmin - gain * dmin
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:60: RuntimeWarning: invalid value encountered in multiply
+  signals[label] = block * gain[i] + offset[i]
+[chbmit] chb12: 486 ictal, 486 interictal epochs
+[chbmit] chb13: 265 ictal, 265 interictal epochs
+[chbmit] chb14: 84 ictal, 84 interictal epochs
+[chbmit] chb15: 989 ictal, 989 interictal epochs
+[chbmit] chb16: 40 ictal, 40 interictal epochs
+[chbmit] chb17: 146 ictal, 0 interictal epochs
+[chbmit] chb18: 158 ictal, 158 interictal epochs
+[chbmit] chb19: 115 ictal, 115 interictal epochs
+[chbmit] chb20: 144 ictal, 144 interictal epochs
+[chbmit] chb21: 99 ictal, 99 interictal epochs
+[chbmit] chb22: 102 ictal, 102 interictal epochs
+[chbmit] chb23: 210 ictal, 210 interictal epochs
+[chbmit] chb24: 251 ictal, 251 interictal epochs
+[chbmit] total 10856 epochs {'interictal': 5355, 'ictal': 5501}, 23 patients
+[chbmit] skipped: flat channel=17, montage lacks a standard channel=3
+[prep] 10856 epochs x 18 channels, 195408 channel-epochs (59s)
+[prep] QACT: 9 qubits + 1 ancilla, 22,784 in-band atoms, shots=256
+[prep] 256/195408  763/s  ~256s left
+[prep] 13056/195408  1495/s  ~122s left
+[prep] 25856/195408  1501/s  ~113s left
+[prep] 38656/195408  1510/s  ~104s left
+[prep] 51456/195408  1516/s  ~95s left
+[prep] 64256/195408  1519/s  ~86s left
+[prep] 77056/195408  1522/s  ~78s left
+[prep] 89856/195408  1524/s  ~69s left
+[prep] 102656/195408  1524/s  ~61s left
+[prep] 115456/195408  1522/s  ~53s left
+[prep] 128256/195408  1522/s  ~44s left
+[prep] 141056/195408  1523/s  ~36s left
+[prep] 153856/195408  1524/s  ~27s left
+[prep] 166656/195408  1524/s  ~19s left
+[prep] 179456/195408  1525/s  ~10s left
+[prep] 192256/195408  1523/s  ~2s left
+[prep] saved (10856, 234) (QACT) and (10856, 270) (QACT+amplitude); post-selection success 0.167; total 188s

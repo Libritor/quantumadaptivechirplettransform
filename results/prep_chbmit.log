@@ -1,0 +1,83 @@
+[chbmit] chb01: 219 ictal, 219 interictal epochs
+[chbmit] chb02: 85 ictal, 85 interictal epochs
+[chbmit] chb03: 195 ictal, 195 interictal epochs
+[chbmit] chb04: 184 ictal, 184 interictal epochs
+[chbmit] chb05: 278 ictal, 278 interictal epochs
+[chbmit] chb06: 75 ictal, 75 interictal epochs
+[chbmit] chb07: 162 ictal, 162 interictal epochs
+[chbmit] chb08: 459 ictal, 459 interictal epochs
+[chbmit] chb09: 135 ictal, 135 interictal epochs
+[chbmit] chb10: 217 ictal, 217 interictal epochs
+[chbmit] chb11: 403 ictal, 403 interictal epochs
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:50: RuntimeWarning: divide by zero encountered in divide
+  gain = (pmax - pmin) / (dmax - dmin)
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:51: RuntimeWarning: invalid value encountered in multiply
+  offset = pmin - gain * dmin
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:60: RuntimeWarning: invalid value encountered in multiply
+  signals[label] = block * gain[i] + offset[i]
+[chbmit] chb12: 486 ictal, 486 interictal epochs
+[chbmit] chb13: 265 ictal, 265 interictal epochs
+[chbmit] chb14: 84 ictal, 84 interictal epochs
+[chbmit] chb15: 989 ictal, 989 interictal epochs
+[chbmit] chb16: 40 ictal, 40 interictal epochs
+[chbmit] chb17: 146 ictal, 0 interictal epochs
+[chbmit] chb18: 158 ictal, 158 interictal epochs
+[chbmit] chb19: 115 ictal, 115 interictal epochs
+[chbmit] chb20: 144 ictal, 144 interictal epochs
+[chbmit] chb21: 99 ictal, 99 interictal epochs
+[chbmit] chb22: 102 ictal, 102 interictal epochs
+[chbmit] chb23: 210 ictal, 210 interictal epochs
+[chbmit] chb24: 251 ictal, 251 interictal epochs
+[chbmit] total 10856 epochs {'interictal': 5355, 'ictal': 5501}, 23 patients
+[chbmit] skipped: flat channel=17, montage lacks a standard channel=3
+[prep] loaded in 116s
+[gpu_features] 4096/195408 channel-epochs  397/s  ~482s left
+[gpu_features] 8192/195408 channel-epochs  678/s  ~276s left
+[gpu_features] 12288/195408 channel-epochs  887/s  ~206s left
+[gpu_features] 16384/195408 channel-epochs  1049/s  ~171s left
+[gpu_features] 20480/195408 channel-epochs  1179/s  ~148s left
+[gpu_features] 24576/195408 channel-epochs  1284/s  ~133s left
+[gpu_features] 28672/195408 channel-epochs  1371/s  ~122s left
+[gpu_features] 32768/195408 channel-epochs  1444/s  ~113s left
+[gpu_features] 36864/195408 channel-epochs  1507/s  ~105s left
+[gpu_features] 40960/195408 channel-epochs  1562/s  ~99s left
+[gpu_features] 45056/195408 channel-epochs  1611/s  ~93s left
+[gpu_features] 49152/195408 channel-epochs  1653/s  ~88s left
+[gpu_features] 53248/195408 channel-epochs  1687/s  ~84s left
+[gpu_features] 57344/195408 channel-epochs  1709/s  ~81s left
+[gpu_features] 61440/195408 channel-epochs  1727/s  ~78s left
+[gpu_features] 65536/195408 channel-epochs  1743/s  ~75s left
+[gpu_features] 69632/195408 channel-epochs  1759/s  ~72s left
+[gpu_features] 73728/195408 channel-epochs  1772/s  ~69s left
+[gpu_features] 77824/195408 channel-epochs  1791/s  ~66s left
+[gpu_features] 81920/195408 channel-epochs  1794/s  ~63s left
+[gpu_features] 86016/195408 channel-epochs  1790/s  ~61s left
+[gpu_features] 90112/195408 channel-epochs  1808/s  ~58s left
+[gpu_features] 94208/195408 channel-epochs  1826/s  ~55s left
+[gpu_features] 98304/195408 channel-epochs  1842/s  ~53s left
+[gpu_features] 102400/195408 channel-epochs  1858/s  ~50s left
+[gpu_features] 106496/195408 channel-epochs  1855/s  ~48s left
+[gpu_features] 110592/195408 channel-epochs  1852/s  ~46s left
+[gpu_features] 114688/195408 channel-epochs  1855/s  ~44s left
+[gpu_features] 118784/195408 channel-epochs  1868/s  ~41s left
+[gpu_features] 122880/195408 channel-epochs  1871/s  ~39s left
+[gpu_features] 126976/195408 channel-epochs  1870/s  ~37s left
+[gpu_features] 131072/195408 channel-epochs  1876/s  ~34s left
+[gpu_features] 135168/195408 channel-epochs  1887/s  ~32s left
+[gpu_features] 139264/195408 channel-epochs  1898/s  ~30s left
+[gpu_features] 143360/195408 channel-epochs  1902/s  ~27s left
+[gpu_features] 147456/195408 channel-epochs  1906/s  ~25s left
+[gpu_features] 151552/195408 channel-epochs  1909/s  ~23s left
+[gpu_features] 155648/195408 channel-epochs  1912/s  ~21s left
+[gpu_features] 159744/195408 channel-epochs  1920/s  ~19s left
+[gpu_features] 163840/195408 channel-epochs  1928/s  ~16s left
+[gpu_features] 167936/195408 channel-epochs  1936/s  ~14s left
+[gpu_features] 172032/195408 channel-epochs  1944/s  ~12s left
+[gpu_features] 176128/195408 channel-epochs  1951/s  ~10s left
+[gpu_features] 180224/195408 channel-epochs  1958/s  ~8s left
+[gpu_features] 184320/195408 channel-epochs  1965/s  ~6s left
+[gpu_features] 188416/195408 channel-epochs  1972/s  ~4s left
+[gpu_features] 192512/195408 channel-epochs  1978/s  ~1s left
+[gpu_features] 195408/195408 channel-epochs  1972/s  ~0s left
+[prep] GPU ACT on 195408 channel-epochs in 107s
+[prep] saved X=(10856, 234)  total 223s

@@ -1,0 +1,16 @@
+[siena] PN00: 132 ictal, 132 interictal
+[siena] PN01: 64 ictal, 64 interictal
+[siena] PN03: 121 ictal, 121 interictal
+[siena] PN05: 51 ictal, 51 interictal
+[siena] PN06: 140 ictal, 140 interictal
+[siena] PN07: 31 ictal, 31 interictal
+[siena] PN09: 101 ictal, 101 interictal
+[siena] PN10: 155 ictal, 155 interictal
+[siena] PN11: 27 ictal, 27 interictal
+[siena] PN12: 144 ictal, 144 interictal
+[siena] PN13: 131 ictal, 131 interictal
+[siena] PN14: 80 ictal, 80 interictal
+[siena] PN16: 114 ictal, 114 interictal
+[siena] PN17: 76 ictal, 76 interictal
+[siena] total 2734 epochs {'interictal': 1367, 'ictal': 1367}, 14 patients
+SAVED (2734, 18, 512) {'interictal': 1367, 'ictal': 1367} 14 patients

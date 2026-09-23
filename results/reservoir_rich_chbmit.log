@@ -1,0 +1,63 @@
+prepared 23 people (9s)
+
+=== K=8 inputs, R=4 reservoirs, 456 readout features (25s) ===
+  qrc      skill +0.0780 / median +0.1121   risk AUC 0.559 (14)
+  qrc_J0   skill +0.0993 / median +0.1290   risk AUC 0.607 (14)
+  esn      skill +0.1063 / median +0.1385   risk AUC 0.582 (14)
+  linear   skill +0.1095 / median +0.1412   risk AUC 0.594 (14)
+  pooled readout (all 23 people trained together):
+    qrc      skill +0.2436 / median +0.2557
+    qrc_J0   skill +0.2448 / median +0.2537
+    esn      skill +0.2507 / median +0.2660
+    linear   skill +0.2459 / median +0.2553
+  [per-person] A qrc vs esn    diff -0.0283 better 1/23 p=0.0000 -> none
+  [per-person] B qrc vs qrc_J0 diff -0.0214 better 5/23 p=0.0035 -> none
+  [pooled    ] A qrc vs esn    diff -0.0072 better 2/23 p=0.0000 -> none
+  [pooled    ] B qrc vs qrc_J0 diff -0.0012 better 11/23 p=0.3931 -> none
+
+=== K=24 inputs, R=6 reservoirs, 560 readout features (38s) ===
+  qrc      skill +0.0903 / median +0.1106   risk AUC 0.592 (14)
+  qrc_J0   skill +0.1038 / median +0.1270   risk AUC 0.577 (14)
+  esn      skill +0.1077 / median +0.1352   risk AUC 0.564 (14)
+  linear   skill +0.1143 / median +0.1454   risk AUC 0.592 (14)
+  pooled readout (all 23 people trained together):
+    qrc      skill +0.2430 / median +0.2545
+    qrc_J0   skill +0.2429 / median +0.2553
+    esn      skill +0.2491 / median +0.2649
+    linear   skill +0.2454 / median +0.2550
+  [per-person] A qrc vs esn    diff -0.0174 better 5/23 p=0.0605 -> none
+  [per-person] B qrc vs qrc_J0 diff -0.0134 better 9/23 p=0.0563 -> none
+  [pooled    ] A qrc vs esn    diff -0.0061 better 4/23 p=0.0006 -> none
+  [pooled    ] B qrc vs qrc_J0 diff +0.0002 better 9/23 p=0.7090 -> none
+
+=== K=48 inputs, R=12 reservoirs, 848 readout features (78s) ===
+  qrc      skill +0.0826 / median +0.0867   risk AUC 0.639 (14)
+  qrc_J0   skill +0.0960 / median +0.1167   risk AUC 0.602 (14)
+  esn      skill +0.1116 / median +0.0944   risk AUC 0.534 (14)
+  linear   skill +0.1266 / median +0.1445   risk AUC 0.591 (14)
+  pooled readout (all 23 people trained together):
+    qrc      skill +0.2401 / median +0.2522
+    qrc_J0   skill +0.2427 / median +0.2558
+    esn      skill +0.2469 / median +0.2650
+    linear   skill +0.2451 / median +0.2558
+  [per-person] A qrc vs esn    diff -0.0290 better 6/23 p=0.0135 -> none
+  [per-person] B qrc vs qrc_J0 diff -0.0134 better 6/23 p=0.1114 -> none
+  [pooled    ] A qrc vs esn    diff -0.0069 better 3/23 p=0.0001 -> none
+  [pooled    ] B qrc vs qrc_J0 diff -0.0026 better 6/23 p=0.0049 -> none
+
+=== K=100 inputs, R=25 reservoirs, 1472 readout features (183s) ===
+  qrc      skill +0.0665 / median +0.0503   risk AUC 0.609 (14)
+  qrc_J0   skill +0.1128 / median +0.1092   risk AUC 0.601 (14)
+  esn      skill +0.0824 / median +0.0572   risk AUC 0.602 (14)
+  linear   skill +0.1223 / median +0.1357   risk AUC 0.605 (14)
+  pooled readout (all 23 people trained together):
+    qrc      skill +0.2346 / median +0.2507
+    qrc_J0   skill +0.2373 / median +0.2533
+    esn      skill +0.2411 / median +0.2567
+    linear   skill +0.2443 / median +0.2553
+  [per-person] A qrc vs esn    diff -0.0159 better 4/23 p=0.0054 -> none
+  [per-person] B qrc vs qrc_J0 diff -0.0463 better 4/23 p=0.0008 -> none
+  [pooled    ] A qrc vs esn    diff -0.0065 better 2/23 p=0.0001 -> none
+  [pooled    ] B qrc vs qrc_J0 diff -0.0027 better 4/23 p=0.0301 -> none
+
+total 646s

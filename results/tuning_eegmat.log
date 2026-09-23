@@ -1,0 +1,46 @@
+[tune] X=(2016, 247) subjects=36 classes=[1008 1008]
+[tune] train 1344 epochs / 24 subjects | test 672 epochs / 12 subjects (held out)
+[tune] searching on 900 training epochs, 24 subjects, budget=25/model
+
+  [qsvc 1/25] inner= 52.6%  {'angle_scale': 0.7, 'reps': 2, 'entanglement': 'full', 'feature_map': 'zz', 'C': 1.0, 'n_qubits': 4}  <-- best
+  [qsvc 3/25] inner= 52.8%  {'angle_scale': 0.3, 'reps': 2, 'entanglement': 'full', 'feature_map': 'z', 'C': 10.0, 'n_qubits': 6}  <-- best
+  [qsvc 4/25] inner= 53.6%  {'angle_scale': 0.3, 'reps': 2, 'entanglement': 'linear', 'feature_map': 'z', 'C': 10.0, 'n_qubits': 4}  <-- best
+  [qsvc 9/25] inner= 53.7%  {'angle_scale': 0.1, 'reps': 2, 'entanglement': 'full', 'feature_map': 'zz', 'C': 1.0, 'n_qubits': 8}  <-- best
+  [qsvc 10/25] inner= 52.7%
+  [qsvc 20/25] inner= 52.8%
+  [qsvc 22/25] inner= 54.1%  {'angle_scale': 0.5, 'reps': 2, 'entanglement': 'full', 'feature_map': 'zz', 'C': 100.0, 'n_qubits': 8}  <-- best
+[qsvc] inner 54.1% -> HELD-OUT 50.9% (445s search)
+
+  [svm_rbf 1/25] inner= 51.6%  {'C': 100.0, 'gamma': 0.1, 'n_qubits': 8}  <-- best
+  [svm_rbf 4/25] inner= 54.3%  {'C': 100.0, 'gamma': 0.1, 'n_qubits': 20}  <-- best
+  [svm_rbf 10/25] inner= 50.4%
+  [svm_rbf 17/25] inner= 54.7%  {'C': 0.1, 'gamma': 0.05, 'n_qubits': 20}  <-- best
+  [svm_rbf 19/25] inner= 54.9%  {'C': 10.0, 'gamma': 0.5, 'n_qubits': 12}  <-- best
+  [svm_rbf 20/25] inner= 51.6%
+[svm_rbf] inner 54.9% -> HELD-OUT 56.5% (3s search)
+
+  [logreg 1/25] inner= 54.2%  {'C': 10.0, 'n_qubits': 16}  <-- best
+  [logreg 5/25] inner= 54.9%  {'C': 0.01, 'n_qubits': 20}  <-- best
+  [logreg 10/25] inner= 53.8%
+  [logreg 16/25] inner= 55.6%  {'C': 0.003, 'n_qubits': 30}  <-- best
+  [logreg 20/25] inner= 51.6%
+[logreg] inner 55.6% -> HELD-OUT 59.7% (1s search)
+
+==============================================================
+model       inner CV   HELD-OUT
+--------------------------------------------------------------
+logreg         55.6%      59.7%
+svm_rbf        54.9%      56.5%
+qsvc           54.1%      50.9%
+majority                  50.0%
+
+best quantum (qsvc) - best classical (logreg) = -8.8 points
+per-subject: quantum better on 4/12 (0 tied), mean diff -8.8 pts
+paired Wilcoxon across subjects: p = 0.088
+Traceback (most recent call last):
+  File "/Users/khalilchaghouri/Quantum Brain Encoding/tune.py", line 195, in <module>
+    main()
+  File "/Users/khalilchaghouri/Quantum Brain Encoding/tune.py", line 190, in main
+    json.dump(report, open(a.out, "w"), indent=2, default=str)
+                           ^^^^^
+AttributeError: 'numpy.ndarray' object has no attribute 'out'. Did you mean: 'put'?

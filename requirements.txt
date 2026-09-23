@@ -1,0 +1,18 @@
+# Core pipeline. Python 3.12 recommended (Qiskit has no 3.14 wheels yet).
+numpy>=1.26
+scipy>=1.11
+scikit-learn>=1.4
+matplotlib>=3.8
+
+# Quantum
+qiskit>=2.0
+qiskit-machine-learning>=0.9
+qiskit-aer>=0.15
+
+# Adaptive Chirplet Transform
+adaptive-chirplet-transform @ git+https://gitlab.com/adaptive-chirplet-transform/adaptive-chirplet-transform.git
+
+# Live Muse capture (optional -- only needed for --source lsl / brainflow)
+# muselsl>=2.2
+# pylsl>=1.16
+# brainflow>=5.12

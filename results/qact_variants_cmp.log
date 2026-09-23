@@ -1,0 +1,33 @@
+model      feature set        pooled  per-patient
+logreg L2  classical ACT       61.5%        63.6%
+logreg L2  QACT quad           61.7%        62.7%
+logreg L2  cubic               62.9%        63.6%
+logreg L2  skew                60.5%        62.5%
+logreg L2  cubic+skew          61.8%        63.0%
+logreg L2  proposal k=32       59.7%        60.6%
+svm_rbf    classical ACT       65.2%        67.5%
+svm_rbf    QACT quad           64.6%        66.4%
+svm_rbf    cubic               64.1%        66.0%
+svm_rbf    skew                64.0%        66.7%
+svm_rbf    cubic+skew          64.1%        66.2%
+svm_rbf    proposal k=32       62.7%        64.8%
+
+paired Wilcoxon across 23 patients (alpha = 0.003125):
+  logreg L2  cubic          vs classical ACT  +0.02 pts better 15/23  p=0.7090  ns
+  logreg L2  cubic          vs QACT quad      +0.94 pts better 12/23  p=0.4274  ns
+  logreg L2  skew           vs classical ACT  -1.18 pts better 10/23  p=0.1341  (negative)
+  logreg L2  skew           vs QACT quad      -0.25 pts better 12/23  p=0.5633  (negative)
+  logreg L2  cubic+skew     vs classical ACT  -0.62 pts better 10/23  p=0.4549  (negative)
+  logreg L2  cubic+skew     vs QACT quad      +0.31 pts better 13/23  p=0.8932  ns
+  logreg L2  proposal k=32  vs classical ACT  -3.02 pts better  8/23  p=0.0179  (negative)
+  logreg L2  proposal k=32  vs QACT quad      -2.09 pts better  5/23  p=0.0101  (negative)
+  svm_rbf    cubic          vs classical ACT  -1.53 pts better 10/23  p=0.1695  (negative)
+  svm_rbf    cubic          vs QACT quad      -0.37 pts better 10/23  p=0.3720  (negative)
+  svm_rbf    skew           vs classical ACT  -0.78 pts better  8/23  p=0.3548  (negative)
+  svm_rbf    skew           vs QACT quad      +0.38 pts better 13/23  p=0.4651  ns
+  svm_rbf    cubic+skew     vs classical ACT  -1.33 pts better 13/23  p=0.4852  (negative)
+  svm_rbf    cubic+skew     vs QACT quad      -0.17 pts better 11/23  p=0.7413  (negative)
+  svm_rbf    proposal k=32  vs classical ACT  -2.71 pts better  4/23  p=0.0017  (negative)
+  svm_rbf    proposal k=32  vs QACT quad      -1.55 pts better  5/23  p=0.0327  (negative)
+
+wrote results/qact_variants.json

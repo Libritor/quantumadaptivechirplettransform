@@ -1,0 +1,13 @@
+=== cubic phase (argmax) ===
+[prep] QACT: 9 qubits + 1 ancilla, 107,740 in-band atoms, shots=256, refine_steps=4 (112 circuit evaluations per step)
+[prep] saved (10856, 234) (QACT) and (10856, 270) (QACT+amplitude); post-selection success 0.167; refinement circuit evaluations 4,107,264; total 194s
+=== skew envelope (argmax) ===
+[prep] QACT: 9 qubits + 1 ancilla, 113,920 in-band atoms, shots=256, refine_steps=4 (112 circuit evaluations per step)
+[prep] saved (10856, 234) (QACT) and (10856, 270) (QACT+amplitude); post-selection success 0.239; refinement circuit evaluations 4,107,264; total 245s
+=== cubic + skew (argmax) ===
+[prep] QACT: 9 qubits + 1 ancilla, 195,840 in-band atoms, shots=256, refine_steps=4 (112 circuit evaluations per step)
+[prep] saved (10856, 234) (QACT) and (10856, 270) (QACT+amplitude); post-selection success 0.230; refinement circuit evaluations 4,107,264; total 286s
+=== proposal k=32 ===
+[prep] QACT: 9 qubits + 1 ancilla, 22,784 in-band atoms, shots=256, refine_steps=4 (112 circuit evaluations per step)
+[prep] saved (10856, 234) (QACT) and (10856, 270) (QACT+amplitude); post-selection success 0.169; refinement circuit evaluations 131,432,448; total 139s
+VARIANTSDONE

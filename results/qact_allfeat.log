@@ -1,0 +1,58 @@
+logreg L2  classical ACT   234 feats  pooled  61.5%  per-patient  63.6%
+logreg L2  QACT argmax     234 feats  pooled  61.7%  per-patient  62.7%
+logreg L2  QACT sampled    234 feats  pooled  60.2%  per-patient  61.0%
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+logreg L1  classical ACT   234 feats  pooled  61.4%  per-patient  63.4%
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+logreg L1  QACT argmax     234 feats  pooled  62.1%  per-patient  62.9%
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+  warnings.warn(
+logreg L1  QACT sampled    234 feats  pooled  60.3%  per-patient  61.4%
+svm_rbf    classical ACT   234 feats  pooled  65.2%  per-patient  67.5%
+svm_rbf    QACT argmax     234 feats  pooled  64.6%  per-patient  66.4%
+svm_rbf    QACT sampled    234 feats  pooled  63.1%  per-patient  64.4%
+
+paired Wilcoxon across 23 patients (alpha = 0.00556):
+  logreg L2  A1 QACT sampled  - classical ACT  -2.59 pts  better  8/23  p=0.0392  (negative)
+  logreg L2  A2 QACT sampled  - QACT argmax    -1.66 pts  better  7/23  p=0.0262  (negative)
+  logreg L2  A3 QACT argmax   - classical ACT  -0.93 pts  better  9/23  p=0.4452  (negative)
+  logreg L1  A1 QACT sampled  - classical ACT  -2.04 pts  better 10/23  p=0.0824  (negative)
+  logreg L1  A2 QACT sampled  - QACT argmax    -1.58 pts  better  6/23  p=0.0442  (negative)
+  logreg L1  A3 QACT argmax   - classical ACT  -0.46 pts  better 10/23  p=0.7089  (negative)
+  svm_rbf    A1 QACT sampled  - classical ACT  -3.09 pts  better  7/23  p=0.0081  (negative)
+  svm_rbf    A2 QACT sampled  - QACT argmax    -1.93 pts  better  4/23  p=0.0032  (negative)
+  svm_rbf    A3 QACT argmax   - classical ACT  -1.16 pts  better 11/23  p=0.3931  (negative)
+
+wrote results/qact_allfeat.json

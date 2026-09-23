@@ -1,0 +1,25 @@
+[siena] 2734 epochs x 18 channels, 14 patients
+[siena] classical ACT done (34s)
+[siena] QACT done (48s)
+
+model      feature set             feats   pooled  per-patient
+logreg L2  amplitude only             36    70.9%        69.5%
+logreg L2  classical ACT             234    68.6%        68.3%
+logreg L2  QACT sampled              234    67.5%        68.0%
+logreg L2  classical ACT + amp       270    79.0%        78.9%
+logreg L2  QACT + amp                270    78.2%        78.5%
+svm_rbf    amplitude only             36    70.3%        65.9%
+svm_rbf    classical ACT             234    66.5%        66.7%
+svm_rbf    QACT sampled              234    68.6%        68.7%
+svm_rbf    classical ACT + amp       270    80.1%        79.2%
+svm_rbf    QACT + amp                270    79.8%        79.1%
+
+paired Wilcoxon across 14 patients (alpha = 0.00833); CHB-MIT differences in brackets:
+  logreg L2  S1 classical ACT + amp   - amplitude only     +9.43 pts [CHB-MIT +10.4]  better 11/14  p=0.0047  REPLICATES *
+  logreg L2  S2 classical ACT         - QACT sampled       +0.30 pts [CHB-MIT +2.6]  better  8/14  p=0.6698  REPLICATES
+  logreg L2  S3 classical ACT + amp   - QACT + amp         +0.44 pts [CHB-MIT +2.5]  better  8/14  p=0.4631  REPLICATES
+  svm_rbf    S1 classical ACT + amp   - amplitude only     +13.31 pts [CHB-MIT +10.4]  better 11/14  p=0.0040  REPLICATES *
+  svm_rbf    S2 classical ACT         - QACT sampled       -1.99 pts [CHB-MIT +2.6]  better  4/14  p=0.2958  OPPOSITE SIGN
+  svm_rbf    S3 classical ACT + amp   - QACT + amp         +0.19 pts [CHB-MIT +2.5]  better  7/14  p=0.9515  REPLICATES
+
+wrote results/siena_confirmation.json (53s)

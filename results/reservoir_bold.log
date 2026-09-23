@@ -1,0 +1,24 @@
+prepared 23 people, K=48, target = 30x270 unsmoothed (633s)
+[qrc] done (754s)
+[qrc_J0] done (771s)
+[esn] done (781s)
+[linear] done (781s)
+
+=== per_person readout, K=48 ===
+  qrc      skill +0.2037  corr +0.4447  skill if made bold -0.0959  (boldness x2.13)
+  qrc_J0   skill +0.2364  corr +0.4818  skill if made bold -0.0043  (boldness x2.13)
+  esn      skill +0.2244  corr +0.4663  skill if made bold -0.0508  (boldness x2.16)
+  linear   skill +0.2569  corr +0.5075  skill if made bold +0.0542  (boldness x1.87)
+  qrc vs esn    diff -0.0207 better 1/23 p=0.0000 -> none
+  qrc vs qrc_J0 diff -0.0327 better 2/23 p=0.0000 -> none
+
+=== pooled readout, K=48 ===
+  qrc      skill +0.4020  corr +0.6183  skill if made bold +0.2690  (boldness x1.53)
+  qrc_J0   skill +0.4056  corr +0.6204  skill if made bold +0.2743  (boldness x1.54)
+  esn      skill +0.4055  corr +0.6219  skill if made bold +0.2742  (boldness x1.53)
+  linear   skill +0.4070  corr +0.6214  skill if made bold +0.2764  (boldness x1.55)
+  qrc vs esn    diff -0.0035 better 4/23 p=0.0001 -> none
+  qrc vs qrc_J0 diff -0.0036 better 4/23 p=0.0011 -> none
+
+total 781s
+BOLDDONE

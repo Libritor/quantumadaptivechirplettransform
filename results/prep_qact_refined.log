@@ -1,0 +1,51 @@
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:50: RuntimeWarning: divide by zero encountered in divide
+  gain = (pmax - pmin) / (dmax - dmin)
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:51: RuntimeWarning: invalid value encountered in multiply
+  offset = pmin - gain * dmin
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:60: RuntimeWarning: invalid value encountered in multiply
+  signals[label] = block * gain[i] + offset[i]
+[prep] 10856 epochs x 18 channels, 195408 channel-epochs (49s)
+[prep] QACT: 9 qubits + 1 ancilla, 22,784 in-band atoms, shots=256, refine_steps=4 (112 circuit evaluations per step)
+[prep] 256/195408  703/s  ~278s left
+[prep] 13056/195408  1485/s  ~123s left
+[prep] 25856/195408  1505/s  ~113s left
+[prep] 38656/195408  1513/s  ~104s left
+[prep] 51456/195408  1519/s  ~95s left
+[prep] 64256/195408  1519/s  ~86s left
+[prep] 77056/195408  1520/s  ~78s left
+[prep] 89856/195408  1521/s  ~69s left
+[prep] 102656/195408  1521/s  ~61s left
+[prep] 115456/195408  1522/s  ~53s left
+[prep] 128256/195408  1523/s  ~44s left
+[prep] 141056/195408  1523/s  ~36s left
+[prep] 153856/195408  1523/s  ~27s left
+[prep] 166656/195408  1524/s  ~19s left
+[prep] 179456/195408  1525/s  ~10s left
+[prep] 192256/195408  1524/s  ~2s left
+[prep] saved (10856, 234) (QACT) and (10856, 270) (QACT+amplitude); post-selection success 0.167; refinement circuit evaluations 4,107,264; total 179s
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:50: RuntimeWarning: divide by zero encountered in divide
+  gain = (pmax - pmin) / (dmax - dmin)
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:51: RuntimeWarning: invalid value encountered in multiply
+  offset = pmin - gain * dmin
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:60: RuntimeWarning: invalid value encountered in multiply
+  signals[label] = block * gain[i] + offset[i]
+[prep] 10856 epochs x 18 channels, 195408 channel-epochs (53s)
+[prep] QACT: 9 qubits + 1 ancilla, 22,784 in-band atoms, shots=256, refine_steps=4 (112 circuit evaluations per step)
+[prep] 256/195408  712/s  ~274s left
+[prep] 13056/195408  1493/s  ~122s left
+[prep] 25856/195408  1514/s  ~112s left
+[prep] 38656/195408  1519/s  ~103s left
+[prep] 51456/195408  1511/s  ~95s left
+[prep] 64256/195408  1504/s  ~87s left
+[prep] 77056/195408  1501/s  ~79s left
+[prep] 89856/195408  1499/s  ~70s left
+[prep] 102656/195408  1496/s  ~62s left
+[prep] 115456/195408  1495/s  ~53s left
+[prep] 128256/195408  1495/s  ~45s left
+[prep] 141056/195408  1498/s  ~36s left
+[prep] 153856/195408  1501/s  ~28s left
+[prep] 166656/195408  1503/s  ~19s left
+[prep] 179456/195408  1506/s  ~11s left
+[prep] 192256/195408  1507/s  ~2s left
+[prep] saved (10856, 234) (QACT) and (10856, 270) (QACT+amplitude); post-selection success 0.165; refinement circuit evaluations 4,107,264; total 183s
+REFDONE

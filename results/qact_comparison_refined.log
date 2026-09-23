@@ -1,0 +1,24 @@
+variant: refined
+
+logreg   classical ACT  pooled  57.4%  per-patient  56.0%
+logreg   QACT argmax    pooled  60.1%  per-patient  58.2%
+logreg   QACT sampled   pooled  59.6%  per-patient  57.3%
+svm_rbf  classical ACT  pooled  56.4%  per-patient  56.8%
+svm_rbf  QACT argmax    pooled  60.1%  per-patient  59.1%
+svm_rbf  QACT sampled   pooled  59.4%  per-patient  57.6%
+qsvc     classical ACT  pooled  55.8%  per-patient  54.8%
+qsvc     QACT argmax    pooled  56.2%  per-patient  55.8%
+qsvc     QACT sampled   pooled  55.0%  per-patient  55.4%
+
+paired Wilcoxon across 23 patients (alpha = 0.00556):
+  logreg   P1 QACT sampled  - classical ACT  +1.39 pts  better 14/23  p=0.4264  ns
+  logreg   P2 QACT sampled  - QACT argmax    -0.88 pts  better 10/23  p=0.3570  (negative)
+  logreg   P3 QACT argmax   - classical ACT  +2.27 pts  better 16/23  p=0.1341  ns
+  svm_rbf  P1 QACT sampled  - classical ACT  +0.79 pts  better 12/23  p=0.6010  ns
+  svm_rbf  P2 QACT sampled  - QACT argmax    -1.54 pts  better  7/23  p=0.0945  (negative)
+  svm_rbf  P3 QACT argmax   - classical ACT  +2.33 pts  better 13/23  p=0.0858  ns
+  qsvc     P1 QACT sampled  - classical ACT  +0.59 pts  better 11/23  p=0.7998  ns
+  qsvc     P2 QACT sampled  - QACT argmax    -0.36 pts  better 10/23  p=0.9095  (negative)
+  qsvc     P3 QACT argmax   - classical ACT  +0.95 pts  better 13/23  p=0.7090  ns
+
+wrote results/qact_comparison_refined.json

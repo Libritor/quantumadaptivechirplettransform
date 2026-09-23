@@ -1,0 +1,43 @@
+{
+  "qsvc": {
+    "best": {
+      "angle_scale": 0.3,
+      "reps": 2,
+      "entanglement": "full",
+      "feature_map": "z",
+      "C": 10.0,
+      "n_qubits": 6
+    },
+    "inner": 0.7184167803104097,
+    "test": 0.7666666666666667,
+    "search_seconds": 6.25396203994751
+  },
+  "svm_rbf": {
+    "best": {
+      "C": 100.0,
+      "gamma": 0.1,
+      "n_qubits": 8
+    },
+    "inner": 0.6726410805896487,
+    "test": 0.7333333333333333,
+    "search_seconds": 0.12058496475219727
+  },
+  "logreg": {
+    "best": {
+      "C": 10.0,
+      "n_qubits": 16
+    },
+    "inner": 0.7850834469770764,
+    "test": 0.8166666666666667,
+    "search_seconds": 0.2412891387939453
+  },
+  "_meta": {
+    "test_subjects": [
+      "S2",
+      "S3"
+    ],
+    "majority": 0.5,
+    "n_train": 118,
+    "n_test": 60
+  }
+}

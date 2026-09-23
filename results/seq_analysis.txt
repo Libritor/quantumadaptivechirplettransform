@@ -1,0 +1,17 @@
+23 persons: chb01, chb02, chb03, chb04, chb05, chb06, chb07, chb08, chb09, chb10, chb11, chb12, chb13, chb14, chb15, chb16, chb17, chb18, chb19, chb20, chb22, chb23, chb24
+train 490 h / test 490 h; seizure onsets train 85 / test 100
+
+model         forecast skill (mean / median)    risk AUC (mean, n)   params  core
+lstm               +0.1058 / +0.1035                 0.567 (15)   191637     -
+qin_zz             +0.1010 / +0.1007                 0.573 (15)   197781     -
+qin_z              +0.1016 / +0.0925                 0.569 (15)   197781     -
+qlstm              +0.0136 / +0.0059                 0.576 (15)    60061   144
+qlstm_twin         +0.0189 / +0.0053                 0.557 (15)    60085   168
+
+forecast skill > 0 (beats persistence) for: lstm 23/23, qin_zz 23/23, qin_z 22/23, qlstm 19/23, qlstm_twin 17/23
+
+PRE-REGISTERED DECISIONS (alpha = 0.0125):
+  A: fixed circuit features       forecast skill  quantum - twin = -0.0006 (better for 9/23 persons), p = 0.5202 -> no demonstrated quantum benefit
+  A: fixed circuit features       risk AUC        quantum - twin = +0.0035 (better for 6/15 persons), p = 1.0000 -> no demonstrated quantum benefit
+  B: trainable circuits in gates  forecast skill  quantum - twin = -0.0052 (better for 9/23 persons), p = 0.0858 -> no demonstrated quantum benefit
+  B: trainable circuits in gates  risk AUC        quantum - twin = +0.0190 (better for 7/15 persons), p = 0.6788 -> no demonstrated quantum benefit

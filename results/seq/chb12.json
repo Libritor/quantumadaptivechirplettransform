@@ -1,0 +1,147 @@
+{
+  "person": "chb12",
+  "info": {
+    "steps": 7446,
+    "train_h": 10.3,
+    "test_h": 10.3,
+    "onsets_train": 14,
+    "onsets_test": 13,
+    "risk_pos_train": 342,
+    "risk_pos_test": 338
+  },
+  "n_train": 2810,
+  "n_val": 528,
+  "n_test": 3338,
+  "models": {
+    "lstm": [
+      {
+        "skill": 0.038814856193484126,
+        "auc": 0.5859369570613056,
+        "epochs": 40,
+        "params": 191637,
+        "core_params": null,
+        "seconds": 10.26103401184082
+      },
+      {
+        "skill": 0.03467150294731558,
+        "auc": 0.5645544800198561,
+        "epochs": 40,
+        "params": 191637,
+        "core_params": null,
+        "seconds": 8.911301851272583
+      },
+      {
+        "skill": 0.02567169228145627,
+        "auc": 0.6656316703896749,
+        "epochs": 40,
+        "params": 191637,
+        "core_params": null,
+        "seconds": 7.464619398117065
+      }
+    ],
+    "qin_zz": [
+      {
+        "skill": 0.01959366833709264,
+        "auc": 0.6238607594936708,
+        "epochs": 40,
+        "params": 197781,
+        "core_params": null,
+        "seconds": 5.726494550704956
+      },
+      {
+        "skill": 0.007196001565914489,
+        "auc": 0.5152792256142963,
+        "epochs": 39,
+        "params": 197781,
+        "core_params": null,
+        "seconds": 6.2892186641693115
+      },
+      {
+        "skill": 0.042885400135070806,
+        "auc": 0.645734673616282,
+        "epochs": 40,
+        "params": 197781,
+        "core_params": null,
+        "seconds": 3.9640166759490967
+      }
+    ],
+    "qin_z": [
+      {
+        "skill": 0.009740516004801969,
+        "auc": 0.5894303797468354,
+        "epochs": 40,
+        "params": 197781,
+        "core_params": null,
+        "seconds": 4.681478261947632
+      },
+      {
+        "skill": 0.002806662714589403,
+        "auc": 0.6192156862745098,
+        "epochs": 40,
+        "params": 197781,
+        "core_params": null,
+        "seconds": 5.2639710903167725
+      },
+      {
+        "skill": 0.02962268752808539,
+        "auc": 0.6037254901960785,
+        "epochs": 40,
+        "params": 197781,
+        "core_params": null,
+        "seconds": 5.484933376312256
+      }
+    ],
+    "qlstm": [
+      {
+        "skill": -0.002024942063153956,
+        "auc": 0.6354082898982377,
+        "epochs": 24,
+        "params": 60061,
+        "core_params": 144,
+        "seconds": 264.64961647987366
+      },
+      {
+        "skill": -0.0009887342225334272,
+        "auc": 0.729862248696947,
+        "epochs": 40,
+        "params": 60061,
+        "core_params": 144,
+        "seconds": 465.90149974823
+      },
+      {
+        "skill": -0.0011712284524212357,
+        "auc": 0.6486969471332837,
+        "epochs": 24,
+        "params": 60061,
+        "core_params": 144,
+        "seconds": 310.1883955001831
+      }
+    ],
+    "qlstm_twin": [
+      {
+        "skill": -0.0006134858965773926,
+        "auc": 0.6789476296847854,
+        "epochs": 16,
+        "params": 60085,
+        "core_params": 168,
+        "seconds": 5.947829723358154
+      },
+      {
+        "skill": -0.003881011752647767,
+        "auc": 0.6679051873914122,
+        "epochs": 20,
+        "params": 60085,
+        "core_params": 168,
+        "seconds": 7.583367824554443
+      },
+      {
+        "skill": -0.0013276769203305339,
+        "auc": 0.6603400347480765,
+        "epochs": 23,
+        "params": 60085,
+        "core_params": 168,
+        "seconds": 8.835294485092163
+      }
+    ]
+  }
+}

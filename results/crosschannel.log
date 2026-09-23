@@ -1,0 +1,29 @@
+model      feature set                   feats  per-patient
+logreg L2  chbmit                          234        63.6%
+logreg L2  chbmit_cc                       252        63.6%
+logreg L2  chbmitqactonly_ref              234        61.0%
+logreg L2  chbmitqactonly_cc               252        61.5%
+logreg L2  chbmitamp                       270        74.0%
+logreg L2  chbmitamp_cc                    288        74.5%
+logreg L2  chbmitqact_ref                  270        71.5%
+logreg L2  chbmitqact_cc                   288        72.4%
+svm_rbf    chbmit                          234        67.5%
+svm_rbf    chbmit_cc                       252        67.7%
+svm_rbf    chbmitqactonly_ref              234        64.4%
+svm_rbf    chbmitqactonly_cc               252        64.3%
+svm_rbf    chbmitamp                       270        76.8%
+svm_rbf    chbmitamp_cc                    288        76.5%
+svm_rbf    chbmitqact_ref                  270        73.7%
+svm_rbf    chbmitqact_cc                   288        73.7%
+
+paired Wilcoxon across 23 patients (alpha = 0.00625):
+  logreg L2  C1 classical ACT              +0.02 pts  better 11/23  p=0.9095  ns
+  logreg L2  C2 QACT                       +0.51 pts  better 13/23  p=0.2443  ns
+  logreg L2  C3 classical ACT + amplitude  +0.43 pts  better 10/23  p=0.6849  ns
+  logreg L2  C4 QACT + amplitude           +0.90 pts  better 13/23  p=0.0420  ns
+  svm_rbf    C1 classical ACT              +0.24 pts  better 13/23  p=0.4651  ns
+  svm_rbf    C2 QACT                       -0.16 pts  better  9/23  p=0.4452  (negative)
+  svm_rbf    C3 classical ACT + amplitude  -0.33 pts  better 10/23  p=0.3703  (negative)
+  svm_rbf    C4 QACT + amplitude           -0.07 pts  better  8/23  p=0.6274  (negative)
+
+wrote results/crosschannel.json

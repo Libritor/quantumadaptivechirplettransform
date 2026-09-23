@@ -1,0 +1,147 @@
+[tune2] X=(10856, 270) subjects=23 budget=30/model outer=6 inner=3 alpha=0.025
+  [none] fold 1/6 qsvc     inner  70.6%  outer  67.9%   {'n_qubits': 6, 'layers': 3, 'reupload': True, 'entanglement': 'full', 'feature_map': 'z', 'angle_scale': 0.5, 'C': 10.0}
+  [none] fold 1/6 pqk      inner  70.2%  outer  71.3%   {'n_qubits': 10, 'layers': 3, 'reupload': False, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 0.7, 'C': 1.0, 'gamma': 'scale'}
+  [none] fold 1/6 qlr      inner  68.2%  outer  69.9%   {'n_qubits': 10, 'layers': 2, 'reupload': True, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 0.5, 'C': 1.0}
+  [none] fold 1/6 hybrid   inner  68.2%  outer  74.5%   {'k_classical': 8, 'n_qubits': 8, 'layers': 1, 'reupload': False, 'entanglement': 'full', 'feature_map': 'zz', 'angle_scale': 0.3, 'C': 1.0}
+  [none] fold 1/6 hybrid_z inner  68.1%  outer  69.0%   {'k_classical': 8, 'n_qubits': 8, 'layers': 1, 'reupload': False, 'entanglement': 'full', 'feature_map': 'z', 'angle_scale': 0.3, 'C': 1.0}
+  [none] fold 1/6 logreg   inner  68.0%  outer  64.3%   {'C': 0.003, 'n_qubits': 4}
+  [none] fold 1/6 svm_rbf  inner  73.2%  outer  71.1%   {'C': 10.0, 'gamma': 'scale', 'n_qubits': 20}
+  [none] fold 1 done, 20s
+  [none] fold 2/6 qsvc     inner  72.8%  outer  56.2%   {'n_qubits': 6, 'layers': 3, 'reupload': False, 'entanglement': 'full', 'feature_map': 'zz', 'angle_scale': 0.1, 'C': 10.0}
+  [none] fold 2/6 pqk      inner  73.3%  outer  60.5%   {'n_qubits': 10, 'layers': 3, 'reupload': False, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 0.7, 'C': 1.0, 'gamma': 'scale'}
+  [none] fold 2/6 qlr      inner  72.5%  outer  50.6%   {'n_qubits': 4, 'layers': 3, 'reupload': False, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 0.1, 'C': 3.0}
+  [none] fold 2/6 hybrid   inner  71.2%  outer  48.9%   {'k_classical': 8, 'n_qubits': 6, 'layers': 2, 'reupload': False, 'entanglement': 'full', 'feature_map': 'zz', 'angle_scale': 0.3, 'C': 1.0}
+  [none] fold 2/6 hybrid_z inner  72.3%  outer  52.0%   {'k_classical': 8, 'n_qubits': 8, 'layers': 1, 'reupload': False, 'entanglement': 'full', 'feature_map': 'z', 'angle_scale': 0.3, 'C': 1.0}
+  [none] fold 2/6 logreg   inner  72.6%  outer  51.6%   {'C': 3.0, 'n_qubits': 4}
+  [none] fold 2/6 svm_rbf  inner  73.7%  outer  60.1%   {'C': 10.0, 'gamma': 'scale', 'n_qubits': 20}
+  [none] fold 2 done, 33s
+  [none] fold 3/6 qsvc     inner  65.3%  outer  78.5%   {'n_qubits': 6, 'layers': 3, 'reupload': False, 'entanglement': 'full', 'feature_map': 'zz', 'angle_scale': 0.1, 'C': 10.0}
+  [none] fold 3/6 pqk      inner  66.3%  outer  74.4%   {'n_qubits': 8, 'layers': 2, 'reupload': False, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 1.0, 'C': 0.1, 'gamma': 1.0}
+  [none] fold 3/6 qlr      inner  66.0%  outer  77.8%   {'n_qubits': 10, 'layers': 2, 'reupload': True, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 0.5, 'C': 1.0}
+  [none] fold 3/6 hybrid   inner  67.1%  outer  84.1%   {'k_classical': 20, 'n_qubits': 8, 'layers': 1, 'reupload': False, 'entanglement': 'full', 'feature_map': 'zz', 'angle_scale': 0.7, 'C': 0.1}
+  [none] fold 3/6 hybrid_z inner  66.7%  outer  75.1%   {'k_classical': 20, 'n_qubits': 8, 'layers': 1, 'reupload': False, 'entanglement': 'full', 'feature_map': 'z', 'angle_scale': 0.7, 'C': 0.1}
+  [none] fold 3/6 logreg   inner  67.6%  outer  82.0%   {'C': 10.0, 'n_qubits': 20}
+  [none] fold 3/6 svm_rbf  inner  67.2%  outer  77.9%   {'C': 10.0, 'gamma': 0.5, 'n_qubits': 6}
+  [none] fold 3 done, 46s
+  [none] fold 4/6 qsvc     inner  64.3%  outer  79.9%   {'n_qubits': 10, 'layers': 2, 'reupload': False, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 0.1, 'C': 10.0}
+  [none] fold 4/6 pqk      inner  67.5%  outer  78.9%   {'n_qubits': 4, 'layers': 3, 'reupload': False, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 0.3, 'C': 100.0, 'gamma': 'scale'}
+  [none] fold 4/6 qlr      inner  64.7%  outer  78.7%   {'n_qubits': 6, 'layers': 2, 'reupload': True, 'entanglement': 'full', 'feature_map': 'z', 'angle_scale': 0.5, 'C': 0.1}
+  [none] fold 4/6 hybrid   inner  64.8%  outer  71.3%   {'k_classical': 8, 'n_qubits': 10, 'layers': 1, 'reupload': False, 'entanglement': 'full', 'feature_map': 'zz', 'angle_scale': 0.1, 'C': 0.3}
+  [none] fold 4/6 hybrid_z inner  64.4%  outer  77.1%   {'k_classical': 8, 'n_qubits': 4, 'layers': 1, 'reupload': False, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 0.2, 'C': 1.0}
+  [none] fold 4/6 logreg   inner  65.5%  outer  78.6%   {'C': 1.0, 'n_qubits': 12}
+  [none] fold 4/6 svm_rbf  inner  66.5%  outer  80.8%   {'C': 1.0, 'gamma': 'scale', 'n_qubits': 12}
+  [none] fold 4 done, 60s
+  [none] fold 5/6 qsvc     inner  73.9%  outer  49.1%   {'n_qubits': 8, 'layers': 2, 'reupload': True, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 0.2, 'C': 0.1}
+  [none] fold 5/6 pqk      inner  76.3%  outer  49.9%   {'n_qubits': 10, 'layers': 3, 'reupload': False, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 0.7, 'C': 1.0, 'gamma': 'scale'}
+  [none] fold 5/6 qlr      inner  73.9%  outer  48.8%   {'n_qubits': 10, 'layers': 1, 'reupload': False, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 0.3, 'C': 3.0}
+  [none] fold 5/6 hybrid   inner  74.5%  outer  49.2%   {'k_classical': 8, 'n_qubits': 8, 'layers': 3, 'reupload': True, 'entanglement': 'full', 'feature_map': 'zz', 'angle_scale': 0.1, 'C': 0.01}
+  [none] fold 5/6 hybrid_z inner  74.6%  outer  49.2%   {'k_classical': 20, 'n_qubits': 8, 'layers': 3, 'reupload': True, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 1.0, 'C': 0.003}
+  [none] fold 5/6 logreg   inner  73.5%  outer  49.1%   {'C': 0.003, 'n_qubits': 12}
+  [none] fold 5/6 svm_rbf  inner  75.5%  outer  50.0%   {'C': 0.1, 'gamma': 0.1, 'n_qubits': 30}
+  [none] fold 5 done, 72s
+  [none] fold 6/6 qsvc     inner  67.4%  outer  66.2%   {'n_qubits': 8, 'layers': 2, 'reupload': True, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 0.2, 'C': 0.1}
+  [none] fold 6/6 pqk      inner  67.6%  outer  69.0%   {'n_qubits': 10, 'layers': 3, 'reupload': True, 'entanglement': 'full', 'feature_map': 'z', 'angle_scale': 0.1, 'C': 0.01, 'gamma': 0.3}
+  [none] fold 6/6 qlr      inner  68.3%  outer  61.0%   {'n_qubits': 6, 'layers': 3, 'reupload': True, 'entanglement': 'linear', 'feature_map': 'zz', 'angle_scale': 0.1, 'C': 0.003}
+  [none] fold 6/6 hybrid   inner  67.9%  outer  62.0%   {'k_classical': 12, 'n_qubits': 10, 'layers': 2, 'reupload': False, 'entanglement': 'linear', 'feature_map': 'zz', 'angle_scale': 0.5, 'C': 0.1}
+  [none] fold 6/6 hybrid_z inner  67.1%  outer  64.6%   {'k_classical': 12, 'n_qubits': 4, 'layers': 3, 'reupload': True, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 0.05, 'C': 0.03}
+  [none] fold 6/6 logreg   inner  67.0%  outer  64.6%   {'C': 0.1, 'n_qubits': 12}
+  [none] fold 6/6 svm_rbf  inner  67.7%  outer  69.1%   {'C': 1.0, 'gamma': 0.01, 'n_qubits': 20}
+  [none] fold 6 done, 85s
+
+=== none normalisation: nested subject-wise CV, 36 subjects ===
+model      nested acc  mean/subject     sd
+svm_rbf         67.7%         71.1%  18.2   classical
+pqk             66.9%         70.3%  18.5   quantum
+qsvc            65.8%         69.1%  19.5   quantum
+logreg          64.5%         68.9%  16.4   classical
+hybrid          63.9%         68.9%  16.6   quantum
+hybrid_z        63.9%         69.2%  15.8   control (no entanglement)
+qlr             63.8%         67.8%  16.2   quantum
+
+paired Wilcoxon across subjects (quantum vs each classical):
+  qsvc  vs logreg   diff  +0.2 pts  better on 12/23  p = 0.4852
+  qsvc  vs svm_rbf  diff  -2.0 pts  better on 8/23  p = 0.0619
+  pqk   vs logreg   diff  +1.4 pts  better on 13/23  p = 0.2595
+  pqk   vs svm_rbf  diff  -0.8 pts  better on 11/23  p = 0.6148
+  qlr   vs logreg   diff  -1.1 pts  better on 6/23  p = 0.2113
+  qlr   vs svm_rbf  diff  -3.3 pts  better on 5/23  p = 0.0112
+  hybrid vs logreg   diff  +0.0 pts  better on 11/23  p = 0.9643
+  hybrid vs svm_rbf  diff  -2.2 pts  better on 7/23  p = 0.0824
+
+ENTANGLEMENT CONTROL: hybrid (zz) vs hybrid_z (classically trivial): diff -0.3 pts, better on 11/23, p = 0.9168
+
+PRE-REGISTERED DECISION: best quantum pqk vs best classical svm_rbf: -0.8 pts, p = 0.6148 (alpha 0.025) -> classical wins or ties
+  [subject] fold 1/6 qsvc     inner  77.6%  outer  81.6%   {'n_qubits': 10, 'layers': 3, 'reupload': True, 'entanglement': 'full', 'feature_map': 'z', 'angle_scale': 1.0, 'C': 0.1}
+  [subject] fold 1/6 pqk      inner  77.0%  outer  76.5%   {'n_qubits': 10, 'layers': 3, 'reupload': True, 'entanglement': 'full', 'feature_map': 'z', 'angle_scale': 0.1, 'C': 0.01, 'gamma': 0.3}
+  [subject] fold 1/6 qlr      inner  76.5%  outer  80.2%   {'n_qubits': 10, 'layers': 2, 'reupload': False, 'entanglement': 'full', 'feature_map': 'z', 'angle_scale': 1.0, 'C': 3.0}
+  [subject] fold 1/6 hybrid   inner  77.3%  outer  81.7%   {'k_classical': 16, 'n_qubits': 10, 'layers': 3, 'reupload': True, 'entanglement': 'linear', 'feature_map': 'zz', 'angle_scale': 0.1, 'C': 0.3}
+  [subject] fold 1/6 hybrid_z inner  77.8%  outer  80.7%   {'k_classical': 20, 'n_qubits': 8, 'layers': 3, 'reupload': True, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 1.0, 'C': 0.003}
+  [subject] fold 1/6 logreg   inner  75.3%  outer  78.0%   {'C': 0.003, 'n_qubits': 20}
+  [subject] fold 1/6 svm_rbf  inner  79.4%  outer  82.1%   {'C': 0.1, 'gamma': 0.1, 'n_qubits': 30}
+  [subject] fold 1 done, 14s
+  [subject] fold 2/6 qsvc     inner  83.7%  outer  63.2%   {'n_qubits': 4, 'layers': 2, 'reupload': False, 'entanglement': 'full', 'feature_map': 'z', 'angle_scale': 0.5, 'C': 100.0}
+  [subject] fold 2/6 pqk      inner  84.4%  outer  65.2%   {'n_qubits': 10, 'layers': 3, 'reupload': False, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 0.7, 'C': 1.0, 'gamma': 'scale'}
+  [subject] fold 2/6 qlr      inner  82.2%  outer  67.5%   {'n_qubits': 10, 'layers': 2, 'reupload': False, 'entanglement': 'full', 'feature_map': 'z', 'angle_scale': 1.0, 'C': 3.0}
+  [subject] fold 2/6 hybrid   inner  82.7%  outer  63.9%   {'k_classical': 16, 'n_qubits': 10, 'layers': 3, 'reupload': True, 'entanglement': 'linear', 'feature_map': 'zz', 'angle_scale': 0.1, 'C': 0.3}
+  [subject] fold 2/6 hybrid_z inner  82.1%  outer  64.9%   {'k_classical': 20, 'n_qubits': 8, 'layers': 3, 'reupload': True, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 1.0, 'C': 0.003}
+  [subject] fold 2/6 logreg   inner  81.6%  outer  64.2%   {'C': 0.003, 'n_qubits': 4}
+  [subject] fold 2/6 svm_rbf  inner  85.2%  outer  64.2%   {'C': 10.0, 'gamma': 'scale', 'n_qubits': 20}
+  [subject] fold 2 done, 26s
+  [subject] fold 3/6 qsvc     inner  78.2%  outer  90.9%   {'n_qubits': 10, 'layers': 3, 'reupload': True, 'entanglement': 'full', 'feature_map': 'z', 'angle_scale': 1.0, 'C': 0.1}
+  [subject] fold 3/6 pqk      inner  78.5%  outer  90.2%   {'n_qubits': 6, 'layers': 3, 'reupload': True, 'entanglement': 'linear', 'feature_map': 'zz', 'angle_scale': 0.1, 'C': 10.0, 'gamma': 1.0}
+  [subject] fold 3/6 qlr      inner  78.3%  outer  90.7%   {'n_qubits': 10, 'layers': 2, 'reupload': False, 'entanglement': 'full', 'feature_map': 'z', 'angle_scale': 1.0, 'C': 3.0}
+  [subject] fold 3/6 hybrid   inner  78.7%  outer  92.1%   {'k_classical': 16, 'n_qubits': 10, 'layers': 3, 'reupload': True, 'entanglement': 'linear', 'feature_map': 'zz', 'angle_scale': 0.2, 'C': 0.3}
+  [subject] fold 3/6 hybrid_z inner  77.2%  outer  90.9%   {'k_classical': 12, 'n_qubits': 10, 'layers': 2, 'reupload': False, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 0.5, 'C': 0.1}
+  [subject] fold 3/6 logreg   inner  76.3%  outer  91.3%   {'C': 0.003, 'n_qubits': 20}
+  [subject] fold 3/6 svm_rbf  inner  78.5%  outer  91.8%   {'C': 0.1, 'gamma': 0.05, 'n_qubits': 30}
+  [subject] fold 3 done, 40s
+  [subject] fold 4/6 qsvc     inner  76.2%  outer  91.0%   {'n_qubits': 10, 'layers': 3, 'reupload': True, 'entanglement': 'full', 'feature_map': 'z', 'angle_scale': 1.0, 'C': 0.1}
+  [subject] fold 4/6 pqk      inner  77.0%  outer  89.5%   {'n_qubits': 10, 'layers': 3, 'reupload': False, 'entanglement': 'linear', 'feature_map': 'zz', 'angle_scale': 0.1, 'C': 0.1, 'gamma': 'scale'}
+  [subject] fold 4/6 qlr      inner  76.6%  outer  89.4%   {'n_qubits': 6, 'layers': 3, 'reupload': True, 'entanglement': 'linear', 'feature_map': 'zz', 'angle_scale': 0.1, 'C': 0.003}
+  [subject] fold 4/6 hybrid   inner  75.4%  outer  86.3%   {'k_classical': 20, 'n_qubits': 8, 'layers': 3, 'reupload': True, 'entanglement': 'linear', 'feature_map': 'zz', 'angle_scale': 1.0, 'C': 0.003}
+  [subject] fold 4/6 hybrid_z inner  75.8%  outer  87.4%   {'k_classical': 12, 'n_qubits': 10, 'layers': 2, 'reupload': False, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 0.5, 'C': 0.1}
+  [subject] fold 4/6 logreg   inner  75.0%  outer  86.0%   {'C': 0.003, 'n_qubits': 12}
+  [subject] fold 4/6 svm_rbf  inner  77.7%  outer  90.5%   {'C': 0.1, 'gamma': 0.05, 'n_qubits': 30}
+  [subject] fold 4 done, 53s
+  [subject] fold 5/6 qsvc     inner  80.3%  outer  76.0%   {'n_qubits': 10, 'layers': 3, 'reupload': True, 'entanglement': 'full', 'feature_map': 'z', 'angle_scale': 1.0, 'C': 0.1}
+  [subject] fold 5/6 pqk      inner  79.9%  outer  76.8%   {'n_qubits': 6, 'layers': 3, 'reupload': True, 'entanglement': 'linear', 'feature_map': 'zz', 'angle_scale': 0.1, 'C': 10.0, 'gamma': 1.0}
+  [subject] fold 5/6 qlr      inner  79.4%  outer  76.5%   {'n_qubits': 10, 'layers': 2, 'reupload': False, 'entanglement': 'full', 'feature_map': 'z', 'angle_scale': 1.0, 'C': 3.0}
+  [subject] fold 5/6 hybrid   inner  79.3%  outer  69.6%   {'k_classical': 12, 'n_qubits': 8, 'layers': 3, 'reupload': True, 'entanglement': 'linear', 'feature_map': 'zz', 'angle_scale': 0.1, 'C': 0.01}
+  [subject] fold 5/6 hybrid_z inner  79.0%  outer  68.0%   {'k_classical': 12, 'n_qubits': 8, 'layers': 3, 'reupload': True, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 0.1, 'C': 0.01}
+  [subject] fold 5/6 logreg   inner  78.9%  outer  69.5%   {'C': 0.003, 'n_qubits': 12}
+  [subject] fold 5/6 svm_rbf  inner  81.8%  outer  76.9%   {'C': 0.1, 'gamma': 0.1, 'n_qubits': 30}
+  [subject] fold 5 done, 66s
+  [subject] fold 6/6 qsvc     inner  79.5%  outer  69.8%   {'n_qubits': 6, 'layers': 3, 'reupload': False, 'entanglement': 'full', 'feature_map': 'zz', 'angle_scale': 0.1, 'C': 10.0}
+  [subject] fold 6/6 pqk      inner  80.2%  outer  71.6%   {'n_qubits': 10, 'layers': 3, 'reupload': False, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 0.7, 'C': 1.0, 'gamma': 'scale'}
+  [subject] fold 6/6 qlr      inner  80.8%  outer  70.7%   {'n_qubits': 10, 'layers': 2, 'reupload': False, 'entanglement': 'full', 'feature_map': 'z', 'angle_scale': 1.0, 'C': 3.0}
+  [subject] fold 6/6 hybrid   inner  78.9%  outer  71.4%   {'k_classical': 12, 'n_qubits': 8, 'layers': 3, 'reupload': True, 'entanglement': 'linear', 'feature_map': 'zz', 'angle_scale': 0.1, 'C': 0.01}
+  [subject] fold 6/6 hybrid_z inner  80.1%  outer  72.3%   {'k_classical': 12, 'n_qubits': 10, 'layers': 2, 'reupload': False, 'entanglement': 'linear', 'feature_map': 'z', 'angle_scale': 0.5, 'C': 0.1}
+  [subject] fold 6/6 logreg   inner  78.5%  outer  71.3%   {'C': 0.003, 'n_qubits': 12}
+  [subject] fold 6/6 svm_rbf  inner  82.0%  outer  73.0%   {'C': 0.1, 'gamma': 0.05, 'n_qubits': 30}
+  [subject] fold 6 done, 78s
+
+=== subject normalisation: nested subject-wise CV, 36 subjects ===
+model      nested acc  mean/subject     sd
+svm_rbf         79.2%         79.5%  19.2   classical
+qlr             78.7%         78.5%  19.1   quantum
+qsvc            78.2%         78.9%  20.3   quantum
+pqk             78.0%         77.9%  19.2   quantum
+hybrid          76.8%         78.2%  19.4   quantum
+hybrid_z        76.8%         77.9%  19.2   control (no entanglement)
+logreg          76.1%         76.9%  19.3   classical
+
+paired Wilcoxon across subjects (quantum vs each classical):
+  qsvc  vs logreg   diff  +2.1 pts  better on 13/23  p = 0.1305
+  qsvc  vs svm_rbf  diff  -0.6 pts  better on 8/23  p = 0.5481
+  pqk   vs logreg   diff  +1.0 pts  better on 9/23  p = 0.4761
+  pqk   vs svm_rbf  diff  -1.6 pts  better on 6/23  p = 0.0680
+  qlr   vs logreg   diff  +1.7 pts  better on 12/23  p = 0.0569
+  qlr   vs svm_rbf  diff  -1.0 pts  better on 10/23  p = 0.1895
+  hybrid vs logreg   diff  +1.3 pts  better on 17/23  p = 0.0203
+  hybrid vs svm_rbf  diff  -1.3 pts  better on 7/23  p = 0.0802
+
+ENTANGLEMENT CONTROL: hybrid (zz) vs hybrid_z (classically trivial): diff +0.3 pts, better on 12/23, p = 0.6389
+
+PRE-REGISTERED DECISION: best quantum qlr vs best classical svm_rbf: -0.5 pts, p = 0.1895 (alpha 0.025) -> classical wins or ties
+
+wrote results/tuning_chbmitamp.json

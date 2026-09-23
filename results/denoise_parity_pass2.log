@@ -1,0 +1,31 @@
+[denoise] 144 rule configs; tune on 8 subjects, evaluate on 18 held out; 180s per subject
+[denoise] no cleaning (contaminated as-is): median score 3.537  (7s)
+[classical ACT] tuned in 86s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 2.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[classical ACT] held-out score 1.439 (median 1.434)  rrmse 0.428  alpha_dB 0.05  delta_dB 0.73  atoms called artifact 3%  (127s)
+[classical ACT asym] tuned in 86s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 3.0, 'K_LOW': 2.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[classical ACT asym] held-out score 1.375 (median 1.346)  rrmse 0.417  alpha_dB 0.05  delta_dB 0.71  atoms called artifact 4%  (129s)
+[QACT legacy] tuned in 74s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 1.5, 'DT_SHORT': 0.015, 'K_SHORT': 3.0}
+[QACT legacy] held-out score 2.461 (median 2.396)  rrmse 0.535  alpha_dB 0.08  delta_dB 2.07  atoms called artifact 4%  (100s)
+[QACT parity] tuned in 81s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 1.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[QACT parity] held-out score 1.272 (median 1.272)  rrmse 0.398  alpha_dB 0.05  delta_dB 0.66  atoms called artifact 19%  (116s)
+[QACT matched-fn] tuned in 75s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 1.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[QACT matched-fn] held-out score 1.299 (median 1.264)  rrmse 0.430  alpha_dB 0.04  delta_dB 0.72  atoms called artifact 11%  (96s)
+[QACT parity+asym] tuned in 92s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 1.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[QACT parity+asym] held-out score 1.159 (median 1.160)  rrmse 0.402  alpha_dB 0.05  delta_dB 0.57  atoms called artifact 18%  (145s)
+[QACT cubic] tuned in 89s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 1.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[QACT cubic] held-out score 1.484 (median 1.415)  rrmse 0.461  alpha_dB 0.05  delta_dB 1.03  atoms called artifact 17%  (146s)
+[QACT skew] tuned in 95s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 1.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[QACT skew] held-out score 1.227 (median 1.224)  rrmse 0.417  alpha_dB 0.04  delta_dB 0.69  atoms called artifact 20%  (158s)
+
+no cleaning: 3.487   (lower is better throughout)
+
+paired Wilcoxon across 18 held-out subjects (alpha = 0.0071); negative difference = cleans BETTER than classical ACT:
+  classical ACT asym   - classical ACT  -0.0648  better on 17/18  p=0.0000  BETTER *
+  QACT legacy          - classical ACT  +1.0216  better on  0/18  p=0.0000  WORSE *
+  QACT parity          - classical ACT  -0.1675  better on 17/18  p=0.0000  BETTER *
+  QACT matched-fn      - classical ACT  -0.1407  better on 17/18  p=0.0000  BETTER *
+  QACT parity+asym     - classical ACT  -0.2806  better on 18/18  p=0.0000  BETTER *
+  QACT cubic           - classical ACT  +0.0443  better on  8/18  p=0.0898  worse (ns)
+  QACT skew            - classical ACT  -0.2125  better on 17/18  p=0.0000  BETTER *
+
+wrote results/denoise_comparison.json  (total 1023s)

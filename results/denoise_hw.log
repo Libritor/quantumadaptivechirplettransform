@@ -1,0 +1,19 @@
+[denoise] 144 rule configs; tune on 8 subjects, evaluate on 18 held out; 180s per subject
+[denoise] no cleaning (contaminated as-is): median score 3.537  (7s)
+[classical ACT] tuned in 97s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 2.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[classical ACT] held-out score 1.439 (median 1.434)  rrmse 0.428  alpha_dB 0.05  delta_dB 0.73  atoms called artifact 3%  (140s)
+[classical ACT fine-f] tuned in 92s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 1.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[classical ACT fine-f] held-out score 1.257 (median 1.265)  rrmse 0.423  alpha_dB 0.04  delta_dB 0.62  atoms called artifact 12%  (148s)
+[QACT parity] tuned in 112s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 1.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[QACT parity] held-out score 1.272 (median 1.272)  rrmse 0.398  alpha_dB 0.05  delta_dB 0.66  atoms called artifact 19%  (214s)
+[QACT parity hw] tuned in 135s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 1.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[QACT parity hw] held-out score 1.213 (median 1.243)  rrmse 0.392  alpha_dB 0.04  delta_dB 0.57  atoms called artifact 19%  (175s)
+
+no cleaning: 3.487   (lower is better throughout)
+
+paired Wilcoxon across 18 held-out subjects (alpha = 0.0167); negative difference = cleans BETTER than classical ACT:
+  classical ACT fine-f - classical ACT  -0.1825  better on 17/18  p=0.0000  BETTER *
+  QACT parity          - classical ACT  -0.1675  better on 17/18  p=0.0000  BETTER *
+  QACT parity hw       - classical ACT  -0.2262  better on 17/18  p=0.0000  BETTER *
+
+wrote results/denoise_hw.json  (total 684s)

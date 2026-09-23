@@ -39,7 +39,15 @@ later corrected or refuted by their own controls.
    [the denoising section](#denoising-the-one-task-with-real-ground-truth). The
    parity work was still worth doing: it found a genuine selection bug and moved
    QACT from 70% worse than classical to statistically indistinguishable.
-4. **Recurring lesson, confirmed three times: reconstruction quality and
+4. **On real quantum hardware, QACT's circuits were cut to what current devices
+   can run — for short atoms.** Folding the envelope into state preparation, a
+   semiclassical QFT and window-local registers take a short atom's circuit from
+   2,027 to 142 CZ gates; under IBM Heron's noise model it then selects the right
+   atom, where the original design never did. Branch-and-bound and 3-point
+   refinement cut circuit executions per atom ~80x. Long atoms still do not fit:
+   state preparation is ~87% of what remains. See
+   [Making QACT cheaper on real quantum hardware](#making-qact-cheaper-on-real-quantum-hardware).
+5. **Recurring lesson, confirmed three times: reconstruction quality and
    classification value are nearly unrelated.** Atom-level improvements that are
    real and measurable (better fits, new atom families, smarter selection)
    repeatedly produced no gain in downstream accuracy.
@@ -1381,6 +1389,94 @@ update adds ~50%, backfit roughly doubles wall time, and `refine_extra` triples
 the circuit-evaluation count (5,376 -> 17,760 per batch) because c3's 3-local
 gates add 84 triples to the shift-rule budget.
 
+## Making QACT cheaper on real quantum hardware
+
+Everything above ran QACT's circuits in simulation, where cost is simulator
+time. On a device the bill is **circuits x shots x two-qubit gates**.
+`qact_hardware.py` measures that bill with standard tools only: circuits built
+from Qiskit library parts (`qbe/qact_hw.py`), gate counts from the Qiskit
+transpiler targeting IBM Heron (`FakeTorino`), and execution in **Qiskit Aer**
+under that backend's calibrated noise model, on real EEGMAT windows. Full tables
+are in [docs/QUANTUM_ACT.md](docs/QUANTUM_ACT.md#running-on-real-hardware).
+
+**Per circuit** — every construction is verified against the exact target
+(to 1e-11 where Aer gives exact probabilities, at the sampling floor for the
+dynamic circuits):
+
+- **Fold the envelope into state preparation.** The drafted design applied the
+  Gaussian window with a 2^n-way multiplexed rotation onto an ancilla and
+  post-selected — which on real EEG *discarded 43-97% of all shots*. Loading
+  `env * r` directly is exact, removes the ancilla and the multiplexor, and keeps
+  every shot: 2,027 -> 1,156 CZ.
+- **Semiclassical QFT.** Measure each qubit as soon as it is final and replace
+  every controlled phase by a classically controlled single-qubit phase
+  (Griffiths & Niu 1996): the QFT then contains **no two-qubit gates**, needs one
+  fewer qubit, and IBM Heron runs it natively as a dynamic circuit.
+- **Window-local registers.** A chirp is shift-covariant, so a Gaussian atom only
+  needs a register as large as its ±4σ window, with the offset folded into one
+  linear phase. The smaller QFT returns the original distribution *exactly* on a
+  sub-grid of bins. For short atoms that is **142 CZ on 6 qubits instead of
+  2,027 on 10** — and under Heron noise, fidelity 0.20 -> 0.66 and the correct
+  atom selected (99-100% of the best atom's energy, where the baseline managed
+  19% on average).
+
+**Per atom:**
+
+- **Branch-and-bound selection.** `(sum env |r|)^2 / ||env||^2` is a rigorous
+  classical bound on every atom sharing an envelope, so envelopes can be searched
+  in decreasing-bound order and abandoned once they cannot win. Identical
+  selections (verified against a brute-force loop); 57% of the circuits.
+- **3-point refinement.** The refinement update only ever uses each gradient's
+  sign, so the parameter-shift chain rule through 45 gates was buying nothing a
+  3-point comparison does not: **112 -> 8 circuit evaluations per step**.
+- OMP costs no circuits at all: the atom Gram matrix and the right-hand side are
+  both classical.
+
+Combining the measured factors, circuit executions per atom fall by **~80x** and
+the average circuit is ~2.9x shallower. That combined figure multiplies separately
+measured factors; it is not one end-to-end hardware run.
+
+The 3-point refinement also turned out *better*, not just cheaper. On EEGMAT
+denoising (same protocol as above):
+
+```
+QACT parity (parameter shift)   1.272
+QACT parity hw (3-point)        1.213   better than parameter shift on 17/18, p < 0.0001
+classical ACT fine-f            1.257
+```
+
+It also beats the frequency-matched classical engine (*p* = 0.0007), **but that
+is not a quantum advantage**: coordinate search is an ordinary classical
+optimiser, and the classical engine refines with Adam instead. It is the same
+kind of confound the frequency grid turned out to be, and the fair control —
+giving the classical engine the same coordinate search — has not been run.
+
+**What still does not fit on today's hardware.** Long atoms (logDt >= 3.9) span
+the whole 2 s window, so windowing cannot shrink them; every construction loses
+their selection under Heron noise. After everything else, **state preparation is
+~87% of the remaining two-qubit budget**. What is left is a pure
+state-loading problem, and IBM's `qiskit-addon-aqc-tensor` (approximate
+tensor-network compilation of a target state) is the existing tool to try next.
+
+### A pre-existing leak in refinement, found along the way
+
+The parameter-shift refiner's comment says it keeps the centre frequency in
+band, but it only reverts the *frequency* move — moves in `tc` or `c` can still
+carry an atom out of band, and on real EEG ~17% of refined atoms end up below
+0.5 Hz or above 45 Hz. It has been there since refinement was added. It is **not
+fixed**, deliberately:
+
+- restricting the exact-f update to in-band frequencies made denoising *worse*
+  (1.272 -> 1.338), because out-of-band atoms are what capture drift and EMG;
+- the classical engine itself refines anywhere in [0, 0.49 fs].
+
+So "in band" is a modelling choice, and the parity-faithful choice is arguably the
+classical engine's bounds rather than the selection band. Both refinement modes
+share the current (leaky) semantics so that comparisons between them stay clean;
+`exact_f_band=True` enables the restriction. Changing the constraint would move
+every published QACT number, so it is left as an explicit decision rather than a
+silent fix.
+
 ## Layout
 
 ```
@@ -1412,6 +1508,10 @@ run_variants.sh     extraction for those variants
 qbe/denoise.py      artifact rules, overlap-add subtraction, both engines
 compare_denoise.py  denoising vs clean ground truth (tuned then frozen), with the
                     functional-parity arms and their fairness controls
+qbe/qact_hw.py      QACT as real hardware circuits (Qiskit library parts):
+                    baseline / folded / aqft / semiclassical / windowed
+qact_hardware.py    hardware study: Aer correctness, IBM Heron (FakeTorino)
+                    gate counts and noisy execution
 run_parity_features.sh  rebuild CHB-MIT QACT features with the parity engine and
                     rerun the pre-registered classification comparison (A4/A5)
 qbe/crosschannel.py cross-channel synchrony / spread / propagation features
@@ -1426,7 +1526,8 @@ run_qbe.py          CLI
 
 - **QACT's parity switches are all opt-in**, so older results stay reproducible:
   `omp`, `backfit_passes`, `exact_f`, `min_amp`, `norm_select`, `exact_ls`,
-  `asym_ratios`, `refine_extra`. The defaults are the parity configuration;
+  `asym_ratios`, `refine_extra`, `refine_mode` (`"shift"` / `"hw"`),
+  `exact_f_band`. The defaults are the parity configuration;
   `prep_chbmit_qact.py --legacy` restores the pre-parity engine bit-for-bit.
   `norm_select=False` is only there to reproduce the old reference — it is a bug,
   not an alternative (see the denoising section).

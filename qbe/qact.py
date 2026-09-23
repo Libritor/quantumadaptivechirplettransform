@@ -169,7 +169,7 @@ class QACT:
                  refine_steps=0, rates3_hz_s2=None, skews=None, n_candidates=1,
                  omp=True, backfit_passes=1, min_amp=0.0, exact_f=True,
                  asym_ratios=None, refine_extra=False, norm_select=True,
-                 exact_ls=False):
+                 exact_ls=False, refine_mode="shift", exact_f_band=False):
         self.N = int(length)
         self.n = int(round(math.log2(self.N)))
         assert 2 ** self.n == self.N, "length must be a power of two (log2 N qubits)"
@@ -284,6 +284,14 @@ class QACT:
             * self.fs / self.N
         self.mask = ((fc >= band_hz[0]) & (fc <= band_hz[1])).float()
         self.dict_size = int(self.mask.sum().item())
+        self.band_hz = band_hz
+        # exact_f_band  restrict the exact-f update to in-band centre frequencies.
+        #               OFF by default. MEASURED on EEGMAT denoising: turning it on
+        #               worsens the held-out score 1.272 -> 1.338, because atoms that
+        #               refine below 0.5 Hz or above 45 Hz are what capture drift and
+        #               EMG -- and the classical engine itself refines anywhere in
+        #               [0, 0.49 fs]. Kept as an option, not a fix.
+        self.exact_f_band = bool(exact_f_band)
         self.post_select_frac = None
         # the exact-f update is judged with the refiner's energy functional, so it
         # only applies when refinement is enabled
@@ -297,9 +305,14 @@ class QACT:
             c3_max=(float(np.abs(self.c3).max()) if self.refine_extra else 0.0),
             skew_max=(float(np.abs(self.skews).max()) if self.refine_extra else 0.0),
             ratio_range=((float(self.asym.min()), float(self.asym.max()))
-                         if self.refine_extra else (1.0, 1.0))
+                         if self.refine_extra else (1.0, 1.0)),
+            mode=refine_mode,
         ) if refine_steps else None)
         self.refine_evals = 0
+        # hardware accounting for argmax selection: circuits an exhaustive
+        # search runs vs circuits branch-and-bound over envelopes runs
+        self.hw_circuits_full = 0
+        self.hw_circuits_bnb = 0
         # (envelope, chirp) pairs with no in-band frequency at all contribute
         # nothing but still cost a QFT, so they are skipped. The flat dictionary
         # layout is unchanged (their slots stay zero), so measurement sampling
@@ -384,6 +397,38 @@ class QACT:
             P = P / self.env_norm2[None, :, None, None]
         return P * self.mask[None], succ
 
+    def _count_bnb(self, R, P):
+        """Circuits a hardware branch-and-bound would run for this selection.
+
+        For envelope e, every atom's score is |sum env r e^{-i phase}|^2 / ||env||^2
+        <= (sum_t env(t) |r(t)|)^2 / ||env||^2 by the triangle inequality -- a
+        classical, O(N) bound that holds for every chirp and every frequency.
+        Visiting envelopes in decreasing-bound order and stopping at the first
+        whose bound cannot beat the best score found so far returns EXACTLY the
+        exhaustive argmax. The selection itself is unchanged (it is still the
+        exhaustive argmax); this only counts the circuits the pruned search needs.
+        """
+        if not hasattr(self, "_pairs_per_env"):
+            self._pairs_per_env = torch.bincount(self.pair_e, minlength=self.env.shape[0])
+        best = P.amax(dim=(2, 3))                              # (B, E)
+        bound = (R.abs() @ self.env.T) ** 2 / self.env_norm2[None, :]
+        live = self._pairs_per_env[None, :] > 0
+        bound = torch.where(live, bound, torch.full_like(bound, -1.0))
+        order = bound.argsort(dim=1, descending=True)
+        bs = bound.gather(1, order)
+        es = best.gather(1, order)
+        prefix = torch.cummax(es, dim=1).values
+        prefix = torch.cat([torch.full_like(prefix[:, :1], -1.0), prefix[:, :-1]], 1)
+        stop = (bs <= prefix) | (bs < 0)
+        visited = torch.where(stop.any(1), stop.float().argmax(1),
+                              torch.full_like(stop[:, 0], stop.shape[1], dtype=torch.long))
+        cum = torch.cumsum(self._pairs_per_env[order], dim=1)
+        pruned = torch.where(visited > 0,
+                             cum.gather(1, (visited - 1).clamp(min=0)[:, None])[:, 0],
+                             torch.zeros_like(visited))
+        self.hw_circuits_full += int(self.n_pairs_used) * R.shape[0]
+        self.hw_circuits_bnb += int(pruned.sum())
+
     def _joint_refit(self, X, bases):
         """OMP step: least-squares re-fit of every selected atom's quadrature pair.
 
@@ -422,6 +467,13 @@ class QACT:
         ph = 2 * math.pi * (c3[:, None] * t ** 3 + c[:, None] * t ** 2) / self.N
         z = (env * R).to(torch.complex64) * torch.exp(-1j * ph)
         P = torch.fft.fft(z, dim=-1)[:, :self.fmax].abs() ** 2
+        # optionally restrict to bins whose CENTRE frequency (f + 2 c tc + 3 c3
+        # tc^2) is in band -- see `exact_f_band` for why this is off by default
+        kb = torch.arange(self.fmax, device=R.device, dtype=torch.float32)[None, :]
+        fc = (kb + (2 * c * tc + 3 * c3 * tc ** 2)[:, None]) * self.fs / self.N
+        if self.exact_f_band:
+            inb = (fc >= self.band_hz[0]) & (fc <= self.band_hz[1])
+            P = torch.where(inb, P, torch.zeros_like(P))
         k = P.argmax(1)
         km1 = (k - 1).clamp(min=0); kp1 = (k + 1).clamp(max=self.fmax - 1)
         rows = torch.arange(len(R), device=R.device)
@@ -515,6 +567,8 @@ class QACT:
             if select == "argmax":
                 best = flat.argmax(dim=1)
                 tc_sel, ld_sel, sk_sel, f_sel, c_sel, c3_sel, ar_sel = decode(best)
+                if self.norm_select and not self.exact_ls:
+                    self._count_bnb(R, P)
             elif select == "proposal":
                 # k distinct candidates per row, drawn from the measurement
                 # distribution, then refined and judged on refined energy
@@ -694,7 +748,7 @@ class QACTRefiner:
     def __init__(self, N, fs, device="cuda", steps=4, lr_f=0.5, lr_c=None,
                  lr_tc=1.0, lr_logdt=0.05, band_hz=(0.5, 45.0),
                  logdt_range=(1.0, 6.0), rate_max_hz_s=60.0,
-                 c3_max=0.0, skew_max=0.0, ratio_range=(1.0, 1.0)):
+                 c3_max=0.0, skew_max=0.0, ratio_range=(1.0, 1.0), mode="shift"):
         self.N, self.fs, self.dev, self.steps = int(N), float(fs), device, int(steps)
         self.n = int(round(math.log2(N)))
         self.t = torch.arange(N, device=device, dtype=torch.float32)
@@ -740,10 +794,21 @@ class QACTRefiner:
         self.evals_per_step = 2 * self.n + 2 * (self.n + len(self.pairs)) + 4
         # refining c3 costs its own 3-local shift gradients; skew and the width
         # ratio cost one central difference each
+        # mode="hw": the update rule only ever uses each gradient's SIGN (or a
+        # batch-normalised step), so the parameter-shift chain rule through
+        # n + n(n-1)/2 gates -- 90 of the 112 evaluations -- buys nothing a
+        # 3-point comparison does not. Per coordinate, evaluate E(p - d) and
+        # E(p + d) and keep the best of the three: 2 evaluations per coordinate,
+        # same step sizes, accept-only-if-better built in.
+        self.mode = mode
+        if mode == "hw":
+            self.evals_per_step = 2 * 4
         self.evals_per_step_full = (self.evals_per_step
-                                    + 2 * (self.n + len(self.pairs) + len(self.triples))
-                                    + (4 if self.lr_skew > 0 else 0)
-                                    + (4 if self.lr_logr > 0 else 0))
+                                    + (2 if mode == "hw" else
+                                       2 * (self.n + len(self.pairs) + len(self.triples)))
+                                    * (1 if c3_max > 0 else 0)
+                                    + (2 if mode == "hw" else 4) * (self.lr_skew > 0)
+                                    + (2 if mode == "hw" else 4) * (self.lr_logr > 0))
 
     def _env_phase(self, tc, logdt, f, c, c3=None, skew=None, ratio=None):
         """Envelope and phase for the full parameter set.
@@ -773,12 +838,63 @@ class QACTRefiner:
         O = ((env * R) * torch.exp(-1j * phase)).sum(1)
         return (O.abs() ** 2) / (env ** 2).sum(1).clamp(min=1e-12)
 
+    def _refine_hw(self, R, tc, logdt, f, c, c3, skew, ratio, full):
+        """Coordinate 3-point search: 2 circuit evaluations per coordinate."""
+        E = lambda p: self.energy(R, p["tc"], p["ld"], p["f"], p["c"],
+                                  p["c3"], p["sk"], p["ra"])
+        p = dict(tc=tc.clone(), ld=logdt.clone(), f=f.clone(), c=c.clone(),
+                 c3=None if c3 is None else c3.clone(),
+                 sk=None if skew is None else skew.clone(),
+                 ra=None if ratio is None else ratio.clone())
+        c3v = lambda q: 0.0 if q["c3"] is None else 3 * q["c3"] * q["tc"] ** 2
+
+        def ok(q):
+            # Band semantics copied from the parameter-shift path so that the two
+            # modes differ ONLY in how the update is evaluated: that path rejects a
+            # frequency move whose centre frequency leaves the band, and does not
+            # band-check tc or c moves (see the note on `refine`).
+            fc = (q["f"] + 2 * q["c"] * q["tc"] + c3v(q)) * self.fs / self.N
+            return (fc >= self.band[0]) & (fc <= self.band[1])
+
+        coords = [("tc", self.lr["tc"], lambda v: v.clamp(0, self.N - 1)),
+                  ("ld", self.lr["logdt"], lambda v: v.clamp(*self.logdt_range)),
+                  ("f", self.lr["f"], lambda v: v),
+                  ("c", self.lr["c"], lambda v: v.clamp(-self.c_max, self.c_max))]
+        if full:
+            if p["c3"] is not None and self.lr_c3 > 0:
+                coords.append(("c3", self.lr_c3,
+                               lambda v: v.clamp(-self.c3_max, self.c3_max)))
+            if p["sk"] is not None and self.lr_skew > 0:
+                coords.append(("sk", self.lr_skew,
+                               lambda v: v.clamp(-self.skew_max, self.skew_max)))
+            if p["ra"] is not None and self.lr_logr > 0:
+                lo, hi = self.ratio_range
+                coords.append(("ra", None, lambda v: v.clamp(lo, hi)))
+        e0 = E(p)
+        for _ in range(self.steps):
+            for name, d, clip in coords:
+                for sgn in (-1.0, 1.0):
+                    q = dict(p)
+                    if name == "ra":              # multiplicative, as log ratio
+                        q["ra"] = clip(p["ra"] * math.exp(sgn * self.lr_logr))
+                    else:
+                        q[name] = clip(p[name] + sgn * d)
+                    e1 = E(q)
+                    take = (e1 > e0) & (ok(q) if name == "f" else True)
+                    p[name] = torch.where(take, q[name], p[name])
+                    e0 = torch.where(take, e1, e0)
+        if full:
+            return p["tc"], p["ld"], p["f"], p["c"], p["c3"], p["sk"], p["ra"]
+        return p["tc"], p["ld"], p["f"], p["c"]
+
     def refine(self, R, tc, logdt, f, c, c3=None, skew=None, ratio=None, full=False):
         """Gradient ascent on captured energy. R: (B, N) residual; params (B,).
 
         `full=True` also refines c3, skew and the envelope width ratio, and
         returns all seven parameters instead of four.
         """
+        if self.mode == "hw":
+            return self._refine_hw(R, tc, logdt, f, c, c3, skew, ratio, full)
         tc, logdt, f, c = (x.clone() for x in (tc, logdt, f, c))
         if full:
             c3 = None if c3 is None else c3.clone()
@@ -840,6 +956,11 @@ class QACTRefiner:
             fc_hz = (cand_f + 2 * cand_c * cand_tc
                      + (0.0 if c3 is None else 3 * c3v * cand_tc ** 2)) * self.fs / self.N
             bad = (fc_hz < self.band[0]) | (fc_hz > self.band[1])
+            # KNOWN LEAK, kept for reproducibility: only the frequency move is
+            # reverted, so tc / c moves can still carry the centre frequency out of
+            # band (~17% of refined atoms on real EEG). The classical engine bounds
+            # refined frequencies to [0, 0.49 fs] instead, so which constraint is
+            # "right" is a modelling choice; see README.
             cand_f = torch.where(bad, f, cand_f)
             cand_c3, cand_sk, cand_ra = c3, skew, ratio
             if full:

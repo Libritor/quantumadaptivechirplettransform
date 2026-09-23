@@ -94,6 +94,89 @@ So the honest claim is:
 * on a simulator, QACT costs about the same as classical ACT, because the
   simulator does the same FFT-scale arithmetic.
 
+## Running on real hardware
+
+The complexity table above counts gates in one circuit. On a device the bill is
+**circuits x shots x two-qubit gates**, and the design as first drafted was
+expensive on all three. `qact_hardware.py` measures it with standard tools only:
+circuits from Qiskit library parts (`qbe/qact_hw.py`), gate counts from the
+Qiskit transpiler targeting IBM Heron (`FakeTorino`: heavy-hex, native CZ,
+dynamic circuits), execution in Qiskit Aer under that backend's calibrated noise
+model, on real EEGMAT windows.
+
+### One circuit: five constructions of the same distribution
+
+| construction | what changes | qubits | CZ (heavy-hex) | CZ (all-to-all) | correct to |
+|---|---|---|---|---|---|
+| baseline | prepare r; envelope = multiplexed RY + post-selected ancilla; QFT | 10 | 2,027 | 1,028 | 3e-11 (exact) |
+| folded | prepare `env * r` directly: no ancilla, no multiplexor, no post-selection | 9 | 1,156 | 635 | 6e-11 (exact) |
+| aqft | folded + Qiskit's approximate QFT (no dynamic circuits needed) | 9 | 1,320 | 629 | 5e-4 (approximation) |
+| semiclassical | folded + QFT as mid-circuit measurement and classically controlled phases (Griffiths & Niu 1996): **zero two-qubit gates in the QFT** | 9 | 1,181 | 563 | sampling floor |
+| **windowed** | semiclassical, on only the envelope's ±4σ support | **6-9** | **142-1,181** | 86-563 | sampling floor |
+
+The window multiply moved to the classical side because it is O(N) classical work
+but, quantumly, a 2^n-way multiplexed rotation *plus* post-selection that
+discarded 43-97% of shots on real EEG (ideal success 0.027 / 0.057 / 0.181 / 0.57
+for logDt 1.5 / 2.7 / 3.9 / 5.1).
+
+**The windowed construction is exact, and it is where the quantum structure
+pays.** A chirp is shift-covariant — `c(u+t0)^2 = c u^2 + 2 c t0 u + const` — so
+a Gaussian atom needs a register only as large as its window: load the support
+onto `m = ceil(log2(8 sigma))` qubits and fold the offset into one extra linear
+phase. The m-qubit QFT then returns the original distribution *exactly* on every
+`2^(n-m)`-th frequency bin (verified at the sampling floor, including with
+frequency offsets, which reach the remaining bins with further shallow circuits).
+Short atoms' spectra are broad, so the coarse grid costs little: its in-band peak
+lands within 0-3 bins of the full grid's and captures 89-100% of the best atom's
+energy before refinement.
+
+Under Heron noise (20,000 shots; "selected-atom energy" = energy of the atom the
+noisy histogram would select, as a fraction of the best in-band atom's):
+
+| envelope | windowed qubits | CZ | noisy fidelity | selected-atom energy |
+|---|---|---|---|---|
+| logDt 1.5 | 6 | 142 (vs 2,027 baseline) | 0.66 (vs 0.20) | **0.99** |
+| logDt 2.7 | 7 | 291 | 0.48 | **1.00** |
+| logDt 3.9 | 9 | 1,181 | 0.22 | 0.60 |
+| logDt 5.1 | 9 | 1,181 | 0.25 | 0.24 |
+| *baseline, all widths* | 10 | 2,027 | 0.20 | *0.19* |
+
+Short and medium atoms now survive realistic noise; the baseline selected the
+right atom essentially never.
+
+### Per atom: fewer circuits and far fewer shots
+
+| cost per atom | before | after | how |
+|---|---|---|---|
+| selection circuits | 292 | 166 (57%) | classical branch-and-bound over envelopes: `(sum env |r|)^2 / ||env||^2` bounds every atom with that envelope, so envelopes are visited in decreasing-bound order until the bound cannot beat the best found — **identical argmax**, verified against a brute-force loop |
+| refinement evaluations per step | 112 | 8 | the update only uses each gradient's sign, so the parameter-shift chain rule through 45 gates buys nothing a 3-point comparison per coordinate does not |
+| shot multiplier from post-selection | 1.75x-37x (width-dependent) | 1x | folding |
+
+With backfit, refinement goes from 896 to 64 evaluations per atom. Combining the
+measured factors (292 x 15.4 average shot multiplier + 896 x 15.4 before, 166 + 64
+after), **total circuit executions per atom fall by roughly 80x**, and the average
+circuit is ~2.9x shallower (2,027 -> ~700 CZ averaged over the four widths). That
+combined figure is a product of separately measured factors, not a single
+end-to-end hardware run.
+
+The 3-point refinement is not just cheaper, it is **better**: on EEGMAT
+denoising it scores 1.213 against 1.272 for parameter shift (better on 17/18
+held-out subjects, *p* < 0.0001), with identical band semantics. It also edges
+out the frequency-matched classical engine (1.257, *p* = 0.0007) — but that is a
+refinement-algorithm difference (coordinate search vs the classical engine's
+Adam), not a quantum one, and the same search could be given to the classical
+engine.
+
+### What still does not fit on today's hardware
+
+Long atoms (logDt >= 3.9) span the whole 512-sample window, so windowing cannot
+shrink them, and every construction loses their selection under Heron noise.
+After the other savings, **state preparation is ~87% of the remaining two-qubit
+budget** (~490 of 563 CZ all-to-all). The problem left is purely one of loading
+an EEG window with fewer gates — an approximate-compilation problem, for which
+IBM's `qiskit-addon-aqc-tensor` (tensor-network approximate state compilation)
+is the existing tool to try next.
+
 ## What is genuinely different, and testable now
 
 Even with no speedup, QACT is not merely classical ACT rewritten:
@@ -119,7 +202,7 @@ form the quantum encoding makes natural rather than ported as classical code:
 | dictionary search `D.best` | one simulated QFT per (envelope, chirp) pair returns the whole frequency axis; the outcome is sampled (`select="sample"`) or argmax'd (the control) |
 | least-squares energy criterion, normalised by atom norm | the measured histogram divided by the envelope filter's success probability, i.e. the distribution **conditioned on post-selection** — see below |
 | off-grid refinement (Adam on tc, fc, log dt, c[, log dt_r]) | parameter-shift rule for the phase parameters (exact: E is degree-1 trigonometric in every gate angle), central differences for the envelope parameters |
-| OMP joint refit (`_joint_refit`) | same least-squares refit, whose normal matrix is the Gram of atom overlaps ⟨ψᵢ\|ψⱼ⟩ — the swap-test observable, so no primitive beyond the ones the circuit already provides |
+| OMP joint refit (`_joint_refit`) | same least-squares refit. Its normal matrix is the Gram of atom overlaps ⟨ψᵢ\|ψⱼ⟩ — a swap-test observable in principle, but on hardware it should cost **no circuits at all**: the Gram depends only on atom parameters, and the right-hand side on the classical signal, so both are O(kN) classical |
 | two-width asymmetric envelope (ACTv9Asym) | `asym_ratios`, a fourth envelope grid axis; refinable via `refine_extra` |
 | per-window stopping rule (`min_amp`, active mask, `E > 0`) | `min_amp`, same semantics |
 | — | **exact frequency update**: E(f) is the periodogram, so one QFT gives the optimum directly instead of gradient-stepping toward it (`exact_f`) |

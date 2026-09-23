@@ -61,6 +61,9 @@ ENGINES = {
     # QACT has that act_gpu does not (the exact-f update and backfit). If this
     # arm also beats classical, those two extras are not what did it.
     "QACT matched-fn": dict(kind="qact", backfit_passes=0, exact_f=False),
+    # hardware-economical refinement: 8 circuit evaluations per step instead of
+    # 112, same step sizes and band semantics (qact_hardware.py, README)
+    "QACT parity hw": dict(kind="qact", refine_mode="hw"),
     "QACT parity+asym": dict(kind="qact", asym_ratios=[1.0, 2.0, 4.0],
                              refine_extra=True),
     "QACT cubic": dict(kind="qact", rates3_hz_s2=[-40, -20, 0, 20, 40],
@@ -121,6 +124,10 @@ def main():
     ap.add_argument("--order", type=int, default=12)
     ap.add_argument("--n-tune", type=int, default=8)
     ap.add_argument("--seed", type=int, default=7)
+    ap.add_argument("--only", nargs="*", default=None,
+                    help="run only these engines ('classical ACT' is always kept "
+                         "as the paired reference)")
+    ap.add_argument("--out", default="results/denoise_comparison.json")
     a = ap.parse_args()
     subs = [f"Subject{i:02d}" for i in range(36)]
     tune_subs, test_subs = subs[:a.n_tune], subs[18:]
@@ -140,6 +147,10 @@ def main():
           f"{np.median(list(base.values())):.3f}  ({time.time()-t0:.0f}s)", flush=True)
 
     results, chosen = {}, {}
+    if a.only:
+        keep = set(a.only) | {"classical ACT"}
+        for k in [k for k in ENGINES if k not in keep]:
+            del ENGINES[k]
     for ename, engine in ENGINES.items():
         t1 = time.time()
         # tune
@@ -192,8 +203,8 @@ def main():
         print(f"  {ename:<20} - classical ACT  {d.mean():+.4f}  "
               f"better on {(d<0).sum():>2}/{len(d)}  p={p:.4f}  {verdict}")
     json.dump({"results": results, "no_cleaning": base, "chosen": chosen},
-              open("results/denoise_comparison.json", "w"), indent=2, default=str)
-    print(f"\nwrote results/denoise_comparison.json  (total {time.time()-t0:.0f}s)")
+              open(a.out, "w"), indent=2, default=str)
+    print(f"\nwrote {a.out}  (total {time.time()-t0:.0f}s)")
 
 
 if __name__ == "__main__":

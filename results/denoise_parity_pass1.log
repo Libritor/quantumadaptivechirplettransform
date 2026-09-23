@@ -1,0 +1,25 @@
+[denoise] 144 rule configs; tune on 8 subjects, evaluate on 18 held out; 180s per subject
+[denoise] no cleaning (contaminated as-is): median score 3.537  (7s)
+[classical ACT] tuned in 90s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 2.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[classical ACT] held-out score 1.439 (median 1.434)  rrmse 0.428  alpha_dB 0.05  delta_dB 0.73  atoms called artifact 3%  (132s)
+[QACT legacy] tuned in 76s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 1.5, 'DT_SHORT': 0.015, 'K_SHORT': 3.0}
+[QACT legacy] held-out score 2.461 (median 2.396)  rrmse 0.535  alpha_dB 0.08  delta_dB 2.07  atoms called artifact 4%  (99s)
+[QACT parity] tuned in 79s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 1.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[QACT parity] held-out score 1.317 (median 1.311)  rrmse 0.422  alpha_dB 0.05  delta_dB 0.75  atoms called artifact 21%  (116s)
+[QACT parity+asym] tuned in 90s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 1.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[QACT parity+asym] held-out score 1.170 (median 1.173)  rrmse 0.400  alpha_dB 0.05  delta_dB 0.59  atoms called artifact 20%  (142s)
+[QACT cubic] tuned in 91s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 1.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[QACT cubic] held-out score 1.478 (median 1.437)  rrmse 0.467  alpha_dB 0.05  delta_dB 0.93  atoms called artifact 18%  (144s)
+[QACT skew] tuned in 95s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 1.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[QACT skew] held-out score 1.235 (median 1.238)  rrmse 0.425  alpha_dB 0.05  delta_dB 0.74  atoms called artifact 21%  (159s)
+
+no cleaning: 3.487   (lower is better throughout)
+
+paired Wilcoxon across 18 held-out subjects (alpha = 0.0100); negative difference = QACT cleans better:
+  QACT legacy    - classical ACT  +1.0216  better on  0/18  p=0.0000  (worse)
+  QACT parity    - classical ACT  -0.1225  better on 16/18  p=0.0001  QACT BETTER
+  QACT parity+asym - classical ACT  -0.2694  better on 18/18  p=0.0000  QACT BETTER
+  QACT cubic     - classical ACT  +0.0386  better on  5/18  p=0.0987  (worse)
+  QACT skew      - classical ACT  -0.2047  better on 17/18  p=0.0000  QACT BETTER
+
+wrote results/denoise_comparison.json  (total 799s)

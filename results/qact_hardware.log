@@ -1,0 +1,82 @@
+[ 0 logDt=1.5] baseline      TVD(ideal) 2.71e-13 (floor 0.0e+00)  post-sel 0.027  q 9  CZ  2082 (a2a 1148)  CZ-depth  1569  fidelity 0.300  selected-atom energy 0.08  useful shots 0.50  (10s)
+[ 0 logDt=1.5] folded        TVD(ideal) 8.71e-12 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1156 (a2a  635)  CZ-depth   905  fidelity 0.313  selected-atom energy 0.83  useful shots 1.00  (15s)
+[ 0 logDt=1.5] aqft          TVD(ideal) 3.72e-04 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1320 (a2a  629)  CZ-depth   930  fidelity 0.307  selected-atom energy 0.01  useful shots 1.00  (61s)
+[ 0 logDt=1.5] semiclassical TVD(ideal) 7.28e-03 (floor 7.4e-03)  post-sel 1.000  q 9  CZ  1181 (a2a  563)  CZ-depth   850  fidelity 0.310  selected-atom energy 0.99  useful shots 1.00  (98s)
+[ 0 logDt=1.5] windowed      TVD(ideal) 2.83e-03 (floor 2.4e-03)  post-sel 1.000  q 6  CZ   142 (a2a   86)  CZ-depth   125  fidelity 0.684  selected-atom energy 0.98  useful shots 1.00  (100s)
+[ 1 logDt=2.7] baseline      TVD(ideal) 5.77e-12 (floor 0.0e+00)  post-sel 0.078  q 9  CZ  2159 (a2a 1116)  CZ-depth  1716  fidelity 0.214  selected-atom energy 0.05  useful shots 0.50  (110s)
+[ 1 logDt=2.7] folded        TVD(ideal) 6.07e-11 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1156 (a2a  635)  CZ-depth   905  fidelity 0.231  selected-atom energy 0.33  useful shots 1.00  (116s)
+[ 1 logDt=2.7] aqft          TVD(ideal) 2.50e-04 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1320 (a2a  629)  CZ-depth   930  fidelity 0.232  selected-atom energy 0.14  useful shots 1.00  (162s)
+[ 1 logDt=2.7] semiclassical TVD(ideal) 6.45e-03 (floor 6.4e-03)  post-sel 1.000  q 9  CZ  1181 (a2a  563)  CZ-depth   850  fidelity 0.239  selected-atom energy 0.88  useful shots 1.00  (201s)
+[ 1 logDt=2.7] windowed      TVD(ideal) 3.40e-03 (floor 3.6e-03)  post-sel 1.000  q 7  CZ   291 (a2a  161)  CZ-depth   244  fidelity 0.487  selected-atom energy 1.00  useful shots 1.00  (205s)
+[ 2 logDt=3.9] baseline      TVD(ideal) 1.05e-11 (floor 0.0e+00)  post-sel 0.245  q 9  CZ  2028 (a2a  990)  CZ-depth  1583  fidelity 0.162  selected-atom energy 0.00  useful shots 0.50  (215s)
+[ 2 logDt=3.9] folded        TVD(ideal) 1.92e-13 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1156 (a2a  635)  CZ-depth   905  fidelity 0.189  selected-atom energy 0.06  useful shots 1.00  (220s)
+[ 2 logDt=3.9] aqft          TVD(ideal) 2.78e-04 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1320 (a2a  629)  CZ-depth   930  fidelity 0.191  selected-atom energy 0.06  useful shots 1.00  (268s)
+[ 2 logDt=3.9] semiclassical TVD(ideal) 5.78e-03 (floor 5.8e-03)  post-sel 1.000  q 9  CZ  1181 (a2a  563)  CZ-depth   850  fidelity 0.203  selected-atom energy 0.02  useful shots 1.00  (304s)
+[ 2 logDt=3.9] windowed      TVD(ideal) 5.78e-03 (floor 5.7e-03)  post-sel 1.000  q 9  CZ  1181 (a2a  563)  CZ-depth   850  fidelity 0.210  selected-atom energy 0.29  useful shots 1.00  (340s)
+[ 3 logDt=5.1] baseline      TVD(ideal) 2.72e-11 (floor 0.0e+00)  post-sel 0.627  q 9  CZ  1838 (a2a  858)  CZ-depth  1386  fidelity 0.210  selected-atom energy 0.01  useful shots 0.51  (348s)
+[ 3 logDt=5.1] folded        TVD(ideal) 1.65e-13 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1156 (a2a  635)  CZ-depth   905  fidelity 0.240  selected-atom energy 0.00  useful shots 1.00  (354s)
+[ 3 logDt=5.1] aqft          TVD(ideal) 5.39e-04 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1320 (a2a  629)  CZ-depth   930  fidelity 0.244  selected-atom energy 0.03  useful shots 1.00  (403s)
+[ 3 logDt=5.1] semiclassical TVD(ideal) 6.44e-03 (floor 6.3e-03)  post-sel 1.000  q 9  CZ  1181 (a2a  563)  CZ-depth   850  fidelity 0.257  selected-atom energy 0.01  useful shots 1.00  (441s)
+[ 3 logDt=5.1] windowed      TVD(ideal) 6.44e-03 (floor 6.2e-03)  post-sel 1.000  q 9  CZ  1181 (a2a  563)  CZ-depth   850  fidelity 0.258  selected-atom energy 0.21  useful shots 1.00  (479s)
+[ 4 logDt=1.5] baseline      TVD(ideal) 3.05e-13 (floor 0.0e+00)  post-sel 0.013  q 9  CZ  2082 (a2a 1148)  CZ-depth  1569  fidelity 0.196  selected-atom energy 0.68  useful shots 0.50  (489s)
+[ 4 logDt=1.5] folded        TVD(ideal) 8.81e-12 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1156 (a2a  635)  CZ-depth   905  fidelity 0.210  selected-atom energy 1.00  useful shots 1.00  (495s)
+[ 4 logDt=1.5] aqft          TVD(ideal) 2.47e-04 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1320 (a2a  629)  CZ-depth   930  fidelity 0.203  selected-atom energy 1.00  useful shots 1.00  (544s)
+[ 4 logDt=1.5] semiclassical TVD(ideal) 5.79e-03 (floor 6.3e-03)  post-sel 1.000  q 9  CZ  1181 (a2a  563)  CZ-depth   850  fidelity 0.210  selected-atom energy 0.42  useful shots 1.00  (581s)
+[ 4 logDt=1.5] windowed      TVD(ideal) 1.96e-03 (floor 1.8e-03)  post-sel 1.000  q 6  CZ   142 (a2a   86)  CZ-depth   125  fidelity 0.636  selected-atom energy 1.00  useful shots 1.00  (584s)
+[ 5 logDt=2.7] baseline      TVD(ideal) 6.55e-12 (floor 0.0e+00)  post-sel 0.028  q 9  CZ  2159 (a2a 1116)  CZ-depth  1716  fidelity 0.204  selected-atom energy 0.53  useful shots 0.50  (594s)
+[ 5 logDt=2.7] folded        TVD(ideal) 3.61e-11 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1156 (a2a  635)  CZ-depth   905  fidelity 0.234  selected-atom energy 0.78  useful shots 1.00  (600s)
+[ 5 logDt=2.7] aqft          TVD(ideal) 3.34e-04 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1320 (a2a  629)  CZ-depth   930  fidelity 0.236  selected-atom energy 0.78  useful shots 1.00  (647s)
+[ 5 logDt=2.7] semiclassical TVD(ideal) 6.38e-03 (floor 6.9e-03)  post-sel 1.000  q 9  CZ  1181 (a2a  563)  CZ-depth   850  fidelity 0.246  selected-atom energy 0.98  useful shots 1.00  (682s)
+[ 5 logDt=2.7] windowed      TVD(ideal) 3.42e-03 (floor 3.2e-03)  post-sel 1.000  q 7  CZ   291 (a2a  161)  CZ-depth   244  fidelity 0.497  selected-atom energy 1.00  useful shots 1.00  (687s)
+[ 6 logDt=3.9] baseline      TVD(ideal) 1.58e-11 (floor 0.0e+00)  post-sel 0.101  q 9  CZ  2028 (a2a  990)  CZ-depth  1583  fidelity 0.179  selected-atom energy 0.00  useful shots 0.50  (696s)
+[ 6 logDt=3.9] folded        TVD(ideal) 1.85e-13 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1156 (a2a  635)  CZ-depth   905  fidelity 0.213  selected-atom energy 0.11  useful shots 1.00  (701s)
+[ 6 logDt=3.9] aqft          TVD(ideal) 3.26e-04 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1320 (a2a  629)  CZ-depth   930  fidelity 0.221  selected-atom energy 0.11  useful shots 1.00  (749s)
+[ 6 logDt=3.9] semiclassical TVD(ideal) 6.72e-03 (floor 6.4e-03)  post-sel 1.000  q 9  CZ  1181 (a2a  563)  CZ-depth   850  fidelity 0.230  selected-atom energy 0.13  useful shots 1.00  (785s)
+[ 6 logDt=3.9] windowed      TVD(ideal) 6.72e-03 (floor 5.8e-03)  post-sel 1.000  q 9  CZ  1181 (a2a  563)  CZ-depth   850  fidelity 0.231  selected-atom energy 0.50  useful shots 1.00  (821s)
+[ 7 logDt=5.1] baseline      TVD(ideal) 2.53e-11 (floor 0.0e+00)  post-sel 0.534  q 9  CZ  1838 (a2a  858)  CZ-depth  1386  fidelity 0.202  selected-atom energy 0.06  useful shots 0.50  (830s)
+[ 7 logDt=5.1] folded        TVD(ideal) 5.45e-12 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1156 (a2a  635)  CZ-depth   905  fidelity 0.231  selected-atom energy 0.22  useful shots 1.00  (836s)
+[ 7 logDt=5.1] aqft          TVD(ideal) 3.35e-04 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1320 (a2a  629)  CZ-depth   930  fidelity 0.235  selected-atom energy 0.22  useful shots 1.00  (883s)
+[ 7 logDt=5.1] semiclassical TVD(ideal) 7.07e-03 (floor 7.1e-03)  post-sel 1.000  q 9  CZ  1181 (a2a  563)  CZ-depth   850  fidelity 0.250  selected-atom energy 0.16  useful shots 1.00  (919s)
+[ 7 logDt=5.1] windowed      TVD(ideal) 7.07e-03 (floor 5.7e-03)  post-sel 1.000  q 9  CZ  1181 (a2a  563)  CZ-depth   850  fidelity 0.249  selected-atom energy 0.04  useful shots 1.00  (958s)
+[ 8 logDt=1.5] baseline      TVD(ideal) 1.42e-13 (floor 0.0e+00)  post-sel 0.041  q 9  CZ  2082 (a2a 1148)  CZ-depth  1569  fidelity 0.232  selected-atom energy 0.69  useful shots 0.50  (968s)
+[ 8 logDt=1.5] folded        TVD(ideal) 5.56e-12 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1156 (a2a  635)  CZ-depth   905  fidelity 0.248  selected-atom energy 1.00  useful shots 1.00  (974s)
+[ 8 logDt=1.5] aqft          TVD(ideal) 3.28e-04 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1320 (a2a  629)  CZ-depth   930  fidelity 0.243  selected-atom energy 0.33  useful shots 1.00  (1022s)
+[ 8 logDt=1.5] semiclassical TVD(ideal) 6.38e-03 (floor 6.1e-03)  post-sel 1.000  q 9  CZ  1181 (a2a  563)  CZ-depth   850  fidelity 0.248  selected-atom energy 0.87  useful shots 1.00  (1057s)
+[ 8 logDt=1.5] windowed      TVD(ideal) 2.30e-03 (floor 2.7e-03)  post-sel 1.000  q 6  CZ   142 (a2a   86)  CZ-depth   125  fidelity 0.669  selected-atom energy 1.00  useful shots 1.00  (1060s)
+[ 9 logDt=2.7] baseline      TVD(ideal) 3.42e-12 (floor 0.0e+00)  post-sel 0.065  q 9  CZ  2159 (a2a 1116)  CZ-depth  1716  fidelity 0.166  selected-atom energy 0.02  useful shots 0.50  (1070s)
+[ 9 logDt=2.7] folded        TVD(ideal) 4.34e-11 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1156 (a2a  635)  CZ-depth   905  fidelity 0.190  selected-atom energy 0.20  useful shots 1.00  (1076s)
+[ 9 logDt=2.7] aqft          TVD(ideal) 2.55e-04 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1320 (a2a  629)  CZ-depth   930  fidelity 0.190  selected-atom energy 0.20  useful shots 1.00  (1124s)
+[ 9 logDt=2.7] semiclassical TVD(ideal) 5.41e-03 (floor 5.3e-03)  post-sel 1.000  q 9  CZ  1181 (a2a  563)  CZ-depth   850  fidelity 0.204  selected-atom energy 0.95  useful shots 1.00  (1160s)
+[ 9 logDt=2.7] windowed      TVD(ideal) 3.04e-03 (floor 3.3e-03)  post-sel 1.000  q 7  CZ   291 (a2a  161)  CZ-depth   244  fidelity 0.459  selected-atom energy 1.00  useful shots 1.00  (1164s)
+[10 logDt=3.9] baseline      TVD(ideal) 9.46e-12 (floor 0.0e+00)  post-sel 0.198  q 9  CZ  2028 (a2a  990)  CZ-depth  1583  fidelity 0.162  selected-atom energy 0.00  useful shots 0.50  (1174s)
+[10 logDt=3.9] folded        TVD(ideal) 1.48e-12 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1156 (a2a  635)  CZ-depth   905  fidelity 0.191  selected-atom energy 0.08  useful shots 1.00  (1179s)
+[10 logDt=3.9] aqft          TVD(ideal) 2.47e-04 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1320 (a2a  629)  CZ-depth   930  fidelity 0.195  selected-atom energy 0.08  useful shots 1.00  (1227s)
+[10 logDt=3.9] semiclassical TVD(ideal) 5.85e-03 (floor 5.9e-03)  post-sel 1.000  q 9  CZ  1181 (a2a  563)  CZ-depth   850  fidelity 0.205  selected-atom energy 0.91  useful shots 1.00  (1262s)
+[10 logDt=3.9] windowed      TVD(ideal) 5.85e-03 (floor 5.9e-03)  post-sel 1.000  q 9  CZ  1181 (a2a  563)  CZ-depth   850  fidelity 0.205  selected-atom energy 1.00  useful shots 1.00  (1299s)
+[11 logDt=5.1] baseline      TVD(ideal) 2.43e-11 (floor 0.0e+00)  post-sel 0.549  q 9  CZ  1838 (a2a  858)  CZ-depth  1386  fidelity 0.205  selected-atom energy 0.12  useful shots 0.50  (1307s)
+[11 logDt=5.1] folded        TVD(ideal) 2.15e-13 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1156 (a2a  635)  CZ-depth   905  fidelity 0.233  selected-atom energy 0.63  useful shots 1.00  (1312s)
+[11 logDt=5.1] aqft          TVD(ideal) 2.99e-04 (floor 0.0e+00)  post-sel 1.000  q 9  CZ  1320 (a2a  629)  CZ-depth   930  fidelity 0.238  selected-atom energy 0.63  useful shots 1.00  (1359s)
+[11 logDt=5.1] semiclassical TVD(ideal) 6.45e-03 (floor 6.2e-03)  post-sel 1.000  q 9  CZ  1181 (a2a  563)  CZ-depth   850  fidelity 0.252  selected-atom energy 0.46  useful shots 1.00  (1394s)
+[11 logDt=5.1] windowed      TVD(ideal) 6.45e-03 (floor 5.5e-03)  post-sel 1.000  q 9  CZ  1181 (a2a  563)  CZ-depth   850  fidelity 0.252  selected-atom energy 0.46  useful shots 1.00  (1429s)
+
+summary over 12 EEG window x envelope cases; TVD is exact except semiclassical (sampled, floor in brackets):
+construction             max TVD      CZ  a2a CZ  CZ depth  fidelity sel. energy  useful shots
+baseline                 2.7e-11    2027    1028      1564     0.203        0.19          0.50
+folded                   6.1e-11    1156     635       905     0.227        0.44          1.00
+aqft                     5.4e-04    1320     629       930     0.228        0.30          1.00
+semiclassical  7.3e-03 [7.4e-03]    1181     563       850     0.238        0.56          1.00
+windowed       7.1e-03 [6.2e-03]     699     343       517     0.403        0.71          1.00
+
+windowed construction, by envelope width:
+  logDt 1.5: 6 qubits, CZ 142 vs folded 1156, fidelity 0.663 vs 0.257, selected-atom energy 0.99 vs 0.94, full axis needs 8 circuit(s), coarse-grid peak error 498 bins
+  logDt 2.7: 7 qubits, CZ 291 vs folded 1156, fidelity 0.481 vs 0.218, selected-atom energy 1.00 vs 0.44, full axis needs 4 circuit(s), coarse-grid peak error 487 bins
+  logDt 3.9: 9 qubits, CZ 1181 vs folded 1156, fidelity 0.216 vs 0.198, selected-atom energy 0.60 vs 0.09, full axis needs 1 circuit(s), coarse-grid peak error 497 bins
+  logDt 5.1: 9 qubits, CZ 1181 vs folded 1156, fidelity 0.253 vs 0.234, selected-atom energy 0.24 vs 0.28, full axis needs 1 circuit(s), coarse-grid peak error 502 bins
+
+wrote results/qact_hardware.json
+
+[CORRECTION, appended after the run] The "coarse-grid peak error" printed above compared the
+in-band windowed peak against the UNMASKED global peak (a negative-frequency bin), so ~500 is
+meaningless. Recomputed in-band vs in-band: 0-3 bins for logDt 1.5/2.7 (always < one grid step),
+89-100% of the best atom energy; 0 for the 9-qubit cases. results/qact_hardware.json holds the
+corrected grid_bin_err and a new grid_energy_ratio field. The script is fixed.

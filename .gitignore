@@ -1,0 +1,45 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# --- virtualenvs ---
+.venv/
+venv/
+env/
+
+# --- raw EEG data (public datasets: re-download, never commit) ---
+# CHB-MIT      physionet.org/content/chbmit/1.0.0/   (42.6 GB)
+# Siena        physionet.org/content/siena-scalp-eeg/ (20.3 GB)
+# EEGMAT       physionet.org/content/eegmat/
+datasets/
+data/
+*.edf
+*.EDF
+*.rec
+*.seizures
+
+# --- derived feature matrices (regenerable by prep_*.py, tens of MB each) ---
+results/X_*.npy
+results/y_*.npy
+results/g_*.npy
+results/features.npy
+results/labels.npy
+results/*.npz
+
+# --- model checkpoints / scratch ---
+*.pt
+*.pth
+*.ckpt
+scratch/
+nohup.out
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/

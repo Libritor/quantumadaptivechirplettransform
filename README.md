@@ -11,6 +11,41 @@ variational classifier and two classical baselines on identical folds.
 
 ---
 
+## What this project found
+
+Every comparison below is pre-registered, uses subject-wise or patient-wise folds,
+and reports paired non-parametric tests with Bonferroni correction. Negative
+results are kept in place rather than deleted, including three findings that were
+later corrected or refuted by their own controls.
+
+1. **Chirplet features are worth +9 to +13 accuracy points beyond amplitude
+   features** for cross-patient seizure detection. Replicated on two independent
+   databases: CHB-MIT +10.4 points, Siena +9.43 (*p* = 0.0047) and +13.31
+   (*p* = 0.0040). This is the project's one solid, reproduced positive result.
+   Best absolute accuracy 79.2% (Siena), 76.8% (CHB-MIT).
+2. **Every quantum *classifier* landed at parity or below**, each with a control
+   explaining why: QSVC, VQC, projected quantum kernels, data re-uploading, a
+   hybrid model, QLSTM (+0.014 vs +0.106 for a plain LSTM), and quantum reservoirs
+   (entanglement contributes +0.024 over its own J=0 control on 23/23 people — a
+   real effect, but an ESN still wins outright).
+3. **A quantum ACT (QACT) brought to full functional parity with the classical
+   engine is its exact peer on real EEG denoising — no better, no worse.** It
+   appeared to *win* (1.272 vs 1.439, 17 of 18 held-out subjects) until the
+   control arm reported: the entire difference was QACT's finer frequency grid,
+   which the QFT supplies for free. Give the classical engine the same 0.5 Hz
+   seeds and the gap vanishes (*p* = 0.15 to 1.00, and the QACT arm restricted to
+   the classical function set is significantly *worse*). Real structural
+   property, real constant-factor resource saving, not an advantage — see
+   [the denoising section](#denoising-the-one-task-with-real-ground-truth). The
+   parity work was still worth doing: it found a genuine selection bug and moved
+   QACT from 70% worse than classical to statistically indistinguishable.
+4. **Recurring lesson, confirmed three times: reconstruction quality and
+   classification value are nearly unrelated.** Atom-level improvements that are
+   real and measurable (better fits, new atom families, smarter selection)
+   repeatedly produced no gain in downstream accuracy.
+
+---
+
 ## Why chirplets
 
 A chirplet atom is a Gaussian-windowed linear-FM waveform with four continuous
@@ -1167,9 +1202,7 @@ All three QACT variants are significantly worse: better on **0 of 18** subjects,
 *p* < 0.0001 (alpha = 0.0167). The discriminator is the **delta band** — classical
 loses 0.73 dB, QACT 2.05 dB. That is where the low-frequency artifact rule
 operates, so it is diagnostic: QACT's slow atoms match the true waveform less
-precisely, and subtracting them removes real slow EEG. The skew family is the best
-QACT variant and nearly halves that damage (1.25 dB), the one place a #3 family
-helped on a real task.
+precisely, and subtracting them removes real slow EEG.
 
 **Caveat, stated rather than buried.** Part of this gap is engine bookkeeping, not
 quantumness: the classical engine does **OMP joint refit** — re-fitting every
@@ -1179,6 +1212,174 @@ reconstruction gap on real EEG (0.28 vs 0.38), and subtraction accuracy is exact
 what denoising depends on. So this result reads "classical ACT denoises better,
 with a known confound", and adding joint refit to QACT would be needed to make it
 a clean test of the quantum parts.
+
+### That caveat was real, but it was not the whole story
+
+The confound was removed by giving QACT every function the classical engine has
+(below). Re-running the identical protocol appears to **reverse the finding** —
+and then a further control shows why that reading is wrong. The full table, with
+every arm needed to interpret it:
+
+| engine | score (lower better) | rrmse | alpha err dB | delta err dB | atoms flagged |
+|---|---|---|---|---|---|
+| no cleaning | 3.487 | — | — | — | — |
+| classical ACT | 1.439 | 0.428 | 0.05 | 0.73 | 3% |
+| classical ACT asym | 1.375 | 0.417 | 0.05 | 0.71 | 4% |
+| **classical ACT fine-f** | **1.257** | 0.423 | 0.04 | 0.62 | 12% |
+| **classical ACT fine+asym** | **1.160** | 0.408 | 0.03 | 0.60 | 13% |
+| QACT legacy (the old engine) | 2.461 | 0.535 | 0.08 | 2.07 | 4% |
+| QACT matched-fn | 1.299 | 0.430 | 0.04 | 0.72 | 11% |
+| QACT parity | 1.272 | 0.398 | 0.05 | 0.66 | 19% |
+| QACT skew | 1.227 | 0.417 | 0.04 | 0.69 | 20% |
+| QACT parity + asym | 1.159 | 0.402 | 0.05 | 0.57 | 18% |
+| QACT cubic | 1.484 | 0.461 | 0.05 | 1.03 | 17% |
+
+Against the **original** classical arm, every parity QACT variant wins (paired
+Wilcoxon, 18 held-out subjects, alpha = 0.05/9 = 0.0056):
+
+```
+QACT legacy         - classical ACT  +1.0216  better on  0/18  p<0.0001  WORSE  *
+QACT matched-fn     - classical ACT  -0.1407  better on 17/18  p<0.0001  BETTER *
+QACT parity         - classical ACT  -0.1675  better on 17/18  p<0.0001  BETTER *
+QACT skew           - classical ACT  -0.2125  better on 17/18  p<0.0001  BETTER *
+QACT parity + asym  - classical ACT  -0.2806  better on 18/18  p<0.0001  BETTER *
+QACT cubic          - classical ACT  +0.0443  better on  8/18  p=0.0898  ns
+```
+
+Three controls were added so that this could not be an unfair comparison in the
+other direction. The first two leave the conclusion standing; **the third
+dismantles it.**
+
+- **`QACT matched-fn`** restricts QACT to *exactly* the classical function set —
+  no exact-f update, no backfit, the two things QACT has that `act_gpu` does not.
+  It still beat plain classical (1.299, 17/18), so the reversal was not those
+  extras.
+- **`classical ACT asym`** turns on the classical engine's own two-width
+  envelope, so the asymmetric QACT arm is not compared against a family the
+  classical side was denied. It helps classical (1.439 -> 1.375); QACT's
+  asymmetric arm was still ahead.
+- **`classical ACT fine-f`** addresses the largest remaining asymmetry, which is
+  not an engine function at all but the *dictionary*. QACT covers **every QFT
+  bin** (`fs/N` = 0.5 Hz here) because one transform returns the whole frequency
+  axis, while the classical seed grid used 1 Hz steps (`fc = 1..40`). Rebuilding
+  the classical grid at 0.5 Hz — which gives it *more* atoms than QACT has,
+  45,900 vs 22,784 — moves classical from 1.439 to **1.257**, and with the
+  two-width envelope to **1.160**.
+
+#### Corrected conclusion: parity, not advantage
+
+Comparing each QACT arm against the **frequency-matched** classical engine
+(alpha = 0.05/4 = 0.0125):
+
+```
+QACT parity       - classical ACT fine-f     +0.0150  QACT better  6/18  p=0.1540  no difference
+QACT matched-fn   - classical ACT fine-f     +0.0418  QACT better  4/18  p=0.0077  CLASSICAL BETTER *
+QACT skew         - classical ACT fine-f     -0.0300  QACT better 13/18  p=0.0814  no difference
+QACT parity+asym  - classical ACT fine+asym  -0.0013  QACT better 11/18  p=1.0000  no difference
+```
+
+So the entire apparent quantum win was the frequency grid. QACT at parity is
+**statistically indistinguishable** from a classical engine given the same
+frequency resolution, and the arm holding QACT to the classical function set is
+significantly *worse*. The earlier reading — "QACT at functional parity wins" —
+was wrong, and this is the control that was explicitly named as the thing that
+would decide it.
+
+What survives is narrower and worth stating precisely:
+
+- **The QFT's free frequency axis is a real structural property with a real
+  effect** — worth 0.18 of score, which is larger than any engine-function
+  difference measured here. It is a *constant-factor resource* saving, not a
+  complexity advantage: the classical engine buys the identical gain by paying
+  for a 2.25x larger dictionary.
+- **QACT is now a genuine peer of the classical engine**, having moved from 70%
+  worse (2.461 vs 1.439) to indistinguishable. That gap was almost entirely a
+  bug plus missing functions, not anything about quantum mechanics.
+- **Consistent with every other result in this project**: the quantum
+  formulation matches the classical one once both are implemented properly, and
+  each apparent advantage has turned out to have a classical explanation. This
+  is now the fourth time.
+
+Note also that the QACT arms flag 18-20% of atoms as artifact versus 3-4% for
+plain classical, at their own independently tuned thresholds — but the
+frequency-matched classical arms also rise to 12-13%, so that difference tracks
+dictionary resolution rather than the engine. Band fidelity is comparable
+throughout (delta 0.57-0.72 dB), so no arm is over-deleting.
+
+### Bringing QACT to full functional parity
+
+`docs/QUANTUM_ACT.md` has the full table. QACT previously implemented only the
+*selection* half of ACT; it now performs every function the classical engine does,
+each written in the form the quantum encoding makes natural rather than ported
+from the classical code:
+
+| classical function | QACT implementation |
+|---|---|
+| OMP joint refit (`_joint_refit`) | the same least-squares refit — its normal matrix is the Gram of atom overlaps `<psi_i\|psi_j>`, which is the swap-test observable, so it needs no primitive the circuit does not already provide |
+| exact 2-D least-squares criterion (with the `<gc,gs>` cross term) | follows from one quantity, the atom's second-harmonic self-overlap `<psi\|psi*>`; data-independent, so it is a table built once (`exact_ls=True`) |
+| two-width asymmetric envelope (ACTv9Asym) | a fourth envelope grid axis (`asym_ratios`), refinable |
+| per-window stopping rule (`min_amp`, active mask, `E > 0`) | `min_amp`, same semantics |
+| off-grid refinement of every parameter | parameter-shift rule for the phase parameters, central differences for the envelope ones |
+| — | **exact frequency update**: `E(f)` *is* the periodogram, so one QFT gives the optimum directly instead of gradient-stepping toward it (`exact_f`) |
+| — | **backfit**: cyclic re-refinement of each atom against the residual with its own contribution added back (`backfit_passes`) |
+| — | **c3 and skew refinement** by the same shift rule; c3's gates are 3-local, so singles, pairs *and* triples enter its chain rule |
+
+Effect of each addition on planted chirplets (reconstruction error, 32 signals,
+order 8):
+
+```
+legacy (plain MP)   0.30722        <- before any of this
++ normalised selection criterion   0.16920   <- see below; this was a BUG FIX
++ OMP joint refit                  0.15542
++ exact-f update                   0.15378
++ backfit x1                       0.14860
+```
+
+#### The selection criterion was wrong, and the quantum reading is what fixes it
+
+`_power` ranked atoms by the raw `|<psi|r>|^2`. That is the **joint** probability
+that the envelope filter succeeds *and* frequency k is read, so it systematically
+over-ranks wide, high-norm envelopes. The classical engine never had this problem
+because its criterion divides by the atom's own norm.
+
+The fix is not a normalisation bolted on for parity — it is the quantity an
+experiment actually reports. A run keeps only post-selected shots, so the observed
+distribution is **conditional** on the filter succeeding: divide by `||psi||^2`,
+which `_power` already computed per envelope as the post-selection success
+probability. That conditional distribution is simultaneously what the hardware
+measures, what the refiner maximises, and what the classical least-squares
+criterion normalises by. All three now agree. This one change accounts for most of
+the improvement above (0.307 -> 0.169), and for most of the reversal in the
+denoising table.
+
+Two further bugs were found and fixed while making the engines comparable: the
+width ratio was not passed to the refiner, so refinement optimised a *symmetric*
+envelope and the atom was then built asymmetric (which made the two-width
+dictionary score *worse* than the symmetric one — a superset dictionary cannot
+legitimately do that, which is how it was caught); and the three-point parabolic
+interpolation in the exact-f update clamped a denominator that is *negative* at a
+peak, degrading it to a fixed half-bin step.
+
+The exact 2-D least-squares criterion was implemented and then **measured to be
+unnecessary**: it changes reconstruction error by <1e-4 (0.17233 -> 0.17221) for
+1.8x the search cost, because an oscillating atom's cosine and sine quadratures
+are already near-orthogonal and equal-norm. It is off by default for that reason,
+not because it is unavailable.
+
+#### Nothing was broken in the process
+
+- gate decompositions still match qiskit: 3.0e-13 (quadratic 1.0e-13, cubic 2.3e-12)
+- `features_batch` still matches the per-row path: 7.1e-15
+- with `omp=False, backfit_passes=0, exact_f=False, norm_select=False` (the
+  `--legacy` flag on `prep_chbmit_qact.py`) the engine reproduces the pre-parity
+  CHB-MIT reference feature matrix **bitwise**: 100% of 2.54M entries identical,
+  max absolute difference 0.0. Every addition is opt-in and the old results remain
+  exactly reproducible.
+
+Cost of parity: OMP is free (the `2k x 2k` solve is negligible), the exact-f
+update adds ~50%, backfit roughly doubles wall time, and `refine_extra` triples
+the circuit-evaluation count (5,376 -> 17,760 per batch) because c3's 3-local
+gates add 84 triples to the shift-rule budget.
 
 ## Layout
 
@@ -1209,7 +1410,10 @@ compare_qact_allfeat.py  the same, all features + regularisation (fair regime)
 compare_variants.py  ideas #2/#3: proposal selection, cubic phase, skew envelopes
 run_variants.sh     extraction for those variants
 qbe/denoise.py      artifact rules, overlap-add subtraction, both engines
-compare_denoise.py  denoising vs clean ground truth (tuned then frozen)
+compare_denoise.py  denoising vs clean ground truth (tuned then frozen), with the
+                    functional-parity arms and their fairness controls
+run_parity_features.sh  rebuild CHB-MIT QACT features with the parity engine and
+                    rerun the pre-registered classification comparison (A4/A5)
 qbe/crosschannel.py cross-channel synchrony / spread / propagation features
 prep_crosschannel.py / compare_crosschannel.py
 confirm_siena.py    independent confirmation on the Siena database
@@ -1219,6 +1423,13 @@ run_qbe.py          CLI
 ```
 
 ## Notes and known limits
+
+- **QACT's parity switches are all opt-in**, so older results stay reproducible:
+  `omp`, `backfit_passes`, `exact_f`, `min_amp`, `norm_select`, `exact_ls`,
+  `asym_ratios`, `refine_extra`. The defaults are the parity configuration;
+  `prep_chbmit_qact.py --legacy` restores the pre-parity engine bit-for-bit.
+  `norm_select=False` is only there to reproduce the old reference — it is a bug,
+  not an alternative (see the denoising section).
 
 - **The Muse montage has no motor-cortex coverage.** TP9/AF7/AF8/TP10 are
   temporal and frontal. Eyes-open/closed works well; left/right motor imagery

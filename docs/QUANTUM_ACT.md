@@ -126,6 +126,14 @@ form the quantum encoding makes natural rather than ported as classical code:
 | — | **backfit**: cyclic re-refinement of each atom against the residual with its own contribution added back (`backfit_passes`) |
 | — | **cubic chirp and skew envelope**, refined by the same shift rule (c₃'s gates are 3-local, so singles, pairs *and* triples enter its chain rule) |
 
+**Measured outcome of parity.** On EEGMAT denoising against ICA-cleaned ground
+truth, QACT at parity scores 1.272 vs the classical engine's 1.439 — but that
+margin is entirely the frequency grid. Giving the classical seed grid the same
+0.5 Hz spacing the QFT provides for free brings it to 1.257, and the paired test
+against QACT then shows no difference (*p* = 0.15; *p* = 1.00 for the asymmetric
+pair). The honest claim is **parity at a 2.25x smaller dictionary**, not an
+advantage.
+
 ### The selection criterion was wrong, and the quantum reading fixes it
 
 `_power` returned the raw `|⟨ψ|r⟩|²`. That is the **joint** probability that the
@@ -142,7 +150,10 @@ the hardware measures, (b) what the refiner maximises, and (c) what the
 classical least-squares criterion normalises by. All three now agree.
 
 On planted chirplets this single change cut reconstruction error from 0.307 to
-0.169. `norm_select=False` restores the old behaviour, and with
+0.169, and on real EEG denoising it moved QACT from 70% worse than the classical
+engine to statistically indistinguishable from it (README has the full table and
+the control that shows the remaining difference is dictionary frequency
+resolution, not the quantum formulation). `norm_select=False` restores the old behaviour, and with
 `omp=False, backfit_passes=0, exact_f=False, norm_select=False` the engine
 reproduces the pre-parity reference feature matrix **bitwise** (verified against
 `results/X_chbmitqactonly_ref.npy`: 100% of 2.5M entries identical).

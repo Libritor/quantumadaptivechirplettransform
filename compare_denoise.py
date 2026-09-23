@@ -50,6 +50,9 @@ ENGINES = {
     # the classical engine's own two-width envelope, so the asymmetric QACT arm
     # is not being compared against a family the classical side was denied
     "classical ACT asym": dict(kind="classical", asym=True),
+    # decisive control: classical engine at QACT's frequency resolution
+    "classical ACT fine-f": dict(kind="classical", fine_f=True),
+    "classical ACT fine+asym": dict(kind="classical", fine_f=True, asym=True),
     "QACT legacy": dict(kind="qact", omp=False, backfit_passes=0, exact_f=False,
                         norm_select=False),
     "QACT parity": dict(kind="qact"),

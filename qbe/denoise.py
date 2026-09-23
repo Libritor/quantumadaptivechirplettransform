@@ -78,10 +78,25 @@ def artifact_mask(phys: dict, sigma: np.ndarray, R: dict) -> np.ndarray:
 # engines: decompose a batch of frames, returning waveforms + physical params
 # ---------------------------------------------------------------------------
 def decompose_classical(frames: np.ndarray, fs: float, order: int, device="cuda",
-                        batch=4096, asym=False):
+                        batch=4096, asym=False, fine_f=False):
     from . import act_gpu
     from .gpu_features import gpu_dictionary_grid
-    D = act_gpu.GPUDictionary(gpu_dictionary_grid(WIN, fs), WIN, fs, device=device)
+    grid = gpu_dictionary_grid(WIN, fs)
+    if fine_f:
+        # Control for the one structural asymmetry left: QACT's dictionary covers
+        # EVERY QFT bin (fs/N = 0.5 Hz here) because one transform returns the
+        # whole frequency axis, while the classical seed grid uses 1 Hz steps.
+        # This rebuilds the classical grid at the same 0.5 Hz resolution, giving
+        # it MORE atoms than QACT has.
+        import numpy as _np
+        T = WIN / fs
+        g = _np.stack(_np.meshgrid(_np.linspace(0.0, T, 17),
+                                   _np.arange(0.5, 45.5, 0.5),
+                                   _np.array([0.03, 0.06, 0.12, 0.25, 0.5, 1.0]),
+                                   _np.array([-20.0, -10.0, 0.0, 10.0, 20.0]),
+                                   indexing="ij"), -1).reshape(-1, 4)
+        grid = g
+    D = act_gpu.GPUDictionary(grid, WIN, fs, device=device)
     t = torch.arange(WIN, device=device, dtype=torch.float32) / fs
     M = frames.shape[0]
     waves = torch.empty(M, order, WIN, device=device)

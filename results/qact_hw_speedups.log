@@ -1,0 +1,26 @@
+reference (qact_vs_act_speed.py): 1,140 circuits x 2000 shots per window, recon err 0.582
+
+   adaptive window 1/4: recon err 0.488, 724,500 shots so far (90s)
+   adaptive window 2/4: recon err 0.595, 1,641,250 shots so far (187s)
+   adaptive window 3/4: recon err 0.580, 2,316,250 shots so far (272s)
+   adaptive window 4/4: recon err 0.663, 3,135,250 shots so far (364s)
+adaptive shots: 783,812 shots/window vs 2,280,000 (2.9x fewer); recon err 0.582 vs 0.582
+
+multi-programming on FakeTorino (133 qubits), 9-qubit QACT circuits:
+   k= 1:   9 physical qubits,   1181 CZ per copy,   95.9 us per shot for all 1 ->  345.9 us per circuit-shot at default delay,  95.9 at zero delay  (0s)
+   k= 2:  18 physical qubits,   1046 CZ per copy,  106.4 us per shot for all 2 ->  178.2 us per circuit-shot at default delay,  53.2 at zero delay  (1s)
+   k= 4:  39 physical qubits,   1241 CZ per copy,  124.9 us per shot for all 4 ->   93.7 us per circuit-shot at default delay,  31.2 at zero delay  (1s)
+   k= 8:  76 physical qubits,   1166 CZ per copy,  121.2 us per shot for all 8 ->   46.4 us per circuit-shot at default delay,  15.2 at zero delay  (15s)
+   k=12: 109 physical qubits,   1180 CZ per copy,  132.5 us per shot for all 12 ->   31.9 us per circuit-shot at default delay,  11.0 at zero delay  (14s)
+   k=14: 126 physical qubits,   1181 CZ per copy,  142.5 us per shot for all 14 ->   28.0 us per circuit-shot at default delay,  10.2 at zero delay  (14s)
+
+QACT on IBM Heron (estimate)                  per window    vs CPU ACT    vs GPU ACT
+optimised circuits (last benchmark)             12.6 min       13,685x    1,128,026x
++ zero repetition delay                          3.1 min        3,392x      279,643x
++ multi-programming (k=14)                        23.2 s          419x       34,534x
++ adaptive shots (all three)                       8.0 s          144x       11,872x
+all three, default 250 us delay (k=14)            22.0 s          397x       32,704x
+classical ACT, CPU (measured)                    55.4 ms
+classical ACT, GPU batched (measured)             0.7 ms
+
+wrote results/qact_hw_speedups.json

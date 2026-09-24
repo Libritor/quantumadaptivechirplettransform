@@ -1,0 +1,63 @@
+{
+ "rows": [
+  {
+   "engine": "classical ACT, GPU",
+   "seconds_per_window": 0.16962974875059444,
+   "batched_seconds_per_window": 0.0006718657226514324,
+   "recon_err": 0.47235557436943054
+  },
+  {
+   "engine": "classical ACT, CPU",
+   "seconds_per_window": 0.05538180549774552,
+   "batched_seconds_per_window": null,
+   "recon_err": 0.47235554456710815
+  },
+  {
+   "engine": "QACT exact simulation, GPU",
+   "seconds_per_window": 0.00942647599731572,
+   "batched_seconds_per_window": 8.785518750187293e-05,
+   "recon_err": 0.577758714556694
+  },
+  {
+   "engine": "QACT circuits in Aer (simulator)",
+   "seconds_per_window": 53.74961257999894,
+   "batched_seconds_per_window": null,
+   "recon_err": 0.5819405952078762
+  },
+  {
+   "engine": "QACT on IBM Heron, optimised",
+   "seconds_per_window": 757.8823000000032,
+   "batched_seconds_per_window": null,
+   "recon_err": null
+  },
+  {
+   "engine": "   same, repetition delay 0",
+   "seconds_per_window": 187.88230000000317,
+   "batched_seconds_per_window": null,
+   "recon_err": null
+  },
+  {
+   "engine": "QACT on IBM Heron, original design",
+   "seconds_per_window": 61183.218865559524,
+   "batched_seconds_per_window": null,
+   "recon_err": null
+  }
+ ],
+ "circuits_per_window": 1140.0,
+ "shots": 2000,
+ "duration_us": {
+  "6": 15.780000000000046,
+  "7": 30.579999999999895,
+  "8": 51.6720000000005,
+  "9": 95.84000000000177
+ },
+ "circuits_by_register": {
+  "6": 18.25,
+  "7": 119.25,
+  "8": 137.5,
+  "9": 865.0
+ },
+ "rep_delay_us": 250.0,
+ "baseline_duration_us": 194.91999999998419,
+ "baseline_circuits_per_atom": 741.0
+}

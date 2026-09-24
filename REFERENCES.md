@@ -53,6 +53,40 @@ Grouped by where they matter in the code.
 - **Grover L., Rudolph T.** "Creating superpositions that correspond to efficiently integrable probability distributions." quant-ph/0208112 (2002). — Gaussian envelope state preparation.
 - **Mitarai K., Negoro M., Kitagawa M., Fujii K.** "Quantum circuit learning." *Phys. Rev. A* 98:032309 (2018). — parameter-shift rule used for off-grid refinement.
 
+## Running QACT on real hardware, and how fast it can go (`qact_hw.py`, `qact_hardware.py`, `qact_vs_act_speed.py`, `qact_hw_speedups.py`)
+
+Implemented here:
+
+- **Griffiths R. B., Niu C.-S.** "Semiclassical Fourier transform for quantum computation." *Phys. Rev. Lett.* 76:3228 (1996). — the QFT as mid-circuit measurement plus classically controlled single-qubit phases: no two-qubit gates (`qact_hw.py`, `semiclassical` / `windowed`).
+- **Huang R., Izmaylov A. F.** "Quantum gambling: best-arm strategies for generator selection in adaptive variational algorithms." arXiv:2509.14917 (2025). — successive elimination over candidate measurements; 69–93% fewer measurements in their setting (Table 1). The model for adaptive shot allocation in QACT's atom selection.
+- **Niu S., Todri-Sanial A.** "Enabling multi-programming mechanism for quantum computing in the NISQ era." *Quantum* 7:925 (2023). — running several small circuits on one chip at once, with crosstalk-aware qubit partitioning.
+- **Ohkura Y., Satoh T., Van Meter R.** "Simultaneous execution of quantum circuits on current and near-future NISQ systems." *IEEE Trans. Quantum Eng.* 3 (2022). — multi-programming on IBM hardware; reports a trade-off between success rate and execution time.
+
+Relevant, not implemented (need hardware or data access this project does not have):
+
+- **Bellante A., Zanero S.** "Quantum matching pursuit: a quantum algorithm for sparse representations." *Phys. Rev. A* 105:022414 (2022); arXiv:2208.04145. — Theorem 8: Õ(kn log n + k·sqrt(m)/ξ·log(km/δ)) vs classical O(knm). Quadratic in dictionary size, but assumes fault-tolerant QRAM, and the kn log n term matches FFT-based classical MP.
+- **Bellante A., Vanerio S., Zanero S.** "Quantum sparse recovery and quantum orthogonal matching pursuit." arXiv:2510.06925 (2025). — polynomial speed-ups over classical OMP in the QRAM model; input is coherent access to a quantum state.
+- **Krstulovic S., Gribonval R.** "MPTK: Matching pursuit made tractable." *Proc. ICASSP* (2006). — the classical baseline any quantum MP must beat: O(N log N) per iteration for structured (Gabor, chirp) dictionaries.
+- **Holmes A., Matsuura A. Y.** "Efficient quantum circuits for accurate state preparation of smooth, differentiable functions." arXiv:2005.04351 (2020). — linear-depth loading via matrix product states; candidate for the state preparation that is ~87% of QACT's remaining two-qubit gates.
+- **Moosa M., Watts T. W., Chen Y., Sarma A., McMahon P. L.** "Linear-depth quantum circuits for loading Fourier approximations of arbitrary functions." *Quantum Sci. Technol.* (2023), doi:10.1088/2058-9565/acfc62; arXiv:2302.03888. — depth linear in the number of Fourier coefficients; relevant because EEG is band-limited.
+- **Smith K. C., Khan A., Clark B. K., Girvin S. M., Wei T.-C.** "Constant-depth preparation of matrix product states with adaptive quantum circuits." arXiv:2404.16083 (2024). — constant depth for symmetric MPS; checked and does not cover generic EEG windows.
+- **Suzuki Y., Uno S., et al.** "Amplitude estimation without phase estimation." *Quantum Inf. Process.* 19 (2020); arXiv:1904.10246. — near-quadratic shot reduction with short circuits.
+- **Giurgica-Tiron T., Kerenidis I., Labib F., Prakash A., Zeng W.** "Low depth algorithms for quantum amplitude estimation." *Quantum* 6:745 (2022). — optimal depth/query trade-off N·D = O(1/ε²), analysed under depolarising noise.
+- **Erle J., Koczor B.** "Nearly optimal amplitude estimation at any depth." arXiv:2608.24434 (2026). — no ancillas or controlled Grover operators; aimed at the early fault-tolerant regime.
+
+Why no speed-up over classical is expected for recorded signals:
+
+- **Aaronson S.** "Read the fine print." *Nature Physics* 11:291–293 (2015). — data loading and output caveats that erase many claimed quantum-ML speed-ups.
+- **Tang E.** "A quantum-inspired classical algorithm for recommendation systems." *Proc. STOC* (2019). — the first dequantization.
+- **Chia N.-H., Gilyén A., Li T., Lin H.-H., Tang E., Wang C.** "Sampling-based sublinear low-rank matrix arithmetic framework for dequantizing quantum machine learning." arXiv:1910.06151 (2019). — with matching classical data access, the advantage becomes polynomial at best.
+- **Tang E.** "Dequantizing algorithms to understand quantum advantage in machine learning." *Nature Reviews Physics* 4:692–693 (2022).
+- **Jaques S., Rattew A. G.** "QRAM: a survey and critique." *Quantum* 9:1922 (2025). — cheap, scalable QRAM (assumed by quantum MP) is unlikely.
+
+Where published speed-ups for signals do exist (quantum data, not recorded arrays):
+
+- **Huang H.-Y., Broughton M., Cotler J., Chen S., Li J., Mohseni M., Neven H., Babbush R., Kueng R., Preskill J., McClean J. R.** "Quantum advantage in learning from experiments." *Science* 376:1182–1186 (2022).
+- **Kannan et al.** "Exponential quantum advantage for learning signals with a single qubit." arXiv:2608.13521 (2026). — up to 10^7-fold fewer measurements, for a qubit coupled directly to the sensor.
+
 ## Classical reservoir baselines and benchmarks
 
 - **Jaeger H.** "The 'echo state' approach to analysing and training recurrent neural networks." GMD Report 148 (2001). — echo state network.

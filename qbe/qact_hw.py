@@ -14,7 +14,7 @@ over frequency k of
 which, reweighted by the classical factor N ||env r||^2 / ||env||^2, is exactly
 the post-selection-conditioned criterion `QACT._power` computes.
 
-Four constructions of the same distribution:
+Five constructions of the same distribution:
 
   baseline      prepare r; envelope filter = multiplexed RY onto an ancilla,
                 post-select ancilla = 0; chirp; inverse QFT (with swaps).
@@ -30,6 +30,8 @@ Four constructions of the same distribution:
                 PRL 76, 3228, 1996). Exact, and it contains NO two-qubit gates:
                 every controlled phase of the inverse QFT has one qubit that is
                 already measured by the time the gate is reached.
+  windowed      semiclassical, on a register holding only the envelope's +-4 sigma
+                support (6-9 qubits); exact on a sub-grid of frequency bins.
 """
 from __future__ import annotations
 
@@ -96,11 +98,16 @@ def _semiclassical_iqft(qc, t, ck):
         qc.measure(t[j], ck[j])
 
 
-def build(kind, r, env, c, approx_degree=2, measure=True, offset=0):
+def build(kind, r, env, c, approx_degree=2, measure=True, offset=0,
+          loader="stateprep"):
     """One QACT evaluation as a Qiskit circuit.
 
     Measured frequency bits land in classical register 'k' (bit j = bit j of k);
-    the baseline also measures its ancilla into register 'anc'.
+    the baseline also measures its ancilla into register 'anc'. For the windowed
+    construction, loader="initialize" loads the window with Aer's native
+    `initialize` instead of a synthesised `StatePreparation` -- identical state,
+    but it skips gate synthesis, which is the right choice when Aer only has to
+    simulate the circuit and wrong when counting device gates.
     """
     N = len(r)
     n = int(round(math.log2(N)))
@@ -167,7 +174,10 @@ def build(kind, r, env, c, approx_degree=2, measure=True, offset=0):
         rev = list(tw)[::-1]
         ck = ClassicalRegister(m, "k")
         qc.add_register(ck)
-        qc.append(StatePreparation(sw), rev)
+        if loader == "initialize":
+            qc.initialize(sw, rev)
+        else:
+            qc.append(StatePreparation(sw), rev)
         _chirp(qc, rev, m, c, N, lin=2 * c * t0 + offset)
         _semiclassical_iqft(qc, tw, ck)
         return qc
@@ -204,6 +214,33 @@ def distribution_from_counts(counts, n, postselect_ancilla=False):
         p[int(kbits, 2)] += v
         kept += v
     return p / max(kept, 1), kept / max(total, 1)
+
+
+def circuit_duration(tq, target, feedforward_s=0.0):
+    """Duration (s) of one shot of a device-transpiled circuit.
+
+    Qiskit's estimator has no duration for `if_else`. In these circuits every
+    conditional body is an RZ, which IBM hardware implements virtually (0 ns),
+    so each block is unrolled to its body and timed normally; the sequential
+    mid-circuit measurements stay in place. The classical feed-forward latency
+    is NOT in the device calibration, so it is added explicitly as
+    `feedforward_s` per conditional block.
+    """
+    flat = tq.copy_empty_like()
+    n_cond = 0
+    for inst in tq.data:
+        op = inst.operation
+        if op.name == "if_else":
+            n_cond += 1
+            body = op.blocks[0]
+            qmap = dict(zip(body.qubits, inst.qubits))
+            cmap = dict(zip(body.clbits, inst.clbits))
+            for b in body.data:
+                flat.append(b.operation, [qmap[q] for q in b.qubits],
+                            [cmap[c] for c in b.clbits])
+        else:
+            flat.append(op, inst.qubits, inst.clbits)
+    return flat.estimate_duration(target, unit="s") + n_cond * feedforward_s
 
 
 def two_qubit_stats(tq):

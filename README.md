@@ -1458,6 +1458,99 @@ their selection under Heron noise. After everything else, **state preparation is
 state-loading problem, and IBM's `qiskit-addon-aqc-tensor` (approximate
 tensor-network compilation of a target state) is the existing tool to try next.
 
+### How fast is it? QACT vs classical ACT, end to end
+
+`qact_vs_act_speed.py` runs the same job through every engine: decompose real
+EEGMAT windows (2 s, 512 samples) into 6 atoms. The **QACT circuits** row is the
+new hardware circuit actually executed — every selection and refinement step a
+windowed, semiclassical-QFT circuit run shot by shot (2,000 shots) in Qiskit Aer,
+with branch-and-bound selection and 3-point refinement. The IBM Heron rows price
+exactly the circuits that run executed, using the device's calibration (CZ 68 ns,
+measurement 1.56 us, default 250 us repetition delay between shots); queueing and
+compilation are excluded, so they are lower bounds. No IBM Quantum account is
+configured, so no row is a real QPU run.
+
+![QACT vs classical ACT, time per window](results/qact_vs_act_speed.png)
+
+| engine | per window | vs classical CPU | recon err |
+|---|---|---|---|
+| classical ACT, GPU, batch of 1,024 | 0.67 ms | 82x faster | 0.47 |
+| classical ACT, CPU | 55 ms | — | 0.47 |
+| QACT simulated on GPU (the FFT is the QFT's output), batch of 1,024 | 0.09 ms | 630x faster | 0.58 |
+| QACT circuits, shot by shot in Aer | 54 s | 971x slower | 0.58 |
+| IBM Heron, optimised circuits (estimate) | **12.6 min** | **13,700x slower** | — |
+| IBM Heron, optimised, zero repetition delay (estimate) | 3.1 min | 3,400x slower | — |
+| IBM Heron, original design (estimate) | 17.0 h | 1.1 million x slower | — |
+
+Three things to read from it:
+
+- **The circuits work.** Run shot by shot, with window-local coarse frequency
+  grids and all, they reach the same reconstruction error as the exact
+  simulation (0.582 vs 0.578).
+- **On a real QPU, QACT is ~14,000x slower than classical ACT on a CPU, and ~a
+  million times slower than batched GPU ACT.** The optimisations made it 81x
+  faster than the original design (17 h -> 12.6 min per window), which moves it
+  from absurd to merely very slow. Per shot, the 250 us repetition delay dwarfs
+  the 16-96 us circuit, and each circuit needs thousands of shots to estimate a
+  distribution that an FFT computes exactly in microseconds. Even with zero
+  repetition delay it is 3 minutes per window.
+- **The fast orange bar is not a quantum result.** "QACT simulated on GPU"
+  beats classical ACT because it is an FFT-based matching pursuit with 4 cheap
+  refinement steps instead of 60 Adam steps — and it pays for that with a worse
+  fit (0.58 vs 0.47). It is a classical algorithm that happens to compute what
+  the quantum circuit would.
+
+This is the "catch" in docs/QUANTUM_ACT.md made concrete: a quantum advantage
+here would need the residual available without re-loading it every circuit
+(QRAM) and Dürr–Høyer search over the whole dictionary in superposition, neither
+of which exists on current hardware. The Heron estimate also assumes every
+circuit returns a usable answer; under Heron's noise, the 9-qubit long-atom
+circuits (865 of the 1,140 per window) currently do not.
+
+### Published speed-ups, applied (`qact_hw_speedups.py`)
+
+A literature search for anything that speeds up this class of problem (sources
+in [REFERENCES.md](REFERENCES.md), section "Running QACT on real hardware")
+found three techniques usable on today's hardware, and they were applied to the
+same job and windows as above:
+
+| QACT on IBM Heron (estimate) | per window | vs classical CPU | vs classical GPU, batched |
+|---|---|---|---|
+| optimised circuits (above) | 12.6 min | 13,685x slower | 1.1 million x slower |
+| + zero repetition delay | 3.1 min | 3,392x | 279,643x |
+| + 14 circuits per chip | 23.2 s | 419x | 34,534x |
+| **+ adaptive shots** | **8.0 s** | **144x slower** | **11,872x slower** |
+
+- **Zero repetition delay.** Heron allows 0-500 us between shots; the default
+  is 250 us, four times the longest QACT circuit. Needs fast qubit reset, whose
+  fidelity cost is not modelled.
+- **Multi-programming** (Niu & Todri-Sanial 2023; Ohkura et al. 2022). Measured
+  by transpiling k copies of a 9-qubit QACT circuit onto FakeTorino: 14 copies
+  fit on 126 of 133 qubits with per-copy CZ counts unchanged (1,181), and one
+  shot of all 14 takes 142.5 us against 95.9 us for one alone — 9.4x throughput.
+  Assumes many windows or channels in flight at once (refinement is sequential
+  within a window). **Crosstalk is not modelled**: the fake backends' noise
+  models do not contain it, and both papers report a fidelity cost.
+- **Adaptive shots** (successive elimination; Huang & Izmaylov 2025, who report
+  69-93% fewer measurements in their setting). Run for real in Aer: every
+  candidate circuit gets 250 shots, and only candidates whose upper confidence
+  bound can still beat the leader's lower bound get more (doubling to 2,000);
+  refinement comparisons are raced the same way. **2.9x fewer shots (2.28M ->
+  0.78M per window) with identical reconstruction error (0.582 vs 0.582).**
+
+Together: **~95x faster** than the optimised circuits, and ~7,600x faster than
+the original design. Still ~140x slower than classical ACT on a CPU and ~12,000x
+slower than batched GPU ACT. The remaining published ideas need hardware that
+does not exist yet: amplitude estimation (quadratically fewer shots, but deeper
+circuits than current noise allows) and quantum matching pursuit (quadratic in
+dictionary size, but it assumes fault-tolerant QRAM and keeps the same n log n
+term fast classical matching pursuit already has). The literature's explanation
+for the gap is the same one this project keeps hitting: recorded data has to be
+loaded into every circuit for every shot, and dequantization results show the
+classical side matches these speed-ups once it gets equivalent data access. The
+published exponential advantages for signals are all for signals that reach a
+qubit directly (quantum sensing), not recorded arrays.
+
 ### A pre-existing leak in refinement, found along the way
 
 The parameter-shift refiner's comment says it keeps the centre frequency in
@@ -1512,6 +1605,10 @@ qbe/qact_hw.py      QACT as real hardware circuits (Qiskit library parts):
                     baseline / folded / aqft / semiclassical / windowed
 qact_hardware.py    hardware study: Aer correctness, IBM Heron (FakeTorino)
                     gate counts and noisy execution
+qact_vs_act_speed.py  end-to-end speed: classical ACT (GPU/CPU) vs QACT simulated,
+                    QACT circuits run in Aer, and IBM Heron time estimates
+qact_hw_speedups.py three published speed-ups: zero repetition delay,
+                    multi-programming (measured packing), adaptive shots (Aer)
 run_parity_features.sh  rebuild CHB-MIT QACT features with the parity engine and
                     rerun the pre-registered classification comparison (A4/A5)
 qbe/crosschannel.py cross-channel synchrony / spread / propagation features

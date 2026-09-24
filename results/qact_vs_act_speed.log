@@ -1,0 +1,29 @@
+job: 4 real EEGMAT windows x 6 atoms  (512 samples = 9 qubits each)
+
+classical ACT, GPU                   169.63 ms/window  (0.672 ms/window batched x1024)   recon err 0.472
+classical ACT, CPU                    55.38 ms/window   recon err 0.472
+QACT exact simulation, GPU             9.43 ms/window  (0.088 ms/window batched x1024)   recon err 0.578
+   circuit QACT window 1/4: recon err 0.512, 1,082 circuits so far (52s)
+   circuit QACT window 2/4: recon err 0.566, 2,236 circuits so far (106s)
+   circuit QACT window 3/4: recon err 0.590, 3,382 circuits so far (160s)
+   circuit QACT window 4/4: recon err 0.660, 4,560 circuits so far (215s)
+QACT circuits in Aer: 53.7 s/window (Aer execution 19.6 s of it); 1,140 circuits and 2,280,000 shots per window; recon err 0.582
+
+IBM Heron, per shot (device-transpiled; feed-forward latency excluded):
+   6-qubit window:   15.8 us + 250 us repetition delay   x    18 circuits/window x 2000 shots
+   7-qubit window:   30.6 us + 250 us repetition delay   x   119 circuits/window x 2000 shots
+   8-qubit window:   51.7 us + 250 us repetition delay   x   138 circuits/window x 2000 shots
+   9-qubit window:   95.8 us + 250 us repetition delay   x   865 circuits/window x 2000 shots
+
+engine                                per window      vs classical CPU    vs classical GPU batched
+classical ACT, GPU                     169.63 ms             3x slower                 252x slower
+classical ACT, CPU                      55.38 ms                 ~same                  82x slower
+QACT exact simulation, GPU               9.43 ms           5.9x faster                  14x slower
+QACT circuits in Aer (simulator)          53.7 s           971x slower              80,001x slower
+QACT on IBM Heron, optimised             757.9 s        13,685x slower           1,128,026x slower  (estimate)
+   same, repetition delay 0              187.9 s         3,392x slower             279,643x slower  (estimate)
+QACT on IBM Heron, original design        17.0 h     1,104,753x slower          91,064,653x slower  (estimate)
+
+original design: 741 circuits/atom, 15.5x shots lost to post-selection, 195 us/shot.  optimised: 190 circuits/atom, no shots lost.
+
+wrote results/qact_vs_act_speed.json

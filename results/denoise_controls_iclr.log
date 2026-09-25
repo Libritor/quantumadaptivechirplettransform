@@ -1,0 +1,35 @@
+[denoise] 144 rule configs; tune on 8 subjects, evaluate on 18 held out; 180s per subject
+[denoise] no cleaning (contaminated as-is): median score 3.537  (8s)
+[classical ACT] tuned in 94s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 2.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[classical ACT] held-out score 1.439 (median 1.434)  rrmse 0.428  alpha_dB 0.05  delta_dB 0.73  atoms called artifact 3%  (131s)
+[classical ACT fine-f] tuned in 85s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 1.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[classical ACT fine-f] held-out score 1.257 (median 1.265)  rrmse 0.423  alpha_dB 0.04  delta_dB 0.62  atoms called artifact 12%  (124s)
+[classical ACT fine-f coord] tuned in 72s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 1.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[classical ACT fine-f coord] held-out score 1.279 (median 1.258)  rrmse 0.422  alpha_dB 0.04  delta_dB 0.61  atoms called artifact 11%  (88s)
+[classical ACT fine-f to78] tuned in 92s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 1.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[classical ACT fine-f to78] held-out score 1.223 (median 1.219)  rrmse 0.380  alpha_dB 0.04  delta_dB 0.61  atoms called artifact 13%  (132s)
+[QACT parity hw] tuned in 89s -> {'F_HIGH': 22.0, 'K_HIGH': 0.5, 'F_LOW': 5.0, 'K_LOW': 1.5, 'DT_SHORT': 0.03, 'K_SHORT': 3.0}
+[QACT parity hw] held-out score 1.213 (median 1.243)  rrmse 0.392  alpha_dB 0.04  delta_dB 0.57  atoms called artifact 19%  (123s)
+
+no cleaning: 3.487   (lower is better throughout)
+
+paired Wilcoxon across 18 held-out subjects (alpha = 0.0125); negative difference = cleans BETTER than classical ACT:
+  classical ACT fine-f - classical ACT  -0.1825  better on 17/18  p=0.0000  BETTER *
+  classical ACT fine-f coord - classical ACT  -0.1605  better on 17/18  p=0.0000  BETTER *
+  classical ACT fine-f to78 - classical ACT  -0.2161  better on 18/18  p=0.0000  BETTER *
+  QACT parity hw       - classical ACT  -0.2262  better on 17/18  p=0.0000  BETTER *
+
+wrote results/denoise_controls_run.json  (total 607s)
+
+reproduction of saved scores:
+  classical ACT          saved 1.4393  rerun 1.4393  max |diff| 0.00e+00
+  classical ACT fine-f   saved 1.2568  rerun 1.2568  max |diff| 0.00e+00
+  QACT parity hw         saved 1.2131  rerun 1.2131  max |diff| 0.00e+00
+
+paired Wilcoxon, 18 held-out subjects, alpha = 0.0125 (negative = first arm cleans better):
+  C1 classical ACT fine-f coord  - QACT parity hw        +0.0656  better  1/18  p=0.0000  first WORSE
+  C2 classical ACT fine-f to78   - QACT parity hw        +0.0100  better  5/18  p=0.3692  no difference
+  C3 classical ACT fine-f coord  - classical ACT fine-f  +0.0220  better  5/18  p=0.0483  no difference
+  C4 classical ACT fine-f to78   - classical ACT fine-f  -0.0336  better 18/18  p=0.0000  first BETTER
+
+wrote results/denoise_controls_iclr.json

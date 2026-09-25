@@ -78,7 +78,7 @@ def artifact_mask(phys: dict, sigma: np.ndarray, R: dict) -> np.ndarray:
 # engines: decompose a batch of frames, returning waveforms + physical params
 # ---------------------------------------------------------------------------
 def decompose_classical(frames: np.ndarray, fs: float, order: int, device="cuda",
-                        batch=4096, asym=False, fine_f=False):
+                        batch=4096, asym=False, fine_f=False, refine="adam", fc_max=None):
     from . import act_gpu
     from .gpu_features import gpu_dictionary_grid
     grid = gpu_dictionary_grid(WIN, fs)
@@ -96,6 +96,20 @@ def decompose_classical(frames: np.ndarray, fs: float, order: int, device="cuda"
                                    _np.array([-20.0, -10.0, 0.0, 10.0, 20.0]),
                                    indexing="ij"), -1).reshape(-1, 4)
         grid = g
+    if fc_max is not None:
+        # seed grid extended above the fine grid's 45 Hz in 1 Hz steps, so the
+        # classical engine can seed a mains (50 Hz) atom the way QACT's exact-f
+        # update can
+        import numpy as _np
+        assert fine_f, "fc_max extends the fine grid"
+        T = WIN / fs
+        g = _np.stack(_np.meshgrid(_np.linspace(0.0, T, 17),
+                                   _np.concatenate([_np.arange(0.5, 45.5, 0.5),
+                                                    _np.arange(46.0, fc_max + 1.0, 1.0)]),
+                                   _np.array([0.03, 0.06, 0.12, 0.25, 0.5, 1.0]),
+                                   _np.array([-20.0, -10.0, 0.0, 10.0, 20.0]),
+                                   indexing="ij"), -1).reshape(-1, 4)
+        grid = g
     D = act_gpu.GPUDictionary(grid, WIN, fs, device=device)
     t = torch.arange(WIN, device=device, dtype=torch.float32) / fs
     M = frames.shape[0]
@@ -104,8 +118,9 @@ def decompose_classical(frames: np.ndarray, fs: float, order: int, device="cuda"
     sig = torch.as_tensor(frames, dtype=torch.float32)
     for lo in range(0, M, batch):
         Xb = sig[lo:lo + batch].to(device)
-        atoms, _ = act_gpu.decompose_batch(Xb, D, max_atoms=order, steps=60, omp=True,
-                                           asym=asym)
+        atoms, _ = act_gpu.decompose_batch(Xb, D, max_atoms=order,
+                                           steps=4 if refine == "coord" else 60, omp=True,
+                                           asym=asym, refine=refine)
         P = torch.stack([a["p"] for a in atoms], 1)
         ac = torch.stack([a["ac"] for a in atoms], 1)
         as_ = torch.stack([a["as_"] for a in atoms], 1)

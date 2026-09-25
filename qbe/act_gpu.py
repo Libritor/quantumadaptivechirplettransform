@@ -95,6 +95,37 @@ def refine_batch(X, p, t, fs, steps=60, lr=0.05, asym=False, dt_max=1.5, c_max=1
     return torch.stack(cols, 1)
 
 
+def refine_coord_batch(X, p, t, fs, sweeps=4, dt_max=1.5, c_max=1e4):
+    """QACT's hardware refinement rule (3-point coordinate search) on the classical
+    objective. Per sweep and coordinate (tc, fc, log dt, c): evaluate p - d and
+    p + d, keep the best of the three. Steps are QACT's own in physical units: tc one
+    sample, fc half a frequency bin, log dt 0.05, chirp rate fs^2/N^2 Hz/s (QACT's
+    2/(4N) under this engine's phase convention pi*c*tau^2). Bounds are the Adam
+    refiner's, so the only change is the search rule."""
+    n = len(t)
+    T = float(n)/fs
+    q = torch.stack([p[:, 0], p[:, 1], torch.log(p[:, 2].clamp(min=1e-3)), p[:, 3]], 1).clone()
+    lo = torch.tensor([-0.1*T, 0.0, np.log(0.008), -c_max], device=X.device, dtype=X.dtype)
+    hi = torch.tensor([1.1*T, 0.49*fs, np.log(dt_max), c_max], device=X.device, dtype=X.dtype)
+    steps = (1.0/fs, 0.5*fs/n, 0.05, fs**2/n**2)
+
+    def energy(qq):
+        gc, gs = _quad(t, qq[:, 0], qq[:, 1], torch.exp(qq[:, 2]), qq[:, 3])
+        return _energy(X, gc, gs)[0]
+
+    e0 = energy(q)
+    for _ in range(sweeps):
+        for j, d in enumerate(steps):
+            for sgn in (-1.0, 1.0):
+                cand = q.clone()
+                cand[:, j] = (cand[:, j] + sgn*d).clamp(lo[j], hi[j])
+                e1 = energy(cand)
+                take = e1 > e0
+                q[take] = cand[take]
+                e0 = torch.where(take, e1, e0)
+    return torch.stack([q[:, 0], q[:, 1], torch.exp(q[:, 2]), q[:, 3]], 1)
+
+
 def _joint_refit(X, params, t):
     """Orthogonal-MP style joint least-squares over all selected atoms (batched 2K x 2K solve).
     params: list of (B,4) tensors. Returns coefficients (B, 2K) and the reconstruction (B, N)."""
@@ -114,7 +145,8 @@ def _joint_refit(X, params, t):
     return coef[:, :, 0], (A @ coef)[:, :, 0]
 
 
-def decompose_batch(X, D, max_atoms=30, min_amp=None, steps=60, omp=False, asym=False, dt_max=1.5, c_max=1e4):
+def decompose_batch(X, D, max_atoms=30, min_amp=None, steps=60, omp=False, asym=False, dt_max=1.5, c_max=1e4,
+                    refine="adam"):
     """X: (B, N) tensor. min_amp: (B,) stop threshold. Returns list of dicts of per-atom tensors."""
     R = X.clone()
     B = X.shape[0]
@@ -126,7 +158,11 @@ def decompose_batch(X, D, max_atoms=30, min_amp=None, steps=60, omp=False, asym=
         if not bool(active.any()):
             break
         p0 = D.best(R)
-        p = refine_batch(R, p0, D.t, D.fs, steps=steps, asym=asym, dt_max=dt_max, c_max=c_max)
+        if refine == "coord":                     # steps = sweeps of the 3-point search
+            assert not asym, "coordinate refiner is symmetric-envelope only"
+            p = refine_coord_batch(R, p0, D.t, D.fs, sweeps=steps, dt_max=dt_max, c_max=c_max)
+        else:
+            p = refine_batch(R, p0, D.t, D.fs, steps=steps, asym=asym, dt_max=dt_max, c_max=c_max)
         gc, gs = _quad(D.t, p[:, 0], p[:, 1], p[:, 2], p[:, 3], p[:, 4] if asym else None)
         E, ac, as_ = _energy(R, gc, gs)
         w = ac[:, None]*gc + as_[:, None]*gs

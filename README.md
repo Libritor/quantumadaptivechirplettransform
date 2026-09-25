@@ -1070,6 +1070,25 @@ both datasets and both classifiers. This is the project's one solid finding.
 CHB-MIT to +0.2…+0.4 on Siena with one sign reversal: on independent data the two
 transforms are **indistinguishable**. No quantum benefit, and no quantum penalty.
 
+### Rerun with the parity engine (`run_parity_features.sh`, `confirm_siena_parity.py`)
+
+The comparisons above used the legacy QACT. Rerun with the full-parity engine
+(OMP joint refit, exact-f, backfit, normalised selection), same folds and tests:
+
+| setting | QACT parity argmax − classical | QACT parity sampled − classical |
+|---|---|---|
+| CHB-MIT, top-20 selection (P1/P3) | +1.4, +2.8, +0.8 pts (ns) | −2.7, −1.2, −4.0 pts |
+| CHB-MIT, all features (A4) | −1.0, −0.9, −1.9 pts (descriptive) | **−4.9, −4.5, −7.2 pts** (p = 0.0006, 0.0027, <0.0001) |
+| Siena, all features (T1/T2) | -- | −2.8, −1.8 pts; with amplitude −3.6, **−5.3** (p = 0.0012) |
+
+**It did not get better; the measurement-sampled version got worse.** Parity
+sampled is also below legacy sampled (A5: −2.3 to −4.1 points, 3 of 3
+significant). The small top-k lead of the argmax control (the old "+1.9 to +3.0")
+is still there and still not significant, and it disappears with all features.
+Parity improved reconstruction and denoising, but it did not improve the
+seizure features, and sampling atoms by measurement costs 4–5 points against
+argmax on the same engine (P2, 3/3 negative).
+
 ### Loading Siena: five annotation layouts and two source errors
 
 The 14 annotation files disagree with each other, and every variation silently
@@ -1448,8 +1467,24 @@ classical ACT fine-f            1.257
 It also beats the frequency-matched classical engine (*p* = 0.0007), **but that
 is not a quantum advantage**: coordinate search is an ordinary classical
 optimiser, and the classical engine refines with Adam instead. It is the same
-kind of confound the frequency grid turned out to be, and the fair control —
-giving the classical engine the same coordinate search — has not been run.
+kind of confound the frequency grid turned out to be.
+
+**The two controls, run (`denoise_controls_iclr.py`, pre-registered in its
+docstring; references reproduced bitwise; alpha = 0.05/4):**
+
+```
+classical ACT fine-f + coordinate search (4 sweeps)  1.279  vs QACT parity hw: worse, 1/18, p<0.0001
+classical ACT fine-f, seed grid to 78 Hz             1.223  vs QACT parity hw: +0.010, 5/18, p=0.37  no difference
+                                                            vs classical fine-f: better on 18/18, p<0.0001
+```
+
+The refiner is **not** the explanation: the coordinate search makes the
+classical engine slightly worse than its 60 Adam steps. The explanation is the
+**seed band**: the classical fine grid seeds 0.5-45 Hz, so it cannot seed the
+50 Hz mains the artifact injection contains, while QACT's exact-f update reads the
+periodogram peak wherever it is. Extend the classical seed grid to 78 Hz and the
+gap to QACT parity hw disappears. Every QACT denoising advantage now has a
+classical explanation: the frequency grid, then the seed band.
 
 **What still does not fit on today's hardware.** Long atoms (logDt >= 3.9) span
 the whole 2 s window, so windowing cannot shrink them; every construction loses

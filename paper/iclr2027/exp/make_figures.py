@@ -124,6 +124,30 @@ def fig_device():
         macro(f"qpu{v.capitalize()}PeakOK", str(sum(r["device"]["peak_ok"] for r in sub)))
         macro(f"qpu{v.capitalize()}N", str(len(sub)))
         macro(f"qpu{v.capitalize()}CZ", f"{np.mean([r['cz_device'] for r in sub]):.0f}")
+    for q, key in ((6, "Six"), (7, "Seven")):
+        sub = [r for r in short if r["qubits"] == q]
+        if not sub:
+            continue
+        macro(f"qpu{key}N", str(len(sub)))
+        macro(f"qpu{key}PeakOK", str(sum(r["device"]["peak_ok"] for r in sub)))
+        macro(f"qpu{key}Sel", f"{np.mean([r['device']['selected_atom_energy'] for r in sub]):.2f}")
+        macro(f"qpu{key}SelMin", f"{np.min([r['device']['selected_atom_energy'] for r in sub]):.2f}")
+        macro(f"qpu{key}Fid", f"{np.mean([r['device']['fidelity'] for r in sub]):.2f}")
+        macro(f"qpu{key}FidSim", f"{np.mean([r['fake_noisy']['fidelity'] for r in sub]):.2f}")
+        macro(f"qpu{key}CZ", f"{np.mean([r['cz_device'] for r in sub]):.0f}")
+        macro(f"qpu{key}Lost", str(sum(1 for r in sub if r["device"]["selected_atom_energy"] < 0.5)))
+    for q, key in ((6, "Six"), (7, "Seven")):
+        sub = [r for r in short if r["qubits"] == q]
+        if not sub:
+            continue
+        macro(f"qpu{key}N", str(len(sub)))
+        macro(f"qpu{key}PeakOK", str(sum(r["device"]["peak_ok"] for r in sub)))
+        macro(f"qpu{key}Sel", f"{np.mean([r['device']['selected_atom_energy'] for r in sub]):.2f}")
+        macro(f"qpu{key}SelMin", f"{np.min([r['device']['selected_atom_energy'] for r in sub]):.2f}")
+        macro(f"qpu{key}Fid", f"{np.mean([r['device']['fidelity'] for r in sub]):.2f}")
+        macro(f"qpu{key}FidSim", f"{np.mean([r['fake_noisy']['fidelity'] for r in sub]):.2f}")
+        macro(f"qpu{key}CZ", f"{np.mean([r['cz_device'] for r in sub]):.0f}")
+        macro(f"qpu{key}Lost", str(sum(1 for r in sub if r["device"]["selected_atom_energy"] < 0.5)))
     if long_:
         macro("qpuLongFid", f"{np.mean([r['device']['fidelity'] for r in long_]):.2f}")
         macro("qpuLongSel", f"{np.mean([r['device']['selected_atom_energy'] for r in long_]):.2f}")

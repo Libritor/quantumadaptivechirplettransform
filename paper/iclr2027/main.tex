@@ -10,6 +10,7 @@
 \usepackage{xcolor}
 \graphicspath{{figures/}}
 \input{numbers.tex}
+\InputIfFileExists{numbers_denoise.tex}{}{}
 % device macros are defined by numbers.tex once the QPU run has been folded in
 \providecommand{\qpuBackend}{ibm\_marrakesh}
 \providecommand{\qpuN}{--}\providecommand{\qpuShots}{--}\providecommand{\qpuJobs}{--}
@@ -188,6 +189,10 @@ classical engine & 1.439 & 0.428 & 0.73 & reference \\
 classical + asymmetric envelope & 1.375 & 0.417 & 0.71 & \\
 classical + 0.5\,Hz frequency grid (45,900 atoms) & 1.257 & 0.423 & 0.62 & \\
 classical + both & 1.160 & 0.408 & 0.60 & \\
+\ifdefined\denoiseArmsPresent
+classical + 0.5\,Hz grid + coordinate refiner & \denoiseArmAScore & & & vs \qact\ parity hw (\denoiseRefQ): better on \denoiseArmAVsQBetter/\denoiseArmAVsQN, $p=\denoiseArmAVsQP$ \\
+classical + 0.5\,Hz grid, seed grid to 78\,Hz & \denoiseArmBScore & & & vs \qact\ parity hw: better on \denoiseArmBVsQBetter/\denoiseArmBVsQN, $p=\denoiseArmBVsQP$ \\
+\fi
 \midrule
 \qact\ at parity vs classical + 0.5\,Hz grid & & & & better on 6/18, $p=0.15$: no difference \\
 \qact\ restricted vs classical + 0.5\,Hz grid & & & & better on 4/18, $p=0.008$: classical better \\
@@ -200,7 +205,7 @@ The reading changed twice. Before parity, \qact\ was significantly worse on ever
 
 \subsection{The refinement and dictionary controls}
 \label{sec:control}
-The hardware refiner of \S\ref{sec:hw} (three-point coordinate search) scored 1.213 on the same protocol, better than the parameter-shift refiner on 17/18 subjects and better than the frequency-matched classical engine ($p=0.0007$). That is not a quantum effect either; it is a refinement-algorithm difference, and the control that decides it, giving the classical engine the same search, had not been run. We run it here on 320 public windows (20 subjects, two baseline runs, eight channels, 512 samples at 160\,Hz, zero-mean, unit norm), scoring the relative residual norm after OMP at 6 and 12 atoms (Table~\ref{tab:fair}, Fig.~\ref{fig:fair}). The engines are the classical engine as shipped (Adam, 60 steps), the same with \qact's budget (Adam, 4 steps), the same with \qact's coordinate rule (4 sweeps, step sizes converted to physical units), the 0.5\,Hz grid with each refiner, and \qact\ with the parameter-shift refiner, the coordinate refiner, and its full parity configuration (coordinate refiner, exact frequency update, one backfit pass).
+The hardware refiner of \S\ref{sec:hw} (three-point coordinate search) scored 1.213 on the same protocol, better than the parameter-shift refiner on 17/18 subjects and better than the frequency-matched classical engine ($p=0.0007$). That is not a quantum effect either; it is a refinement-algorithm difference, and the control that decides it, giving the classical engine the same search, had not been run. We run it here on 320 public windows (20 subjects, two baseline runs, eight channels, 512 samples at 160\,Hz, zero-mean, unit norm), scoring the relative residual norm after OMP at 6 and 12 atoms (Table~\ref{tab:fair}, Fig.~\ref{fig:fair}). \ifdefined\denoiseArmsPresent On the denoising protocol itself, run on the study's machine with the frozen thresholds and the same 18 held-out subjects, the classical engine with the 0.5\,Hz grid scores \denoiseArmAScore\ with the coordinate refiner and \denoiseArmBScore\ with its seed grid extended past mains (50\,Hz on EEGMAT), against \denoiseRefQ\ for \qact\ parity hw and \denoiseRefC\ for the classical engine with the 0.5\,Hz grid alone (Table~\ref{tab:denoise}); the reconstruction study below isolates the same two factors on public data.\fi{} The engines are the classical engine as shipped (Adam, 60 steps), the same with \qact's budget (Adam, 4 steps), the same with \qact's coordinate rule (4 sweeps, step sizes converted to physical units), the 0.5\,Hz grid with each refiner, and \qact\ with the parameter-shift refiner, the coordinate refiner, and its full parity configuration (coordinate refiner, exact frequency update, one backfit pass).
 
 \begin{table}[t]
 \caption{Refinement and dictionary controls on \fairN\ public EEG windows: mean relative residual after OMP, change versus the classical engine as shipped, windows better than it, paired Wilcoxon $p$, and GPU time per window (batch of \fairN). Order 6 / order 12.}

@@ -167,10 +167,25 @@ def fig_device():
     # exact target: recompute from the saved case description is not possible without
     # the window, so the exact peak probability and index are read from the record
     ax = axes[0]
-    ax.bar(np.arange(2 ** m), p, color=BLUE, width=0.8, label=f"{d['backend']} ({d['shots']:,} shots)")
+    want = mask = None
+    try:
+        sys.path.insert(0, str(PAPER / "exp"))
+        from qpu_selection import FS as _FS, N as _N, eeg_windows, make_case
+        w = next(x for x in eeg_windows() if x["subject"] == case["subject"] and x["channel"] == case["channel"])
+        cs = make_case(w, case["logdt"], d["rate_hz_s"] * _N / (2 * _FS ** 2), case["variant"])
+        want, mask = cs["want"], cs["mask"]
+    except Exception as exc:  # noqa: BLE001
+        print("exact overlay unavailable:", exc)
+    k = np.arange(2 ** m)
+    if mask is not None:
+        for lo, hi in [(a, b) for a, b in zip(k, k + 1) if not mask[a]]:
+            ax.axvspan(lo - 0.5, hi - 0.5, color="0.92", lw=0)
+    ax.bar(k, p, color=BLUE, width=0.8, label=f"{d['backend']} ({d['shots']:,} shots)")
+    if want is not None:
+        ax.step(k, want, where="mid", color="black", lw=1.0, label="exact (FFT)")
     ax.axvline(case["want_peak_index"], color=RED, ls="--", lw=1, label="exact in-band peak")
-    ax.set_xlabel("measured frequency bin $k'$ (window register)"); ax.set_ylabel("probability")
-    ax.set_title(f"6-qubit windowed circuit, {case['cz_device']} CZ: device histogram" + (" (STAND-IN)" if standin else ""), fontsize=8.5)
+    ax.set_xlabel("measured frequency bin $k'$ (window register; grey = out of band)"); ax.set_ylabel("probability")
+    ax.set_title(f"6-qubit windowed circuit, {case['cz_device']} CZ: device vs exact" + (" (STAND-IN)" if standin else ""), fontsize=8.5)
     ax.legend(frameon=False, fontsize=7)
     ax = axes[1]
     for v, col, mk in (("dyn", BLUE, "o"), ("uni", RED, "s")):

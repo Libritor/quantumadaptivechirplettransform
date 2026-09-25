@@ -50,12 +50,14 @@ def walk(o, path=""):
             yield from walk(v, f"{path}[{i}]")
 
 
-def find_arm(d, patterns):
-    """Find a dict whose path or 'name'/'engine'/'arm' matches all regexes."""
+def find_arm(d, patterns, exclude=()):
+    """Find a dict whose own name fields (or, failing that, its path) match every regex
+    and none of the exclusions."""
     hits = []
     for path, node in walk(d):
-        label = " ".join(str(node.get(k, "")) for k in ("name", "engine", "arm", "label")) + " " + path
-        if all(re.search(pt, label, re.I) for pt in patterns):
+        own = " ".join(str(node.get(k, "")) for k in ("name", "engine", "arm", "label")).strip()
+        label = own if own else path.rsplit("/", 1)[-1]
+        if all(re.search(pt, label, re.I) for pt in patterns) and not any(re.search(x, label, re.I) for x in exclude):
             hits.append((path, node))
     return hits
 
@@ -85,10 +87,12 @@ def main():
         sys.exit(f"{SRC} not found")
     d = json.load(open(SRC))
     arms = {
-        "A": find_arm(d, [r"coord|hw|3.?point|three.?point"]),
-        "B": find_arm(d, [r"78|extend|mains|band"]),
+        "A": find_arm(d, [r"classical", r"coord|3.?point|three.?point|refiner"], exclude=[r"qact"]),
+        "B": find_arm(d, [r"classical", r"78|extend|mains"], exclude=[r"qact"]),
     }
-    refs = {"Q": find_arm(d, [r"qact.*(parity|hw)"]), "C": find_arm(d, [r"classical.*(fine|0\.5)"])}
+    refs = {"Q": find_arm(d, [r"qact", r"parity|hw"]),
+            "C": find_arm(d, [r"classical", r"fine|0\.5"],
+                          exclude=[r"qact", r"coord|3.?point|three.?point|refiner", r"78|extend|mains"])}
     for k, v in list(arms.items()) + list(refs.items()):
         print(k, "->", [p for p, _ in v][:4])
     macros = {}

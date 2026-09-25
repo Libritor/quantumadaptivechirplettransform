@@ -1,0 +1,830 @@
+{
+ "heron_medians": {
+  "cz": 0.004190160309680474,
+  "sx": 0.000271147748591249,
+  "meas": 0.02294921875,
+  "t2q": 68.0,
+  "t1q": 32.0,
+  "tm": 1560.0
+ },
+ "ops_per_shot": {
+  "5": 160,
+  "6": 317,
+  "7": 613,
+  "8": 1127,
+  "9": 2434
+ },
+ "budgets": [
+  0.3,
+  0.1,
+  0.03,
+  0.01
+ ],
+ "chosen_budget": 0.3,
+ "resources": {
+  "heron_as_calibrated|5|0.3": {
+   "ok": false,
+   "error": "imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01"
+  },
+  "heron_as_calibrated|5|0.1": {
+   "ok": false,
+   "error": "imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01"
+  },
+  "heron_as_calibrated|5|0.03": {
+   "ok": false,
+   "error": "imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01"
+  },
+  "heron_as_calibrated|5|0.01": {
+   "ok": false,
+   "error": "imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01"
+  },
+  "heron_as_calibrated|6|0.3": {
+   "ok": false,
+   "error": "imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01"
+  },
+  "heron_as_calibrated|6|0.1": {
+   "ok": false,
+   "error": "imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01"
+  },
+  "heron_as_calibrated|6|0.03": {
+   "ok": false,
+   "error": "imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01"
+  },
+  "heron_as_calibrated|6|0.01": {
+   "ok": false,
+   "error": "imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01"
+  },
+  "heron_as_calibrated|7|0.3": {
+   "ok": false,
+   "error": "imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01"
+  },
+  "heron_as_calibrated|7|0.1": {
+   "ok": false,
+   "error": "imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01"
+  },
+  "heron_as_calibrated|7|0.03": {
+   "ok": false,
+   "error": "imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01"
+  },
+  "heron_as_calibrated|7|0.01": {
+   "ok": false,
+   "error": "imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01"
+  },
+  "heron_as_calibrated|8|0.3": {
+   "ok": false,
+   "error": "imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01"
+  },
+  "heron_as_calibrated|8|0.1": {
+   "ok": false,
+   "error": "imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01"
+  },
+  "heron_as_calibrated|8|0.03": {
+   "ok": false,
+   "error": "imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01"
+  },
+  "heron_as_calibrated|8|0.01": {
+   "ok": false,
+   "error": "imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01"
+  },
+  "heron_as_calibrated|9|0.3": {
+   "ok": false,
+   "error": "imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01"
+  },
+  "heron_as_calibrated|9|0.1": {
+   "ok": false,
+   "error": "imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01"
+  },
+  "heron_as_calibrated|9|0.03": {
+   "ok": false,
+   "error": "imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01"
+  },
+  "heron_as_calibrated|9|0.01": {
+   "ok": false,
+   "error": "imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01"
+  },
+  "heron_readout_1e-3|5|0.3": {
+   "ok": true,
+   "logical_qubits": 18,
+   "distance": 19,
+   "physical_qubits": 186396,
+   "runtime_s": 0.032932928,
+   "t_states": 642,
+   "t_factories": 15
+  },
+  "heron_readout_1e-3|5|0.1": {
+   "ok": true,
+   "logical_qubits": 18,
+   "distance": 21,
+   "physical_qubits": 246916,
+   "runtime_s": 0.03953376,
+   "t_states": 706,
+   "t_factories": 16
+  },
+  "heron_readout_1e-3|5|0.03": {
+   "ok": true,
+   "logical_qubits": 18,
+   "distance": 23,
+   "physical_qubits": 378764,
+   "runtime_s": 0.048760000000000005,
+   "t_states": 794,
+   "t_factories": 17
+  },
+  "heron_readout_1e-3|5|0.01": {
+   "ok": true,
+   "logical_qubits": 18,
+   "distance": 27,
+   "physical_qubits": 426244,
+   "runtime_s": 0.058888512000000004,
+   "t_states": 834,
+   "t_factories": 16
+  },
+  "heron_readout_1e-3|6|0.3": {
+   "ok": true,
+   "logical_qubits": 20,
+   "distance": 21,
+   "physical_qubits": 234240,
+   "runtime_s": 0.07650316800000001,
+   "t_states": 1332,
+   "t_factories": 15
+  },
+  "heron_readout_1e-3|6|0.1": {
+   "ok": true,
+   "logical_qubits": 20,
+   "distance": 23,
+   "physical_qubits": 285760,
+   "runtime_s": 0.09049856,
+   "t_states": 1453,
+   "t_factories": 15
+  },
+  "heron_readout_1e-3|6|0.03": {
+   "ok": true,
+   "logical_qubits": 20,
+   "distance": 25,
+   "physical_qubits": 363560,
+   "runtime_s": 0.10566080000000001,
+   "t_states": 1574,
+   "t_factories": 16
+  },
+  "heron_readout_1e-3|6|0.01": {
+   "ok": true,
+   "logical_qubits": 20,
+   "distance": 29,
+   "physical_qubits": 500200,
+   "runtime_s": 0.11981222400000001,
+   "t_states": 1548,
+   "t_factories": 16
+  },
+  "heron_readout_1e-3|7|0.3": {
+   "ok": true,
+   "logical_qubits": 23,
+   "distance": 21,
+   "physical_qubits": 222446,
+   "runtime_s": 0.138831168,
+   "t_states": 2224,
+   "t_factories": 14
+  },
+  "heron_readout_1e-3|7|0.1": {
+   "ok": true,
+   "logical_qubits": 23,
+   "distance": 25,
+   "physical_qubits": 324990,
+   "runtime_s": 0.17867360000000002,
+   "t_states": 2426,
+   "t_factories": 14
+  },
+  "heron_readout_1e-3|7|0.03": {
+   "ok": true,
+   "logical_qubits": 23,
+   "distance": 27,
+   "physical_qubits": 383534,
+   "runtime_s": 0.20743776000000003,
+   "t_states": 2628,
+   "t_factories": 14
+  },
+  "heron_readout_1e-3|7|0.01": {
+   "ok": true,
+   "logical_qubits": 23,
+   "distance": 31,
+   "physical_qubits": 452446,
+   "runtime_s": 0.254783296,
+   "t_states": 2830,
+   "t_factories": 14
+  },
+  "heron_readout_1e-3|8|0.3": {
+   "ok": true,
+   "logical_qubits": 25,
+   "distance": 23,
+   "physical_qubits": 273410,
+   "runtime_s": 0.293964288,
+   "t_states": 4202,
+   "t_factories": 14
+  },
+  "heron_readout_1e-3|8|0.1": {
+   "ok": true,
+   "logical_qubits": 25,
+   "distance": 27,
+   "physical_qubits": 311530,
+   "runtime_s": 0.34756128000000003,
+   "t_states": 4238,
+   "t_factories": 13
+  },
+  "heron_readout_1e-3|8|0.03": {
+   "ok": true,
+   "logical_qubits": 25,
+   "distance": 29,
+   "physical_qubits": 450290,
+   "runtime_s": 0.398587136,
+   "t_states": 4552,
+   "t_factories": 14
+  },
+  "heron_readout_1e-3|8|0.01": {
+   "ok": true,
+   "logical_qubits": 25,
+   "distance": 31,
+   "physical_qubits": 519010,
+   "runtime_s": 0.45909363200000003,
+   "t_states": 4930,
+   "t_factories": 14
+  },
+  "heron_readout_1e-3|9|0.3": {
+   "ok": true,
+   "logical_qubits": 28,
+   "distance": 25,
+   "physical_qubits": 310080,
+   "runtime_s": 0.7056208,
+   "t_states": 8659,
+   "t_factories": 13
+  },
+  "heron_readout_1e-3|9|0.1": {
+   "ok": true,
+   "logical_qubits": 28,
+   "distance": 29,
+   "physical_qubits": 347096,
+   "runtime_s": 0.8779344,
+   "t_states": 9354,
+   "t_factories": 12
+  },
+  "heron_readout_1e-3|9|0.03": {
+   "ok": true,
+   "logical_qubits": 28,
+   "distance": 31,
+   "physical_qubits": 491136,
+   "runtime_s": 1.00472736,
+   "t_states": 10073,
+   "t_factories": 13
+  },
+  "heron_readout_1e-3|9|0.01": {
+   "ok": true,
+   "logical_qubits": 28,
+   "distance": 33,
+   "physical_qubits": 560704,
+   "runtime_s": 1.14006816,
+   "t_states": 10792,
+   "t_factories": 13
+  },
+  "GATE_NS_E3|5|0.3": {
+   "ok": true,
+   "logical_qubits": 18,
+   "distance": 7,
+   "physical_qubits": 68404,
+   "runtime_s": 0.0014924,
+   "t_states": 662,
+   "t_factories": 17
+  },
+  "GATE_NS_E3|5|0.1": {
+   "ok": true,
+   "logical_qubits": 18,
+   "distance": 7,
+   "physical_qubits": 68404,
+   "runtime_s": 0.001554,
+   "t_states": 706,
+   "t_factories": 17
+  },
+  "GATE_NS_E3|5|0.03": {
+   "ok": true,
+   "logical_qubits": 18,
+   "distance": 9,
+   "physical_qubits": 113076,
+   "runtime_s": 0.0022500000000000003,
+   "t_states": 794,
+   "t_factories": 17
+  },
+  "GATE_NS_E3|5|0.01": {
+   "ok": true,
+   "logical_qubits": 18,
+   "distance": 11,
+   "physical_qubits": 95076,
+   "runtime_s": 0.0028292,
+   "t_states": 834,
+   "t_factories": 14
+  },
+  "GATE_NS_E3|6|0.3": {
+   "ok": true,
+   "logical_qubits": 20,
+   "distance": 7,
+   "physical_qubits": 68600,
+   "runtime_s": 0.0030072000000000002,
+   "t_states": 1332,
+   "t_factories": 17
+  },
+  "GATE_NS_E3|6|0.1": {
+   "ok": true,
+   "logical_qubits": 20,
+   "distance": 9,
+   "physical_qubits": 54200,
+   "runtime_s": 0.004176,
+   "t_states": 1453,
+   "t_factories": 13
+  },
+  "GATE_NS_E3|6|0.03": {
+   "ok": true,
+   "logical_qubits": 20,
+   "distance": 9,
+   "physical_qubits": 113400,
+   "runtime_s": 0.0044856,
+   "t_states": 1574,
+   "t_factories": 17
+  },
+  "GATE_NS_E3|6|0.01": {
+   "ok": true,
+   "logical_qubits": 20,
+   "distance": 11,
+   "physical_qubits": 169400,
+   "runtime_s": 0.0054824,
+   "t_states": 1574,
+   "t_factories": 17
+  },
+  "GATE_NS_E3|7|0.3": {
+   "ok": true,
+   "logical_qubits": 23,
+   "distance": 9,
+   "physical_qubits": 50766,
+   "runtime_s": 0.007016400000000001,
+   "t_states": 2224,
+   "t_factories": 12
+  },
+  "GATE_NS_E3|7|0.1": {
+   "ok": true,
+   "logical_qubits": 23,
+   "distance": 9,
+   "physical_qubits": 100926,
+   "runtime_s": 0.0075852,
+   "t_states": 2426,
+   "t_factories": 15
+  },
+  "GATE_NS_E3|7|0.03": {
+   "ok": true,
+   "logical_qubits": 23,
+   "distance": 11,
+   "physical_qubits": 89806,
+   "runtime_s": 0.009966000000000001,
+   "t_states": 2628,
+   "t_factories": 13
+  },
+  "GATE_NS_E3|7|0.01": {
+   "ok": true,
+   "logical_qubits": 23,
+   "distance": 11,
+   "physical_qubits": 160446,
+   "runtime_s": 0.010661200000000001,
+   "t_states": 2830,
+   "t_factories": 16
+  },
+  "GATE_NS_E3|8|0.3": {
+   "ok": true,
+   "logical_qubits": 25,
+   "distance": 9,
+   "physical_qubits": 51090,
+   "runtime_s": 0.013658400000000001,
+   "t_states": 4226,
+   "t_factories": 12
+  },
+  "GATE_NS_E3|8|0.1": {
+   "ok": true,
+   "logical_qubits": 25,
+   "distance": 9,
+   "physical_qubits": 101250,
+   "runtime_s": 0.013658400000000001,
+   "t_states": 4226,
+   "t_factories": 15
+  },
+  "GATE_NS_E3|8|0.03": {
+   "ok": true,
+   "logical_qubits": 25,
+   "distance": 11,
+   "physical_qubits": 83810,
+   "runtime_s": 0.017952000000000003,
+   "t_states": 4578,
+   "t_factories": 12
+  },
+  "GATE_NS_E3|8|0.01": {
+   "ok": true,
+   "logical_qubits": 25,
+   "distance": 11,
+   "physical_qubits": 151250,
+   "runtime_s": 0.0192148,
+   "t_states": 4944,
+   "t_factories": 15
+  },
+  "GATE_NS_E3|9|0.3": {
+   "ok": true,
+   "logical_qubits": 28,
+   "distance": 9,
+   "physical_qubits": 95256,
+   "runtime_s": 0.029862000000000003,
+   "t_states": 8635,
+   "t_factories": 14
+  },
+  "GATE_NS_E3|9|0.1": {
+   "ok": true,
+   "logical_qubits": 28,
+   "distance": 11,
+   "physical_qubits": 84536,
+   "runtime_s": 0.03927,
+   "t_states": 9354,
+   "t_factories": 12
+  },
+  "GATE_NS_E3|9|0.03": {
+   "ok": true,
+   "logical_qubits": 28,
+   "distance": 11,
+   "physical_qubits": 142296,
+   "runtime_s": 0.042174,
+   "t_states": 10101,
+   "t_factories": 14
+  },
+  "GATE_NS_E3|9|0.01": {
+   "ok": true,
+   "logical_qubits": 28,
+   "distance": 13,
+   "physical_qubits": 125624,
+   "runtime_s": 0.053128400000000006,
+   "t_states": 10822,
+   "t_factories": 12
+  },
+  "GATE_NS_E4|5|0.3": {
+   "ok": true,
+   "logical_qubits": 18,
+   "distance": 3,
+   "physical_qubits": 360,
+   "runtime_s": 0.0006132,
+   "t_states": 642,
+   "t_factories": 2
+  },
+  "GATE_NS_E4|5|0.1": {
+   "ok": true,
+   "logical_qubits": 18,
+   "distance": 3,
+   "physical_qubits": 6444,
+   "runtime_s": 0.000666,
+   "t_states": 706,
+   "t_factories": 17
+  },
+  "GATE_NS_E4|5|0.03": {
+   "ok": true,
+   "logical_qubits": 18,
+   "distance": 5,
+   "physical_qubits": 17900,
+   "runtime_s": 0.001198,
+   "t_states": 770,
+   "t_factories": 17
+  },
+  "GATE_NS_E4|5|0.01": {
+   "ok": true,
+   "logical_qubits": 18,
+   "distance": 5,
+   "physical_qubits": 17900,
+   "runtime_s": 0.001342,
+   "t_states": 860,
+   "t_factories": 17
+  },
+  "GATE_NS_E4|6|0.3": {
+   "ok": true,
+   "logical_qubits": 20,
+   "distance": 3,
+   "physical_qubits": 6480,
+   "runtime_s": 0.00126,
+   "t_states": 1310,
+   "t_factories": 17
+  },
+  "GATE_NS_E4|6|0.1": {
+   "ok": true,
+   "logical_qubits": 20,
+   "distance": 5,
+   "physical_qubits": 4600,
+   "runtime_s": 0.002268,
+   "t_states": 1429,
+   "t_factories": 10
+  },
+  "GATE_NS_E4|6|0.03": {
+   "ok": true,
+   "logical_qubits": 20,
+   "distance": 5,
+   "physical_qubits": 18000,
+   "runtime_s": 0.0024360000000000002,
+   "t_states": 1548,
+   "t_factories": 17
+  },
+  "GATE_NS_E4|6|0.01": {
+   "ok": true,
+   "logical_qubits": 20,
+   "distance": 5,
+   "physical_qubits": 18000,
+   "runtime_s": 0.0024920000000000003,
+   "t_states": 1574,
+   "t_factories": 17
+  },
+  "GATE_NS_E4|7|0.3": {
+   "ok": true,
+   "logical_qubits": 23,
+   "distance": 5,
+   "physical_qubits": 4390,
+   "runtime_s": 0.0038980000000000004,
+   "t_states": 2224,
+   "t_factories": 9
+  },
+  "GATE_NS_E4|7|0.1": {
+   "ok": true,
+   "logical_qubits": 23,
+   "distance": 5,
+   "physical_qubits": 16150,
+   "runtime_s": 0.004214,
+   "t_states": 2426,
+   "t_factories": 15
+  },
+  "GATE_NS_E4|7|0.03": {
+   "ok": true,
+   "logical_qubits": 23,
+   "distance": 5,
+   "physical_qubits": 17150,
+   "runtime_s": 0.00453,
+   "t_states": 2628,
+   "t_factories": 16
+  },
+  "GATE_NS_E4|7|0.01": {
+   "ok": true,
+   "logical_qubits": 23,
+   "distance": 5,
+   "physical_qubits": 17150,
+   "runtime_s": 0.0048460000000000005,
+   "t_states": 2830,
+   "t_factories": 16
+  },
+  "GATE_NS_E4|8|0.3": {
+   "ok": true,
+   "logical_qubits": 25,
+   "distance": 5,
+   "physical_qubits": 4490,
+   "runtime_s": 0.007536,
+   "t_states": 4202,
+   "t_factories": 9
+  },
+  "GATE_NS_E4|8|0.1": {
+   "ok": true,
+   "logical_qubits": 25,
+   "distance": 5,
+   "physical_qubits": 16250,
+   "runtime_s": 0.007538,
+   "t_states": 4214,
+   "t_factories": 15
+  },
+  "GATE_NS_E4|8|0.03": {
+   "ok": true,
+   "logical_qubits": 25,
+   "distance": 5,
+   "physical_qubits": 16250,
+   "runtime_s": 0.008104,
+   "t_states": 4552,
+   "t_factories": 15
+  },
+  "GATE_NS_E4|8|0.01": {
+   "ok": true,
+   "logical_qubits": 25,
+   "distance": 5,
+   "physical_qubits": 16250,
+   "runtime_s": 0.008674000000000001,
+   "t_states": 4916,
+   "t_factories": 15
+  },
+  "GATE_NS_E4|9|0.3": {
+   "ok": true,
+   "logical_qubits": 28,
+   "distance": 5,
+   "physical_qubits": 15400,
+   "runtime_s": 0.016642,
+   "t_states": 8659,
+   "t_factories": 14
+  },
+  "GATE_NS_E4|9|0.1": {
+   "ok": true,
+   "logical_qubits": 28,
+   "distance": 5,
+   "physical_qubits": 15400,
+   "runtime_s": 0.017906000000000002,
+   "t_states": 9380,
+   "t_factories": 14
+  },
+  "GATE_NS_E4|9|0.03": {
+   "ok": true,
+   "logical_qubits": 28,
+   "distance": 5,
+   "physical_qubits": 15400,
+   "runtime_s": 0.01917,
+   "t_states": 10101,
+   "t_factories": 14
+  },
+  "GATE_NS_E4|9|0.01": {
+   "ok": true,
+   "logical_qubits": 28,
+   "distance": 7,
+   "physical_qubits": 12744,
+   "runtime_s": 0.028518,
+   "t_states": 10792,
+   "t_factories": 10
+  }
+ },
+ "sweep": {
+  "physical Heron, no QEC": [
+   0.22071555035075485,
+   0.14853881061244933,
+   0.020433089324165116,
+   0.963456164458294,
+   0.17895538731035748,
+   0.09726838428479594,
+   0.06140520629350466,
+   0.23793619220406245,
+   0.044130276835944435,
+   1.0,
+   0.1635752269283695,
+   0.2211877718336145,
+   0.9116995110834972,
+   0.03885795183771658,
+   0.1624080958314382,
+   1.0,
+   0.5599294986482103,
+   0.694604535168617
+  ],
+  "budget 0.3": [
+   1.0,
+   0.9949829125862293,
+   1.0,
+   1.0,
+   0.9514491263544803,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   0.9156347572364589,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "budget 0.1": [
+   1.0,
+   0.9949829125862293,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   0.9943117177105447,
+   1.0,
+   1.0,
+   0.9156347572364589,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "budget 0.03": [
+   1.0,
+   0.9949829125862293,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   0.9943117177105447,
+   1.0,
+   1.0,
+   0.9156347572364589,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "budget 0.01": [
+   1.0,
+   0.9949829125862293,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   0.9943117177105447,
+   1.0,
+   1.0,
+   0.9156347572364589,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "perfect (noiseless)": [
+   0.8020733976318263,
+   1.0,
+   1.0,
+   0.963456164458294,
+   1.0,
+   1.0,
+   0.9756834396724644,
+   1.0,
+   1.0,
+   1.0,
+   0.9238217209418688,
+   1.0,
+   0.9116995110834972,
+   0.9945297175386649,
+   1.0,
+   0.8654556435551974,
+   1.0,
+   1.0
+  ]
+ },
+ "end_to_end": {
+  "8": {
+   "recon_err": 0.5725890223770165,
+   "per_window": [
+    0.5166078099864437,
+    0.5496368763743414,
+    0.5708528848646582,
+    0.6532585182826224
+   ],
+   "sel_quality": 0.9784269992444748,
+   "sel_worst": 0.8838371267551316,
+   "shots_by_register": {
+    "5": 0.0,
+    "6": 24312.5,
+    "7": 48687.5,
+    "8": 65250.0,
+    "9": 0.0
+   },
+   "round_trips": 74.5,
+   "classical_s": 0.04339892009011237,
+   "time_s": {
+    "heron_readout_1e-3": 27800.495556,
+    "GATE_NS_E3": 1305.9341250000002,
+    "GATE_NS_E4": 712.141625
+   },
+   "physical_qubits": {
+    "heron_readout_1e-3": 273410,
+    "GATE_NS_E3": 68600,
+    "GATE_NS_E4": 6480
+   }
+  },
+  "9": {
+   "recon_err": 0.5980652218866408,
+   "per_window": [
+    0.5512441907877764,
+    0.6200268819090989,
+    0.5656985249366308,
+    0.6552912899130573
+   ],
+   "sel_quality": 0.9505654133786843,
+   "sel_worst": 0.8086823648075678,
+   "shots_by_register": {
+    "5": 0.0,
+    "6": 54125.0,
+    "7": 118000.0,
+    "8": 104937.5,
+    "9": 492875.0
+   },
+   "round_trips": 228.0,
+   "classical_s": 0.004448034756933339,
+   "time_s": {
+    "heron_readout_1e-3": 399153.541064,
+    "GATE_NS_E3": 17142.2115,
+    "GATE_NS_E4": 9521.39625
+   },
+   "physical_qubits": {
+    "heron_readout_1e-3": 310080,
+    "GATE_NS_E3": 95256,
+    "GATE_NS_E4": 15400
+   }
+  }
+ }
+}

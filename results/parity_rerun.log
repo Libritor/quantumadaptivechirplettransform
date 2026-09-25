@@ -1,0 +1,307 @@
+=== parity features, sampled selection ===
+[chbmit] chb01: 219 ictal, 219 interictal epochs
+[chbmit] chb02: 85 ictal, 85 interictal epochs
+[chbmit] chb03: 195 ictal, 195 interictal epochs
+[chbmit] chb04: 184 ictal, 184 interictal epochs
+[chbmit] chb05: 278 ictal, 278 interictal epochs
+[chbmit] chb06: 75 ictal, 75 interictal epochs
+[chbmit] chb07: 162 ictal, 162 interictal epochs
+[chbmit] chb08: 459 ictal, 459 interictal epochs
+[chbmit] chb09: 135 ictal, 135 interictal epochs
+[chbmit] chb10: 217 ictal, 217 interictal epochs
+[chbmit] chb11: 403 ictal, 403 interictal epochs
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:64: RuntimeWarning: divide by zero encountered in divide
+  gain = (pmax - pmin) / (dmax - dmin)
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:65: RuntimeWarning: invalid value encountered in multiply
+  offset = pmin - gain * dmin
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:74: RuntimeWarning: invalid value encountered in multiply
+  signals[label] = block * gain[i] + offset[i]
+[chbmit] chb12: 486 ictal, 486 interictal epochs
+[chbmit] chb13: 265 ictal, 265 interictal epochs
+[chbmit] chb14: 84 ictal, 84 interictal epochs
+[chbmit] chb15: 989 ictal, 989 interictal epochs
+[chbmit] chb16: 40 ictal, 40 interictal epochs
+[chbmit] chb17: 146 ictal, 0 interictal epochs
+[chbmit] chb18: 158 ictal, 158 interictal epochs
+[chbmit] chb19: 115 ictal, 115 interictal epochs
+[chbmit] chb20: 144 ictal, 144 interictal epochs
+[chbmit] chb21: 99 ictal, 99 interictal epochs
+[chbmit] chb22: 102 ictal, 102 interictal epochs
+[chbmit] chb23: 210 ictal, 210 interictal epochs
+[chbmit] chb24: 251 ictal, 251 interictal epochs
+[chbmit] total 10856 epochs {'interictal': 5355, 'ictal': 5501}, 23 patients
+[chbmit] skipped: flat channel=17, montage lacks a standard channel=3
+[prep] 10856 epochs x 18 channels, 195408 channel-epochs (67s)
+[prep] QACT: 9 qubits + 1 ancilla, 22,784 in-band atoms, shots=256, refine_steps=4 (112 circuit evaluations per step)
+[prep] 256/195408  582/s  ~335s left
+[prep] 13056/195408  1480/s  ~123s left
+[prep] 25856/195408  1506/s  ~113s left
+[prep] 38656/195408  1412/s  ~111s left
+[prep] 51456/195408  1307/s  ~110s left
+[prep] 64256/195408  1252/s  ~105s left
+[prep] 77056/195408  1217/s  ~97s left
+[prep] 89856/195408  1194/s  ~88s left
+[prep] 102656/195408  1176/s  ~79s left
+[prep] 115456/195408  1163/s  ~69s left
+[prep] 128256/195408  1152/s  ~58s left
+[prep] 141056/195408  1144/s  ~48s left
+[prep] 153856/195408  1136/s  ~37s left
+[prep] 166656/195408  1130/s  ~25s left
+[prep] 179456/195408  1124/s  ~14s left
+[prep] 192256/195408  1120/s  ~3s left
+[prep] saved (10856, 234) (QACT) and (10856, 270) (QACT+amplitude); post-selection success 0.169; refinement circuit evaluations 8,214,528; total 242s
+=== parity features, argmax control ===
+[chbmit] chb01: 219 ictal, 219 interictal epochs
+[chbmit] chb02: 85 ictal, 85 interictal epochs
+[chbmit] chb03: 195 ictal, 195 interictal epochs
+[chbmit] chb04: 184 ictal, 184 interictal epochs
+[chbmit] chb05: 278 ictal, 278 interictal epochs
+[chbmit] chb06: 75 ictal, 75 interictal epochs
+[chbmit] chb07: 162 ictal, 162 interictal epochs
+[chbmit] chb08: 459 ictal, 459 interictal epochs
+[chbmit] chb09: 135 ictal, 135 interictal epochs
+[chbmit] chb10: 217 ictal, 217 interictal epochs
+[chbmit] chb11: 403 ictal, 403 interictal epochs
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:64: RuntimeWarning: divide by zero encountered in divide
+  gain = (pmax - pmin) / (dmax - dmin)
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:65: RuntimeWarning: invalid value encountered in multiply
+  offset = pmin - gain * dmin
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:74: RuntimeWarning: invalid value encountered in multiply
+  signals[label] = block * gain[i] + offset[i]
+[chbmit] chb12: 486 ictal, 486 interictal epochs
+[chbmit] chb13: 265 ictal, 265 interictal epochs
+[chbmit] chb14: 84 ictal, 84 interictal epochs
+[chbmit] chb15: 989 ictal, 989 interictal epochs
+[chbmit] chb16: 40 ictal, 40 interictal epochs
+[chbmit] chb17: 146 ictal, 0 interictal epochs
+[chbmit] chb18: 158 ictal, 158 interictal epochs
+[chbmit] chb19: 115 ictal, 115 interictal epochs
+[chbmit] chb20: 144 ictal, 144 interictal epochs
+[chbmit] chb21: 99 ictal, 99 interictal epochs
+[chbmit] chb22: 102 ictal, 102 interictal epochs
+[chbmit] chb23: 210 ictal, 210 interictal epochs
+[chbmit] chb24: 251 ictal, 251 interictal epochs
+[chbmit] total 10856 epochs {'interictal': 5355, 'ictal': 5501}, 23 patients
+[chbmit] skipped: flat channel=17, montage lacks a standard channel=3
+[prep] 10856 epochs x 18 channels, 195408 channel-epochs (72s)
+[prep] QACT: 9 qubits + 1 ancilla, 22,784 in-band atoms, shots=256, refine_steps=4 (112 circuit evaluations per step)
+[prep] 256/195408  396/s  ~492s left
+[prep] 13056/195408  1442/s  ~126s left
+[prep] 25856/195408  1512/s  ~112s left
+[prep] 38656/195408  1535/s  ~102s left
+[prep] 51456/195408  1545/s  ~93s left
+[prep] 64256/195408  1552/s  ~84s left
+[prep] 77056/195408  1550/s  ~76s left
+[prep] 89856/195408  1553/s  ~68s left
+[prep] 102656/195408  1555/s  ~60s left
+[prep] 115456/195408  1556/s  ~51s left
+[prep] 128256/195408  1535/s  ~44s left
+[prep] 141056/195408  1478/s  ~37s left
+[prep] 153856/195408  1433/s  ~29s left
+[prep] 166656/195408  1398/s  ~21s left
+[prep] 179456/195408  1369/s  ~12s left
+[prep] 192256/195408  1345/s  ~2s left
+[prep] saved (10856, 234) (QACT) and (10856, 270) (QACT+amplitude); post-selection success 0.169; refinement circuit evaluations 8,214,528; total 219s
+=== top-k comparison (P1-P3) ===
+variant: parity
+
+logreg   classical ACT  pooled  57.4%  per-patient  56.0%
+logreg   QACT argmax    pooled  59.5%  per-patient  57.4%
+logreg   QACT sampled   pooled  54.6%  per-patient  53.3%
+svm_rbf  classical ACT  pooled  56.4%  per-patient  56.8%
+svm_rbf  QACT argmax    pooled  60.1%  per-patient  59.6%
+svm_rbf  QACT sampled   pooled  56.0%  per-patient  55.6%
+qsvc     classical ACT  pooled  55.8%  per-patient  54.8%
+qsvc     QACT argmax    pooled  56.3%  per-patient  55.6%
+qsvc     QACT sampled   pooled  52.1%  per-patient  50.8%
+
+paired Wilcoxon across 23 patients (alpha = 0.00556):
+  logreg   P1 QACT sampled  - classical ACT  -2.65 pts  better  6/23  p=0.0605  (negative)
+  logreg   P2 QACT sampled  - QACT argmax    -4.08 pts  better  5/23  p=0.0085  (negative)
+  logreg   P3 QACT argmax   - classical ACT  +1.44 pts  better 11/23  p=0.5399  ns
+  svm_rbf  P1 QACT sampled  - classical ACT  -1.15 pts  better 10/23  p=0.4274  (negative)
+  svm_rbf  P2 QACT sampled  - QACT argmax    -3.98 pts  better  5/23  p=0.0067  (negative)
+  svm_rbf  P3 QACT argmax   - classical ACT  +2.82 pts  better 15/23  p=0.1011  ns
+  qsvc     P1 QACT sampled  - classical ACT  -4.02 pts  better  7/23  p=0.0244  (negative)
+  qsvc     P2 QACT sampled  - QACT argmax    -4.80 pts  better  5/23  p=0.0013  (negative)
+  qsvc     P3 QACT argmax   - classical ACT  +0.78 pts  better 15/23  p=0.4274  ns
+
+wrote results/qact_comparison_parity.json
+=== all-feature comparison (A1-A5) ===
+logreg L2  classical ACT   234 feats  pooled  61.5%  per-patient  63.6%
+logreg L2  QACT argmax     234 feats  pooled  61.7%  per-patient  62.7%
+logreg L2  QACT sampled    234 feats  pooled  60.2%  per-patient  61.0%
+logreg L2  QACT parity argmax  234 feats  pooled  61.3%  per-patient  62.6%
+logreg L2  QACT parity sampled  234 feats  pooled  58.2%  per-patient  58.7%
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+logreg L1  classical ACT   234 feats  pooled  61.4%  per-patient  63.4%
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+logreg L1  QACT argmax     234 feats  pooled  62.1%  per-patient  62.9%
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+logreg L1  QACT sampled    234 feats  pooled  60.3%  per-patient  61.4%
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+logreg L1  QACT parity argmax  234 feats  pooled  61.3%  per-patient  62.5%
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/kc/.local/lib/python3.14/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+logreg L1  QACT parity sampled  234 feats  pooled  58.5%  per-patient  58.9%
+svm_rbf    classical ACT   234 feats  pooled  65.2%  per-patient  67.5%
+svm_rbf    QACT argmax     234 feats  pooled  64.6%  per-patient  66.4%
+svm_rbf    QACT sampled    234 feats  pooled  63.1%  per-patient  64.4%
+svm_rbf    QACT parity argmax  234 feats  pooled  63.9%  per-patient  65.6%
+svm_rbf    QACT parity sampled  234 feats  pooled  59.5%  per-patient  60.4%
+
+paired Wilcoxon across 23 patients (alpha = 0.00333):
+  logreg L2  A1 QACT sampled  - classical ACT  -2.59 pts  better  8/23  p=0.0392  (negative)
+  logreg L2  A2 QACT sampled  - QACT argmax    -1.66 pts  better  7/23  p=0.0262  (negative)
+  logreg L2  A3 QACT argmax   - classical ACT  -0.93 pts  better  9/23  p=0.4452  (negative)
+  logreg L2  A4 QACT parity sampled - classical ACT  -4.91 pts  better  5/23  p=0.0006  (negative)
+  logreg L2  A5 QACT parity sampled - QACT sampled   -2.32 pts  better  6/23  p=0.0039  (negative)
+  logreg L1  A1 QACT sampled  - classical ACT  -2.04 pts  better 10/23  p=0.0824  (negative)
+  logreg L1  A2 QACT sampled  - QACT argmax    -1.58 pts  better  6/23  p=0.0442  (negative)
+  logreg L1  A3 QACT argmax   - classical ACT  -0.46 pts  better 10/23  p=0.7332  (negative)
+  logreg L1  A4 QACT parity sampled - classical ACT  -4.54 pts  better  4/23  p=0.0027  (negative)
+  logreg L1  A5 QACT parity sampled - QACT sampled   -2.50 pts  better  7/23  p=0.0060  (negative)
+  svm_rbf    A1 QACT sampled  - classical ACT  -3.09 pts  better  7/23  p=0.0081  (negative)
+  svm_rbf    A2 QACT sampled  - QACT argmax    -1.93 pts  better  4/23  p=0.0032  (negative)
+  svm_rbf    A3 QACT argmax   - classical ACT  -1.16 pts  better 11/23  p=0.3931  (negative)
+  svm_rbf    A4 QACT parity sampled - classical ACT  -7.16 pts  better  1/23  p=0.0000  (negative)
+  svm_rbf    A5 QACT parity sampled - QACT sampled   -4.07 pts  better  3/23  p=0.0007  (negative)
+
+wrote results/qact_allfeat.json
+=== Siena replication ===
+[siena] 2734 epochs x 18 channels, 14 patients
+[siena] parity QACT done (47s)
+logreg L2  classical ACT        per-patient  68.3%
+logreg L2  QACT legacy          per-patient  68.0%
+logreg L2  QACT parity          per-patient  65.5%
+logreg L2  classical ACT + amp  per-patient  78.9%
+logreg L2  QACT parity + amp    per-patient  75.4%
+svm_rbf    classical ACT        per-patient  66.7%
+svm_rbf    QACT legacy          per-patient  68.7%
+svm_rbf    QACT parity          per-patient  64.9%
+svm_rbf    classical ACT + amp  per-patient  79.2%
+svm_rbf    QACT parity + amp    per-patient  74.0%
+
+paired Wilcoxon across 14 patients (alpha = 0.00833):
+  logreg L2  T1 QACT parity        - classical ACT        -2.80 pts  better  5/14  p=0.1040  (negative)
+  logreg L2  T2 QACT parity + amp  - classical ACT + amp  -3.55 pts  better  4/14  p=0.0392  (negative)
+  logreg L2  T3 QACT parity        - QACT legacy          -2.51 pts  better  4/14  p=0.1040  (negative)
+  svm_rbf    T1 QACT parity        - classical ACT        -1.84 pts  better  4/14  p=0.2489  (negative)
+  svm_rbf    T2 QACT parity + amp  - classical ACT + amp  -5.28 pts  better  2/14  p=0.0012  (negative)
+  svm_rbf    T3 QACT parity        - QACT legacy          -3.83 pts  better  3/14  p=0.0192  (negative)
+
+wrote results/siena_parity.json (54s)

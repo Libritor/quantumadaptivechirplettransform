@@ -53,6 +53,12 @@ ENGINES = {
     # decisive control: classical engine at QACT's frequency resolution
     "classical ACT fine-f": dict(kind="classical", fine_f=True),
     "classical ACT fine+asym": dict(kind="classical", fine_f=True, asym=True),
+    # refinement control: the 0.5 Hz classical engine with QACT's hardware refiner
+    # (3-point coordinate search, 4 sweeps) in place of 60 Adam steps
+    "classical ACT fine-f coord": dict(kind="classical", fine_f=True, refine="coord"),
+    # seed-band control: the 0.5 Hz classical grid extended to 78 Hz (1 Hz steps
+    # above 45), so a 50 Hz mains atom can be seeded
+    "classical ACT fine-f to78": dict(kind="classical", fine_f=True, fc_max=78.0),
     "QACT legacy": dict(kind="qact", omp=False, backfit_passes=0, exact_f=False,
                         norm_select=False),
     "QACT parity": dict(kind="qact"),

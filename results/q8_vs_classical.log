@@ -1,0 +1,22 @@
+60 windows x 6 atoms; arms: ['q0', 'mix 0.3', 'mix 0.6', 'q8 noiseless', 'q8 qec', 'q8 heron']
+
+[q0          ] mean recon err 0.5124  atom quality 1.000  (0.1s per window)
+[mix 0.3     ] mean recon err 0.5102  atom quality 0.962  (0.1s per window)
+[mix 0.6     ] mean recon err 0.5132  atom quality 0.929  (0.1s per window)
+[q8 noiseless] mean recon err 0.5186  atom quality 0.981  (16.4s per window)
+[q8 qec      ] mean recon err 0.5140  atom quality 0.983  (36.8s per window)
+[q8 heron    ] mean recon err 0.5131  atom quality 0.932  (46.8s per window)
+
+paired Wilcoxon vs q0 across 60 windows (alpha = 0.0125); negative = lower error than classical:
+  q8 heron     +0.0007  better on 23/60  p=0.7872  no difference
+  q8 qec       +0.0016  better on 19/60  p=0.0768  no difference
+  mix 0.3      -0.0022  better on 28/60  p=0.3736  no difference
+  mix 0.6      +0.0008  better on 22/60  p=0.6484  no difference
+  q8 noiseless +0.0063  better on 15/60  p=0.0014  (descriptive)
+
+matched controls (the decision rule, part b):
+  q8 qec    - mix 0.3  +0.0038  better on 15/60  p=0.0213
+  q8 heron  - mix 0.6  -0.0001  better on  2/60  p=0.8927
+
+verdict under the pre-registered rule: q8 does NOT beat classical
+wrote results/q8_vs_classical.json

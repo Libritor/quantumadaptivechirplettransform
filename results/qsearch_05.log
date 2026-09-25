@@ -1,0 +1,73 @@
+10856 epochs, 23 patients, 270 features
+
+5a  all-feature quantum kernel 74.81%  (bandwidths [(0.01, 0.1), (0.1, 1.0), (0.03, 1.0), (0.03, 1.0), (0.1, 1.0), (0.03, 1.0)])
+    vs RBF-SVM          76.82%  diff  -2.02 pts  better on  7/23  p=0.0910
+    vs grad. boosting   75.46%  diff  -0.65 pts  better on  9/23  p=0.3221
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:110: UserWarning: Features [147] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:111: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:110: UserWarning: Features [225] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:111: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+   5b fold 1/6 done
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:110: UserWarning: Features [225] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:111: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:110: UserWarning: Features [225] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:111: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:110: UserWarning: Features [225] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:111: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+   5b fold 2/6 done
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:110: UserWarning: Features [212 225] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:111: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:110: UserWarning: Features [225] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:111: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:110: UserWarning: Features [212] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:111: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:110: UserWarning: Features [212] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:111: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+   5b fold 3/6 done
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:110: UserWarning: Features [225] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:111: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+   5b fold 4/6 done
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:110: UserWarning: Features [212] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:111: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+   5b fold 5/6 done
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:110: UserWarning: Features [225] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/kc/.local/lib/python3.14/site-packages/sklearn/feature_selection/_univariate_selection.py:111: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+   5b fold 6/6 done
+
+5b  per-patient accuracy vs training-set size (mean of 10 draws x 6 folds):
+        n       Z8    Z8off        A      RBF       LR
+       20   56.59%   64.23%   65.52%   65.51%   66.47%
+       50   61.74%   68.84%   69.89%   69.99%   69.24%
+      100   62.58%   69.56%   70.92%   70.90%   69.65%
+      200   65.12%   71.07%   73.25%   73.35%   71.52%
+    paired Wilcoxon, Z8 minus each (alpha = 0.00625):
+    n= 20: vs RBF -8.93 (2/23, p=0.0000)   vs LR -9.89 (2/23, p=0.0000)   vs Z8off -7.64 (2/23, p=0.0000)
+    n= 50: vs RBF -8.24 (4/23, p=0.0001)   vs LR -7.50 (2/23, p=0.0001)   vs Z8off -7.09 (6/23, p=0.0007)
+    n=100: vs RBF -8.32 (4/23, p=0.0006)   vs LR -7.07 (5/23, p=0.0027)   vs Z8off -6.98 (8/23, p=0.0043)
+    n=200: vs RBF -8.23 (3/23, p=0.0004)   vs LR -6.40 (4/23, p=0.0027)   vs Z8off -5.94 (5/23, p=0.0024)
+
+verdict: 5a no win; 5b no quantum win  (370s)

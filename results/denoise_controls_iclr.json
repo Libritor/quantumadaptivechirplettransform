@@ -1,0 +1,217 @@
+{
+  "protocol": "compare_denoise.py: EEGMAT, thresholds tuned on subjects 0-7 and frozen, 18 held-out subjects 18-35, 180 s each, artifact seed 7, order 12",
+  "scores": {
+    "classical ACT": {
+      "mean": 1.4392804266432444,
+      "median": 1.4339238132391272,
+      "config": {
+        "F_HIGH": 22.0,
+        "K_HIGH": 0.5,
+        "F_LOW": 5.0,
+        "K_LOW": 2.5,
+        "DT_SHORT": 0.03,
+        "K_SHORT": 3.0
+      },
+      "per_subject": {
+        "Subject18": 1.6610774150644447,
+        "Subject19": 1.5967728909765695,
+        "Subject20": 1.5381519559237604,
+        "Subject21": 1.2168637492259822,
+        "Subject22": 1.3138330966657088,
+        "Subject23": 1.2482570251778933,
+        "Subject24": 1.7470492744528643,
+        "Subject25": 1.1301679304996615,
+        "Subject26": 1.6248614101352965,
+        "Subject27": 1.5297888522097463,
+        "Subject28": 1.4286131834812892,
+        "Subject29": 1.2693329484113405,
+        "Subject30": 1.8384294637020515,
+        "Subject31": 1.2136547517042866,
+        "Subject32": 1.2855147647250886,
+        "Subject33": 1.4392344429969652,
+        "Subject34": 1.2803700602474986,
+        "Subject35": 1.54507446397795
+      }
+    },
+    "classical ACT fine-f": {
+      "mean": 1.2567625615161893,
+      "median": 1.2650045614898648,
+      "config": {
+        "F_HIGH": 22.0,
+        "K_HIGH": 0.5,
+        "F_LOW": 5.0,
+        "K_LOW": 1.5,
+        "DT_SHORT": 0.03,
+        "K_SHORT": 3.0
+      },
+      "per_subject": {
+        "Subject18": 1.4581060022377796,
+        "Subject19": 1.3033862050662421,
+        "Subject20": 1.3583616292879777,
+        "Subject21": 1.093264782599091,
+        "Subject22": 1.2218244455469078,
+        "Subject23": 1.0691206295855373,
+        "Subject24": 1.5118535077995503,
+        "Subject25": 1.0042117680678178,
+        "Subject26": 1.4104435094285088,
+        "Subject27": 1.302234553695499,
+        "Subject28": 1.211490445374624,
+        "Subject29": 1.052472653453606,
+        "Subject30": 1.6140866472237079,
+        "Subject31": 1.2277745692842308,
+        "Subject32": 1.1175588259264697,
+        "Subject33": 1.305999285185448,
+        "Subject34": 1.0513602354712526,
+        "Subject35": 1.3081764120571564
+      }
+    },
+    "classical ACT fine-f coord": {
+      "mean": 1.278732805924615,
+      "median": 1.2580419878779363,
+      "config": {
+        "F_HIGH": 22.0,
+        "K_HIGH": 0.5,
+        "F_LOW": 5.0,
+        "K_LOW": 1.5,
+        "DT_SHORT": 0.03,
+        "K_SHORT": 3.0
+      },
+      "per_subject": {
+        "Subject18": 1.511090265909355,
+        "Subject19": 1.3201925955994898,
+        "Subject20": 1.367044808121831,
+        "Subject21": 1.1364262957389102,
+        "Subject22": 1.1742930459128347,
+        "Subject23": 1.1089004944362997,
+        "Subject24": 1.579724440218036,
+        "Subject25": 1.007028321969003,
+        "Subject26": 1.3951812813978177,
+        "Subject27": 1.3840213582337848,
+        "Subject28": 1.2148480817260032,
+        "Subject29": 1.0686501802799142,
+        "Subject30": 1.5728083494486937,
+        "Subject31": 1.2275572390871632,
+        "Subject32": 1.1254117120525915,
+        "Subject33": 1.2885267366687092,
+        "Subject34": 1.1316088137621416,
+        "Subject35": 1.4038764860804955
+      }
+    },
+    "classical ACT fine-f to78": {
+      "mean": 1.223146148201284,
+      "median": 1.2189305674660114,
+      "config": {
+        "F_HIGH": 22.0,
+        "K_HIGH": 0.5,
+        "F_LOW": 5.0,
+        "K_LOW": 1.5,
+        "DT_SHORT": 0.03,
+        "K_SHORT": 3.0
+      },
+      "per_subject": {
+        "Subject18": 1.4009374554887677,
+        "Subject19": 1.2447564739054289,
+        "Subject20": 1.3145406371342627,
+        "Subject21": 1.0670109979270335,
+        "Subject22": 1.1805045763579554,
+        "Subject23": 1.0454262632661417,
+        "Subject24": 1.4879034133513582,
+        "Subject25": 0.9957707945696325,
+        "Subject26": 1.3474781629467583,
+        "Subject27": 1.2761213240607707,
+        "Subject28": 1.1734493392835508,
+        "Subject29": 1.0372754552272485,
+        "Subject30": 1.61101727206155,
+        "Subject31": 1.1931046610265938,
+        "Subject32": 1.069879662028403,
+        "Subject33": 1.2834517175779543,
+        "Subject34": 1.004827329284781,
+        "Subject35": 1.2831751321249252
+      }
+    },
+    "QACT parity hw": {
+      "mean": 1.2131281849594946,
+      "median": 1.2433598626365925,
+      "config": {
+        "F_HIGH": 22.0,
+        "K_HIGH": 0.5,
+        "F_LOW": 5.0,
+        "K_LOW": 1.5,
+        "DT_SHORT": 0.03,
+        "K_SHORT": 3.0
+      },
+      "per_subject": {
+        "Subject18": 1.472929904562208,
+        "Subject19": 1.2322669738222272,
+        "Subject20": 1.2544527514509578,
+        "Subject21": 1.0848043997781895,
+        "Subject22": 1.120315437450496,
+        "Subject23": 1.0120557670967076,
+        "Subject24": 1.4664268922325518,
+        "Subject25": 0.9634152392098636,
+        "Subject26": 1.3309595217170682,
+        "Subject27": 1.3158036303196594,
+        "Subject28": 1.1318716207514634,
+        "Subject29": 1.001047959266623,
+        "Subject30": 1.5493731519276064,
+        "Subject31": 1.256495707754639,
+        "Subject32": 1.0564577329359641,
+        "Subject33": 1.2686100082785972,
+        "Subject34": 1.0557886215647005,
+        "Subject35": 1.2632320091513813
+      }
+    }
+  },
+  "tests": {
+    "C1": {
+      "a": "classical ACT fine-f coord",
+      "b": "QACT parity hw",
+      "mean_diff": 0.06560462096512054,
+      "a_better": 1,
+      "p": 3.814697265625e-05,
+      "verdict": "first WORSE"
+    },
+    "C2": {
+      "a": "classical ACT fine-f to78",
+      "b": "QACT parity hw",
+      "mean_diff": 0.010017963241789551,
+      "a_better": 5,
+      "p": 0.3692169189453125,
+      "verdict": "no difference"
+    },
+    "C3": {
+      "a": "classical ACT fine-f coord",
+      "b": "classical ACT fine-f",
+      "mean_diff": 0.02197024440842595,
+      "a_better": 5,
+      "p": 0.04827880859375,
+      "verdict": "no difference"
+    },
+    "C4": {
+      "a": "classical ACT fine-f to78",
+      "b": "classical ACT fine-f",
+      "mean_diff": -0.03361641331490504,
+      "a_better": 18,
+      "p": 7.62939453125e-06,
+      "verdict": "first BETTER"
+    }
+  },
+  "alpha": 0.0125,
+  "reproduction": {
+    "classical ACT": {
+      "saved_mean": 1.4392804266432444,
+      "rerun_mean": 1.4392804266432444,
+      "max_abs_diff": 0.0
+    },
+    "classical ACT fine-f": {
+      "saved_mean": 1.2567625615161893,
+      "rerun_mean": 1.2567625615161893,
+      "max_abs_diff": 0.0
+    },
+    "QACT parity hw": {
+      "saved_mean": 1.2131281849594946,
+      "rerun_mean": 1.2131281849594946,
+      "max_abs_diff": 0.0
+    }
+  }
+}

@@ -185,6 +185,21 @@ def build(kind, r, env, c, approx_degree=2, measure=True, offset=0,
     raise ValueError(f"unknown construction {kind!r}")
 
 
+def windowed_distribution(r, env, c, offset=0.0):
+    """Exact output distribution of build("windowed", r, env, c, offset), computed
+    classically: the loaded window, the same chirp and linear phase, an m-point FFT."""
+    N = len(r)
+    n = int(round(math.log2(N)))
+    m, t0 = window_register(env, n)
+    s = (env * r)[t0:t0 + 2 ** m]
+    s = s / np.linalg.norm(s)
+    u = np.arange(2 ** m)
+    lin = 2 * c * t0 + offset
+    z = s * np.exp(-2j * np.pi * (c * u ** 2 + lin * u) / N)
+    P = np.abs(np.fft.fft(z)) ** 2
+    return P / P.sum(), m
+
+
 def windowed_target(r, env, c, n, offset=0):
     """What the windowed circuit must return: the full target on bins
     k' 2^(n-m) + offset, renormalised, and the bin each outcome maps to."""

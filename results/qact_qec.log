@@ -1,0 +1,56 @@
+Heron medians: CZ 4.19e-03 (68 ns), SX 2.71e-04 (32 ns), readout 2.29e-02 (1560 ns)
+
+/home/kc/Quantum-Brain-Encoding/qact_qec.py:81: DeprecationWarning: This version of QRE is deprecated and will be removed in a future release. Please use the new version of QRE in qdk.qre. Refer to aka.ms/qdk.QREv3 for more information.
+  p = EstimatorParams()
+logical operations per shot: {5: 160, 6: 317, 7: 613, 8: 1127, 9: 2434}
+
+heron_as_calibrated: surface code for a 9-qubit QACT circuit
+   budget 0.3   NOT POSSIBLE: imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01
+   budget 0.1   NOT POSSIBLE: imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01
+   budget 0.03  NOT POSSIBLE: imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01
+   budget 0.01  NOT POSSIBLE: imates.LogicalErrorRateComputationFailed): The logical error rate cannot be computed: invalid value for 'physical_error_rate', expected value between 0 and 0.01
+
+heron_readout_1e-3: surface code for a 9-qubit QACT circuit
+   budget 0.3   d=25  28 logical ->   310,080 physical qubits,    705.62 ms per shot, 8,659 T states
+   budget 0.1   d=29  28 logical ->   347,096 physical qubits,    877.93 ms per shot, 9,354 T states
+   budget 0.03  d=31  28 logical ->   491,136 physical qubits,   1004.73 ms per shot, 10,073 T states
+   budget 0.01  d=33  28 logical ->   560,704 physical qubits,   1140.07 ms per shot, 10,792 T states
+
+GATE_NS_E3: surface code for a 9-qubit QACT circuit
+   budget 0.3   d=9   28 logical ->    95,256 physical qubits,     29.86 ms per shot, 8,635 T states
+   budget 0.1   d=11  28 logical ->    84,536 physical qubits,     39.27 ms per shot, 9,354 T states
+   budget 0.03  d=11  28 logical ->   142,296 physical qubits,     42.17 ms per shot, 10,101 T states
+   budget 0.01  d=13  28 logical ->   125,624 physical qubits,     53.13 ms per shot, 10,822 T states
+
+GATE_NS_E4: surface code for a 9-qubit QACT circuit
+   budget 0.3   d=5   28 logical ->    15,400 physical qubits,     16.64 ms per shot, 8,659 T states
+   budget 0.1   d=5   28 logical ->    15,400 physical qubits,     17.91 ms per shot, 9,380 T states
+   budget 0.03  d=5   28 logical ->    15,400 physical qubits,     19.17 ms per shot, 10,101 T states
+   budget 0.01  d=7   28 logical ->    12,744 physical qubits,     28.52 ms per shot, 10,792 T states
+
+selection quality of single long-atom circuits (6 windows x 3 widths = 8/9 qubits; 5000 shots):
+   physical Heron, no QEC     mean 0.37  worst 0.02
+   budget 0.3                 mean 0.99  worst 0.92
+   budget 0.1                 mean 0.99  worst 0.92
+   budget 0.03                mean 0.99  worst 0.92
+   budget 0.01                mean 0.99  worst 0.92
+   perfect (noiseless)        mean 0.97  worst 0.80
+-> cheapest code that selects like q7 on Heron (mean >= 0.95, worst >= 0.8): budget 0.3
+[QEC budget 0.3 q8] recon err 0.573  atom quality 0.98 (worst 0.88)  shots/window 138,250  (38s sim per window)
+[QEC budget 0.3 q9] recon err 0.598  atom quality 0.95 (worst 0.81)  shots/window 769,938  (278s sim per window)
+
+level technology             recon err  physical qubits  time per window
+q0    classical                  0.578                —            45 ms
+q7    Heron, no QEC              0.567              133           0.09 s
+q8    Heron, no QEC              0.561              133           0.22 s
+      heron_as_calibrated            code above threshold — not possible
+      heron_readout_1e-3         0.573          273,410            7.7 h
+      GATE_NS_E3                 0.573           68,600         21.8 min
+      GATE_NS_E4                 0.573            6,480         11.9 min
+q9    Heron, no QEC              0.734              133           4.69 s
+      heron_as_calibrated            code above threshold — not possible
+      heron_readout_1e-3         0.598          310,080          110.9 h
+      GATE_NS_E3                 0.598           95,256            4.8 h
+      GATE_NS_E4                 0.598           15,400            2.6 h
+
+wrote results/qact_qec.json  (1482s)

@@ -31,14 +31,19 @@ ALPHA = 0.05 / 9
 import argparse
 
 _ap = argparse.ArgumentParser()
-_ap.add_argument("--variant", choices=("grid", "refined"), default="grid",
+_ap.add_argument("--variant", choices=("grid", "refined", "parity"), default="grid",
                  help="grid = dictionary only; refined = parameter-shift refined atoms "
                       "(the apples-to-apples comparison, since classical ACT also refines)")
 _A = _ap.parse_args()
-SETS = ({"classical ACT": "chbmit", "QACT argmax": "chbmitqactonly_argmax",
-         "QACT sampled": "chbmitqactonly"} if _A.variant == "grid" else
-        {"classical ACT": "chbmit", "QACT argmax": "chbmitqactonly_ref_argmax",
-         "QACT sampled": "chbmitqactonly_ref"})
+# parity = the same tests on features from the full-parity engine (OMP joint refit,
+# exact-f, backfit, post-selection-conditioned selection), added after the parity
+# work; the tests and alpha are unchanged
+SETS = {"grid": {"classical ACT": "chbmit", "QACT argmax": "chbmitqactonly_argmax",
+                 "QACT sampled": "chbmitqactonly"},
+        "refined": {"classical ACT": "chbmit", "QACT argmax": "chbmitqactonly_ref_argmax",
+                    "QACT sampled": "chbmitqactonly_ref"},
+        "parity": {"classical ACT": "chbmit", "QACT argmax": "chbmitqactonly_parity_argmax",
+                   "QACT sampled": "chbmitqactonly_parity"}}[_A.variant]
 print(f"variant: {_A.variant}\n")
 # (name, n features kept, kwargs). QSVC gets 8 because n_qubits == n features:
 # 20 features would mean 20 qubits (a 2^20 statevector per sample), which is not

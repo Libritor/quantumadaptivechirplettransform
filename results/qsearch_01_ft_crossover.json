@@ -1,0 +1,78 @@
+{
+ "t_pair_gpu_s": 2.806184048115203e-08,
+ "t_pair_cpu_s": 1.933540922684849e-06,
+ "rows": [
+  {
+   "oracle": "explicit loading",
+   "tech": "GATE_NS_E3",
+   "t_U_s": 0.08117160000000001,
+   "physical_qubits": 322184,
+   "eps": 0.1,
+   "M_star_gpu": 5.483474657945677e+19,
+   "M_star_cpu": 1.1549984659042526e+16
+  },
+  {
+   "oracle": "explicit loading",
+   "tech": "GATE_NS_E3",
+   "t_U_s": 0.08117160000000001,
+   "physical_qubits": 322184,
+   "eps": 0.01,
+   "M_star_gpu": 5.483474657945678e+21,
+   "M_star_cpu": 1.154998465904253e+18
+  },
+  {
+   "oracle": "explicit loading",
+   "tech": "GATE_NS_E4",
+   "t_U_s": 0.042919200000000005,
+   "physical_qubits": 28056,
+   "eps": 0.1,
+   "M_star_gpu": 1.5330307426865682e+19,
+   "M_star_cpu": 3229062349036910.5
+  },
+  {
+   "oracle": "explicit loading",
+   "tech": "GATE_NS_E4",
+   "t_U_s": 0.042919200000000005,
+   "physical_qubits": 28056,
+   "eps": 0.01,
+   "M_star_gpu": 1.5330307426865685e+21,
+   "M_star_cpu": 3.22906234903691e+17
+  },
+  {
+   "oracle": "QRAM for free",
+   "tech": "GATE_NS_E3",
+   "t_U_s": 0.006288,
+   "physical_qubits": 822600,
+   "eps": 0.1,
+   "M_star_gpu": 3.2905818174392685e+17,
+   "M_star_cpu": 69310376871489.77
+  },
+  {
+   "oracle": "QRAM for free",
+   "tech": "GATE_NS_E3",
+   "t_U_s": 0.006288,
+   "physical_qubits": 822600,
+   "eps": 0.01,
+   "M_star_gpu": 3.29058181743927e+19,
+   "M_star_cpu": 6931037687148978.0
+  },
+  {
+   "oracle": "QRAM for free",
+   "tech": "GATE_NS_E4",
+   "t_U_s": 0.0029596,
+   "physical_qubits": 73304,
+   "eps": 0.1,
+   "M_star_gpu": 7.289767293842066e+16,
+   "M_star_cpu": 15354625609487.025
+  },
+  {
+   "oracle": "QRAM for free",
+   "tech": "GATE_NS_E4",
+   "t_U_s": 0.0029596,
+   "physical_qubits": 73304,
+   "eps": 0.01,
+   "M_star_gpu": 7.289767293842066e+18,
+   "M_star_cpu": 1535462560948702.8
+  }
+ ]
+}

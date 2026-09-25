@@ -1,0 +1,25 @@
+[anchor] lock-in data n=20: precision product 0.0633 us, entangled 0.0420 us -> gain 1.508 [95% CI 1.404-1.807] (ideal sqrt2 = 1.414; 21 points x 100 reps)
+[anchor] lock-in data n=30: precision product 0.0365 us, entangled 0.0158 us -> gain 2.314 [95% CI 2.055-2.534] (ideal sqrt2 = 1.414; 21 points x 100 reps)
+[data] 201 trials, channel MEG1231; evoked peak 1269 fT; 6-atom ACT residual 0.043; 242 empty-room segments
+  atom 0: t  94.0 ms, width  49.4 ms, f   3.7 Hz | signal   8.152 fT*s  noise: total  3.530, empty-room  1.565, brain  3.164 | trials at 5 sigma: real OPM     4.7, perfect sensor     3.8
+  atom 1: t 241.0 ms, width  47.0 ms, f  -0.5 Hz | signal   1.879 fT*s  noise: total  3.358, empty-room  4.103, brain  0.840 | trials at 5 sigma: real OPM    79.8, perfect sensor     5.0   [empty-room > total: noise split unreliable]
+  atom 2: t   0.0 ms, width  38.5 ms, f  -2.0 Hz | signal   3.075 fT*s  noise: total  3.027, empty-room  1.421, brain  2.672 | trials at 5 sigma: real OPM    24.2, perfect sensor    18.9
+  atom 3: t 144.0 ms, width  49.4 ms, f  12.8 Hz | signal   0.792 fT*s  noise: total  1.533, empty-room  0.532, brain  1.438 | trials at 5 sigma: real OPM    93.7, perfect sensor    82.4
+  atom 4: t   0.0 ms, width 164.0 ms, f  27.3 Hz | signal   0.368 fT*s  noise: total  0.913, empty-room  0.460, brain  0.788 | trials at 5 sigma: real OPM   154.1, perfect sensor   115.0
+  atom 5: t   0.0 ms, width 156.0 ms, f  52.7 Hz | signal   0.227 fT*s  noise: total  0.460, empty-room  0.344, brain  0.305 | trials at 5 sigma: real OPM   102.8, perfect sensor    45.3
+
+[sensing] entanglement gain in trials (independent / GHZ-block), best over N, per atom (T = the atom's sensing window):
+  atom    window       T2=1ms      T2=10ms     T2=100ms    T2=1000ms     no deph.
+  0        198ms        1.00x        1.00x        1.00x        1.38x     3406.62x
+  2        154ms        1.00x        1.00x        1.00x        1.63x     4199.62x
+  3        198ms        1.00x        1.00x        1.00x        1.38x     7144.44x
+  4        256ms        1.00x        1.00x        1.00x        1.20x    35696.52x
+  5        256ms        1.00x        1.00x        1.00x        1.20x    35696.52x
+  (a gain is capped by the brain-noise floor: once sensor noise is negligible, every sensor needs the same number of trials)
+
+[check] Aer lock-in circuit vs formula (phase std per trial, T = 50 ms):
+  T2 = inf: N=1P 1.000/1.000  N=1G 1.000/1.000  N=2P 0.707/0.707  N=2G 0.500/0.500  N=3P 0.577/0.577  N=3G 0.333/0.333  N=4P 0.500/0.500  N=4G 0.250/0.250  N=5P 0.447/0.447  N=5G 0.200/0.200
+  T2 = 0.2: N=1P 1.284/1.284  N=1G 1.284/1.284  N=2P 0.908/0.908  N=2G 0.824/0.824  N=3P 0.741/0.741  N=3G 0.706/0.706  N=4P 0.642/0.642  N=4G 0.680/0.680  N=5P 0.574/0.574  N=5G 0.698/0.698
+  max relative deviation Aer vs formula: 4.17e-06
+
+wrote results/quantum_sensing_opm.json (2s)

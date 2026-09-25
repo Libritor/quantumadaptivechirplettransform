@@ -1551,6 +1551,213 @@ classical side matches these speed-ups once it gets equivalent data access. The
 published exponential advantages for signals are all for signals that reach a
 qubit directly (quantum sensing), not recorded arrays.
 
+### Hybrid ACT: quantum where it might help, classical where it definitely does (`qbe/hybrid_act.py`)
+
+Taking "run long atoms classically" further: every component of the transform is
+routed by evidence from the studies above. The parts that could go either way are
+routed by one number, the **level** `q_max` — an atom whose window fits in
+≤ `q_max` qubits is scored and refined by QACT circuits, a wider one by the exact
+classical FFT.
+
+| component | route | why |
+|---|---|---|
+| window multiply `env * r` | always classical | O(N) arithmetic; quantumly a 2^n multiplexor + post-selection that discarded 43-97% of shots |
+| branch-and-bound bounds | always classical | O(N) per envelope, rigorous |
+| OMP coefficients, residual | always classical | atom Gram is data-independent, right-hand side O(kN) |
+| scoring + refining atoms that fit `q_max` qubits | quantum | windowed circuit, semiclassical QFT, adaptive shots |
+| scoring + refining wider atoms | classical | exact, and their circuits fail under noise |
+
+Classical candidates are exact, so the best of them seeds branch-and-bound and
+prunes quantum circuits outright; quantum candidates carry confidence bounds and
+are eliminated against it. `hybrid_act_levels.py` runs every level on the same
+4 EEG windows x 6 atoms, with the quantum routes executed in Aer **under IBM
+Heron's noise model** on device-transpiled circuits, and again noiseless:
+
+| level | quantum share of evaluations | fit error, Heron noise | fit error, noiseless | atom quality, Heron (mean / worst) | QPU time | classical time | QPU round trips |
+|---|---|---|---|---|---|---|---|
+| q0 (classical) | 0% | 0.578 | 0.578 | 1.00 / 1.00 | — | 45 ms | 0 |
+| q6 | 2% | 0.575 | 0.578 | 0.99 / 0.80 | 0.02 s | 35 ms | 10 |
+| **q7** | 11% | 0.567 | 0.584 | 0.96 / 0.80 | 0.09 s | 35 ms | 17 |
+| q8 | 21% | 0.561 | 0.589 | 0.91 / 0.54 | 0.22 s | 32 ms | 13 |
+| q9 (all quantum) | 100% | **0.734** | 0.599 | **0.56 / 0.31** | 4.69 s | 4 ms | 262 |
+
+(Atom quality = exact energy of each chosen atom as a fraction of the best atom in
+the dictionary. QPU time assumes zero repetition delay and multi-programming, with
+each register size's packing measured on FakeTorino: 25 / 21 / 18 / 15 / 14
+copies for 5 / 6 / 7 / 8 / 9 qubits. That per-size pricing is why q9 comes out
+cheaper here than the 8.0 s of the previous study, which priced every circuit as
+9-qubit.)
+
+What it shows:
+
+- **q9 is broken on today's hardware**: worse than classical on 4/4 windows, by
+  0.14-0.17, with chosen atoms at 56% of the best on average.
+- **q6-q8 keep classical quality.** Their small differences from q0 under noise
+  (±0.05, mixed signs, one window driving most of q8's apparent gain) are what 4
+  windows cannot resolve — the smallest possible paired-test p-value at n = 4 is
+  0.125 — and noiselessly they are slightly *worse* (+0.01-0.03, from shot noise and
+  coarser frequency grids). No level improves on classical.
+- **Every quantum level is slower than q0.** q0 is 45 ms of classical work; q7
+  adds 0.09 s of QPU time and 17 classical-QPU round trips per window. Round-trip
+  latency is not priced, because a real service's per-job latency is not in any
+  calibration, but an interactive loop pays it every time.
+- The seeding effect is large: at q7 the exact classical scores for long atoms set
+  a high bar immediately, so branch-and-bound needs only ~11% of evaluations to go
+  quantum.
+
+**Recommended level: q7** — the largest level whose worst chosen atom stays at
+≥ 80% of the best, and whose circuits (≤ 7 qubits, ~140-340 CZ) chose atoms with
+99-100% of the best energy under Heron noise in `qact_hardware.py`. q8 is the most quantum
+version that still holds quality *on average*, but its worst atom drops to 54%.
+q9 needs roughly 4x lower two-qubit error rates, or error correction.
+
+### Error correction for q8 and q9 (`qact_qec.py`)
+
+Error correction cannot be *simulated* for these circuits: surface-code-encoded, a
+9-qubit QACT circuit is ~10^5 physical qubits, and its arbitrary-angle rotations
+rule out stabilizer simulators. So it was run in the two ways that can be:
+
+1. **Cost** — Microsoft's open-source resource estimator (`qdk`) sizes a surface
+   code for the real QACT circuits: logical qubits, code distance, T-state
+   factories, physical qubits and runtime per shot, for four qubit technologies.
+2. **Effect** — a code's job is to hand the algorithm a small logical error
+   rate, sized to an *error budget* (the chance a whole shot fails). The circuits
+   were run in Aer at that logical level (all-to-all logical qubits, depolarizing
+   error on every logical operation, scaled to the budget), first per circuit
+   over a sweep of budgets, then end to end through Hybrid ACT.
+
+**IBM Heron as calibrated cannot be error-corrected.** The estimator refuses:
+Heron's median readout error (2.3%) is above the surface-code threshold its model
+assumes (1%). Two-qubit (4.2e-3) and single-qubit (2.7e-4) errors are fine.
+
+**The cheapest code is enough.** Selection quality of single long-atom circuits
+(8-9 qubits, 18 cases, chosen atom's energy as a fraction of the best):
+
+```
+physical Heron, no error correction    mean 0.37  worst 0.02
+error-corrected, any budget 0.3-0.01   mean 0.99  worst 0.92
+perfect (noiseless)                    mean 0.97  worst 0.80
+```
+
+Even a code that lets 30% of shots fail selects as well as a perfect machine:
+QACT only needs the peak of a histogram, and failures scattered across outcomes do
+not move it. (0.97 vs 0.99 is sampling noise on near-tied atoms.)
+
+**End to end, at that cheapest code:**
+
+| level | machine | fit error | chosen atom (mean / worst) | physical qubits | time per window |
+|---|---|---|---|---|---|
+| q0 | classical | 0.578 | 1.00 / 1.00 | — | **45 ms** |
+| q7 | Heron, no QEC | 0.567 | 0.96 / 0.80 | 133 | 0.09 s |
+| q8 | Heron, no QEC | 0.561 | 0.91 / 0.54 | 133 | 0.22 s |
+| q8 | surface code, 1e-4 qubits | 0.573 | 0.98 / 0.88 | 6,480 | 11.9 min |
+| q8 | surface code, 1e-3 qubits | 0.573 | 0.98 / 0.88 | 68,600 | 21.8 min |
+| q8 | surface code, Heron + 0.1% readout | 0.573 | 0.98 / 0.88 | 273,410 | 7.7 h |
+| q9 | Heron, no QEC | **0.734** | **0.56 / 0.31** | 133 | 4.7 s |
+| q9 | surface code, 1e-4 qubits | 0.598 | 0.95 / 0.81 | 15,400 | 2.6 h |
+| q9 | surface code, 1e-3 qubits | 0.598 | 0.95 / 0.81 | 95,256 | 4.8 h |
+| q9 | surface code, Heron + 0.1% readout | 0.598 | 0.95 / 0.81 | 310,080 | 111 h |
+
+("1e-3" and "1e-4 qubits" are Microsoft's `GATE_NS_E3` / `GATE_NS_E4`
+superconducting presets; "Heron + 0.1% readout" is Heron's calibration with
+readout hypothetically improved 23x.)
+
+- **Error correction fixes the quality.** q9 goes from broken (0.734) to exactly
+  its noiseless level (0.599 in the earlier run); q8's worst atom goes from 54%
+  to 88% of the best.
+- **It costs 6,000-310,000 physical qubits** (Heron has 133) **and 12 minutes to
+  111 hours per 2-second window**, against 45 ms classically. At the budget used,
+  one error-corrected shot takes ~4 ms (7-qubit circuit, best qubits) to ~700 ms
+  (9-qubit, Heron-based), because every logical step is many rounds of syndrome
+  measurement and every rotation needs distilled T states (~8,600 for a 9-qubit
+  circuit); q9 needs ~770,000 shots per window.
+- It also does not beat q0 on quality: with perfect qubits q9 is still slightly
+  worse than classical (0.598 vs 0.578), from shot noise and coarser frequency
+  grids. Error correction removes the noise penalty, not the sampling one.
+
+So the honest recommendation stands: **q7 on today's hardware**, or q0.
+Error-corrected q8/q9 are correct but 4-5 orders of magnitude slower on machines
+that do not exist yet.
+
+### Does q8 beat classical? No — a powered test (`q8_vs_classical.py`)
+
+On 4 windows, q8 (bare Heron 0.561, error-corrected 0.573) looked slightly better
+than classical (0.578), each winning 3 of 4 windows — while *noiseless* q8 was
+worse. Four windows cannot decide that (smallest possible paired p = 0.125), and
+"noisy better, noiseless worse" pointed at noise acting as randomised selection,
+which a classical algorithm can do too. So a test was pre-registered: 60 fresh
+EEGMAT windows (30 subjects x 2), paired Wilcoxon against q0, Bonferroni
+alpha = 0.05/4, plus two **classical controls** that use no circuits at all —
+each quantum-route distribution computed exactly, mixed 30% or 60% with uniform
+noise, and sampled with the same shots — and a decision rule: q8 beats classical
+only if it beats q0 *and* its matched classical control.
+
+```
+                       vs q0      better on   p        (alpha 0.0125)
+q8 bare Heron          +0.0007    23/60       0.79     no difference
+q8 error-corrected     +0.0016    19/60       0.077    no difference
+classical mix 0.3      -0.0022    28/60       0.37     no difference
+classical mix 0.6      +0.0008    22/60       0.65     no difference
+q8 noiseless           +0.0063    15/60       0.0014   worse (descriptive)
+```
+
+**q8 does not beat classical.** The 4-window lead was noise. What the numbers do
+show: noiseless q8 is genuinely worse (its coarser window-local frequency grids and
+shot noise cost fit quality), and noise — from Heron, from an error-corrected
+machine's residual errors, or from a classical random mix — only brings it back to
+parity. The error-corrected arm even leans worse than its matched classical
+control (+0.0038, p = 0.021). And whatever any of these arms achieved was, by
+construction, produced by a classical computer (Aer), at 0.1 s per window for the
+classical controls against 0.22 s of QPU time (bare Heron) or ~12 min
+(error-corrected) for q8.
+
+### Searching for any quantum ACT that beats classical ([docs/QACT_SEARCH_LOG.md](docs/QACT_SEARCH_LOG.md))
+
+A self-paced search loop with a success criterion fixed in advance: beat the
+strongest classical baseline, *including a classical implementation of the same
+idea*, in speed (at equal accuracy) or accuracy (at equal time). It ended
+negative after two iterations:
+
+- **Fault-tolerant coherent dictionary search** (Dürr–Høyer + amplitude
+  estimation, sized with Microsoft's resource estimator, every constant tilted
+  toward quantum, QRAM free): the crossover with classical FFT-based matching
+  pursuit is a dictionary of 1.5e13 atoms — 600x more than every chirplet a
+  512-sample window can resolve.
+- **Research round:** the 2024–2026 claims for quantum sparse recovery reduce to
+  giving the quantum solver more information (QAOA matching pursuit, Phys. Rev.
+  A 2024), fragile small-n effects on binary signals (quantum annealing, 2026), or
+  quantum data. QAOA support selection fails the criterion by construction: any
+  instance small enough to simulate is solved exactly by classical search.
+
+Reopened with a broader scope (quantum models that *use* chirplet atoms, new
+architectures, niche literature) and the field's standard bar (beat tuned classical
+models; quantum-hard at scale). Four more iterations, all on CHB-MIT seizure
+detection with patient-wise folds, all at parity or below:
+
+| iteration | architecture | result vs best tuned classical |
+|---|---|---|
+| 4 | quantum kernel on *sets* of chirplet atoms (IQP map, energy-weighted density matrices) | 62.6% vs 67.4% RBF-SVM (worse, p = 0.0015); entanglement hurt |
+| 5a | all-feature quantum kernel, one qubit per feature | 74.8% vs 76.8% RBF-SVM (p = 0.09) |
+| 5b/5c | small-data learning curves, 20-200 training epochs | parity once kernel concentration was fixed |
+| 6 | research: GBS graph kernels, covariant kernels, provable-advantage theory | GBS classically reproducible for EEG graphs; covariant kernels "in line with classical" on real data |
+
+Every candidate left has published evidence of parity on real classical data, and
+the theory says why: provable quantum learning advantages need quantum-hard label
+structure or quantum data.
+
+**Iteration 7: data with quantum structure** (`quantum_sensing_opm.py`, real
+OPM-MEG brain recordings + real ion-trap entangled lock-in data). A quantum
+advantage for brain signals could only live in the *sensing*, before the data
+become classical numbers. The entanglement gain is real in hardware (ion-trap
+anchor: 1.51x at n = 20, CI 1.40–1.81, ideal √2). But detecting the chirplet atoms of
+a real somatosensory evoked field is limited by the brain's own background: a
+perfect, noiseless sensor would need only 1.1–2.3x fewer trials than today's OPM.
+Entangled (GHZ) probes gain nothing at realistic spin numbers (1e11–1e13) or
+coherence times (≤ 100 ms). They gain ≥ 10% only with ≤ 3e9 spins and T2 ≥ 1 s, a
+sensor that still needs far more trials than an ordinary vapour cell. An Aer
+simulation of the lock-in circuit matches the model to 4e-6. Details and caveats
+are in the search log.
+
 ### A pre-existing leak in refinement, found along the way
 
 The parameter-shift refiner's comment says it keeps the centre frequency in
@@ -1609,6 +1816,14 @@ qact_vs_act_speed.py  end-to-end speed: classical ACT (GPU/CPU) vs QACT simulate
                     QACT circuits run in Aer, and IBM Heron time estimates
 qact_hw_speedups.py three published speed-ups: zero repetition delay,
                     multi-programming (measured packing), adaptive shots (Aer)
+qbe/hybrid_act.py   Hybrid ACT: per-component quantum/classical routing, with a
+                    qubit level q_max (0 = classical ... 9 = all quantum)
+hybrid_act_levels.py  every level under IBM Heron noise and noiseless: quality,
+                    QPU time, classical time, round trips
+qact_qec.py         error correction for q8/q9: surface-code sizing (Microsoft's
+                    resource estimator) and logical-level runs in Aer
+q8_vs_classical.py  pre-registered 60-window test of q8 vs classical, with
+                    classical noise-mixing controls
 run_parity_features.sh  rebuild CHB-MIT QACT features with the parity engine and
                     rerun the pre-registered classification comparison (A4/A5)
 qbe/crosschannel.py cross-channel synchrony / spread / propagation features

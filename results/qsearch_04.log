@@ -1,0 +1,107 @@
+[chbmit] chb01: 219 ictal, 219 interictal epochs
+[chbmit] chb02: 85 ictal, 85 interictal epochs
+[chbmit] chb03: 195 ictal, 195 interictal epochs
+[chbmit] chb04: 184 ictal, 184 interictal epochs
+[chbmit] chb05: 278 ictal, 278 interictal epochs
+[chbmit] chb06: 75 ictal, 75 interictal epochs
+[chbmit] chb07: 162 ictal, 162 interictal epochs
+[chbmit] chb08: 459 ictal, 459 interictal epochs
+[chbmit] chb09: 135 ictal, 135 interictal epochs
+[chbmit] chb10: 217 ictal, 217 interictal epochs
+[chbmit] chb11: 403 ictal, 403 interictal epochs
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:64: RuntimeWarning: divide by zero encountered in divide
+  gain = (pmax - pmin) / (dmax - dmin)
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:65: RuntimeWarning: invalid value encountered in multiply
+  offset = pmin - gain * dmin
+/home/kc/Quantum-Brain-Encoding/qbe/edf.py:74: RuntimeWarning: invalid value encountered in multiply
+  signals[label] = block * gain[i] + offset[i]
+[chbmit] chb12: 486 ictal, 486 interictal epochs
+[chbmit] chb13: 265 ictal, 265 interictal epochs
+[chbmit] chb14: 84 ictal, 84 interictal epochs
+[chbmit] chb15: 989 ictal, 989 interictal epochs
+[chbmit] chb16: 40 ictal, 40 interictal epochs
+[chbmit] chb17: 146 ictal, 0 interictal epochs
+[chbmit] chb18: 158 ictal, 158 interictal epochs
+[chbmit] chb19: 115 ictal, 115 interictal epochs
+[chbmit] chb20: 144 ictal, 144 interictal epochs
+[chbmit] chb21: 99 ictal, 99 interictal epochs
+[chbmit] chb22: 102 ictal, 102 interictal epochs
+[chbmit] chb23: 210 ictal, 210 interictal epochs
+[chbmit] chb24: 251 ictal, 251 interictal epochs
+[chbmit] total 10856 epochs {'interictal': 5355, 'ictal': 5501}, 23 patients
+[chbmit] skipped: flat channel=17, montage lacks a standard channel=3
+[atoms] loaded 10856 epochs x 18 channels (87s)
+[gpu_features] 4096/195408 channel-epochs  353/s  ~542s left
+[gpu_features] 8192/195408 channel-epochs  599/s  ~313s left
+[gpu_features] 12288/195408 channel-epochs  805/s  ~228s left
+[gpu_features] 16384/195408 channel-epochs  931/s  ~192s left
+[gpu_features] 20480/195408 channel-epochs  1012/s  ~173s left
+[gpu_features] 24576/195408 channel-epochs  1056/s  ~162s left
+[gpu_features] 28672/195408 channel-epochs  1088/s  ~153s left
+[gpu_features] 32768/195408 channel-epochs  1112/s  ~146s left
+[gpu_features] 36864/195408 channel-epochs  1133/s  ~140s left
+[gpu_features] 40960/195408 channel-epochs  1165/s  ~133s left
+[gpu_features] 45056/195408 channel-epochs  1195/s  ~126s left
+[gpu_features] 49152/195408 channel-epochs  1213/s  ~121s left
+[gpu_features] 53248/195408 channel-epochs  1222/s  ~116s left
+[gpu_features] 57344/195408 channel-epochs  1223/s  ~113s left
+[gpu_features] 61440/195408 channel-epochs  1232/s  ~109s left
+[gpu_features] 65536/195408 channel-epochs  1252/s  ~104s left
+[gpu_features] 69632/195408 channel-epochs  1294/s  ~97s left
+[gpu_features] 73728/195408 channel-epochs  1324/s  ~92s left
+[gpu_features] 77824/195408 channel-epochs  1352/s  ~87s left
+[gpu_features] 81920/195408 channel-epochs  1368/s  ~83s left
+[gpu_features] 86016/195408 channel-epochs  1382/s  ~79s left
+[gpu_features] 90112/195408 channel-epochs  1396/s  ~75s left
+[gpu_features] 94208/195408 channel-epochs  1407/s  ~72s left
+[gpu_features] 98304/195408 channel-epochs  1431/s  ~68s left
+[gpu_features] 102400/195408 channel-epochs  1442/s  ~64s left
+[gpu_features] 106496/195408 channel-epochs  1464/s  ~61s left
+[gpu_features] 110592/195408 channel-epochs  1473/s  ~58s left
+[gpu_features] 114688/195408 channel-epochs  1478/s  ~55s left
+[gpu_features] 118784/195408 channel-epochs  1483/s  ~52s left
+[gpu_features] 122880/195408 channel-epochs  1485/s  ~49s left
+[gpu_features] 126976/195408 channel-epochs  1493/s  ~46s left
+[gpu_features] 131072/195408 channel-epochs  1499/s  ~43s left
+[gpu_features] 135168/195408 channel-epochs  1514/s  ~40s left
+[gpu_features] 139264/195408 channel-epochs  1512/s  ~37s left
+[gpu_features] 143360/195408 channel-epochs  1507/s  ~35s left
+[gpu_features] 147456/195408 channel-epochs  1504/s  ~32s left
+[gpu_features] 151552/195408 channel-epochs  1501/s  ~29s left
+[gpu_features] 155648/195408 channel-epochs  1499/s  ~27s left
+[gpu_features] 159744/195408 channel-epochs  1484/s  ~24s left
+[gpu_features] 163840/195408 channel-epochs  1475/s  ~21s left
+[gpu_features] 167936/195408 channel-epochs  1481/s  ~19s left
+[gpu_features] 172032/195408 channel-epochs  1489/s  ~16s left
+[gpu_features] 176128/195408 channel-epochs  1495/s  ~13s left
+[gpu_features] 180224/195408 channel-epochs  1502/s  ~10s left
+[gpu_features] 184320/195408 channel-epochs  1517/s  ~7s left
+[gpu_features] 188416/195408 channel-epochs  1525/s  ~5s left
+[gpu_features] 192512/195408 channel-epochs  1531/s  ~2s left
+[gpu_features] 195408/195408 channel-epochs  1537/s  ~0s left
+[atoms] saved results/atoms_chbmit.npy (10856, 18, 12, 5); labels and groups match the existing feature files  (215s)
+10856 epochs, 23 patients, atoms (10856, 18, 12, 5), flat ACT features 234
+
+[Q] kernels 196s, CV 26s, chosen [(0.25, 1.0), (0.25, 1.0), (0.5, 10.0), (0.25, 1.0), (0.25, 1.0), (0.25, 1.0)]
+[Qp] kernels 177s, CV 26s, chosen [(1.0, 1.0), (2.0, 1.0), (2.0, 1.0), (0.5, 10.0), (1.0, 1.0), (1.0, 1.0)]
+[R] kernels 46s, CV 26s, chosen [(16.0, 1.0), (4.0, 10.0), (16.0, 0.1), (4.0, 10.0), (64.0, 1.0), (4.0, 10.0)]
+[F1] CV 4s, chosen [{'C': 0.001}, {'C': 0.1}, {'C': 0.001}, {'C': 0.01}, {'C': 0.1}, {'C': 0.001}]
+[F2] CV 156s, chosen [{'C': 10.0, 'gamma': 'scale'}, {'C': 1.0, 'gamma': 0.001}, {'C': 10.0, 'gamma': 0.01}, {'C': 1.0, 'gamma': 'scale'}, {'C': 10.0, 'gamma': 0.001}, {'C': 10.0, 'gamma': 'scale'}]
+[F3] CV 535s, chosen [{'lr': 0.1, 'depth': None}, {'lr': 0.1, 'depth': 3}, {'lr': 0.1, 'depth': None}, {'lr': 0.1, 'depth': None}, {'lr': 0.05, 'depth': None}, {'lr': 0.1, 'depth': None}]
+
+per-patient accuracy (mean over 23 patients):
+  Q   quantum atom-set kernel           62.57%   pooled  62.97%
+  Qp  quantum, entanglement off         64.49%   pooled  64.46%
+  R   classical RBF atom-set kernel     62.68%   pooled  63.21%
+  F1  logistic, flat ACT                62.66%   pooled  60.93%
+  F2  RBF-SVM, flat ACT                 67.36%   pooled  65.16%
+  F3  gradient boosting, flat ACT       65.88%   pooled  63.79%
+
+paired Wilcoxon, Q minus each (alpha = 0.0125):
+  Q - R    -0.11 pts  better on 10/23  p=0.6434  no difference
+  Q - F1   -0.09 pts  better on 12/23  p=0.9861  no difference
+  Q - F2   -4.79 pts  better on  4/23  p=0.0015  WORSE *
+  Q - F3   -3.31 pts  better on  5/23  p=0.0534  no difference
+  Q - Qp   -1.92 pts  better on  6/23  p=0.0228  (control)
+
+verdict: no quantum win under the pre-registered rule  (1194s)

@@ -9,6 +9,7 @@ qiskit>=2.0
 qiskit-machine-learning>=0.9
 qiskit-aer>=0.15
 qiskit-ibm-runtime>=0.40   # fake IBM Heron backends (coupling map + noise) for qact_hardware.py
+qdk[qiskit]>=1.32          # Microsoft's quantum resource estimator (surface code sizing) for qact_qec.py
 
 # Adaptive Chirplet Transform
 adaptive-chirplet-transform @ git+https://gitlab.com/adaptive-chirplet-transform/adaptive-chirplet-transform.git

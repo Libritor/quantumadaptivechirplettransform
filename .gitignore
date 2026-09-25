@@ -43,3 +43,11 @@ Thumbs.db
 *~
 .idea/
 .vscode/
+paper/iclr2027/*.aux
+paper/iclr2027/*.log
+paper/iclr2027/*.out
+paper/iclr2027/*.bbl
+paper/iclr2027/*.blg
+paper/iclr2027/style.zip
+paper/iclr2027/style/
+paper/iclr2027/bibtex.out

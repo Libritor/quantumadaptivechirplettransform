@@ -55,8 +55,7 @@
 
 \title{A Quantum Chirplet Transform, Audited:\\ Exact Circuits, Fair Controls, and a Real-Device Test}
 
-% Submission is double blind. Author block for the camera-ready:
-% Khalil Chaghouri, Alexander Vicol, Steve Mann -- University of Toronto.
+% Submission is double blind; the author block is filled in for the camera-ready only.
 \author{Anonymous authors\\ Paper under double-blind review}
 
 %\iclrfinalcopy % camera-ready only
@@ -114,7 +113,7 @@ which, rescaled by the classical factor $N\norm{e\odot r}^2/\norm{e}^2$, equals 
 The normalisation in the previous sentence was the source of the transform's first failure. The raw histogram is the \emph{joint} probability that the envelope filter succeeds and frequency $k$ is read, so it over-ranks wide, high-norm envelopes. A device keeps only post-selected shots, so what it reports is the \emph{conditional} distribution; dividing by the filter's success probability $\norm{\psi}^2$ makes the hardware observable, the refiner's objective and the classical least-squares criterion the same quantity. This one change moved \qact\ from a reconstruction error of 0.307 to 0.169 on planted chirplets and, on real EEG denoising, from 70\% worse than the classical engine to statistically indistinguishable from it (\S\ref{sec:denoise}).
 
 \subsection{Exact refinement by the parameter-shift rule}
-The captured energy $E(\theta)=|\braket{\psi_\theta}{r}|^2/\norm{\psi_\theta}^2$ depends on every phase-gate angle $a$ through a factor $e^{ia}$ multiplying part of the overlap, so $E=A+B\cos a+C\sin a$ and $\partial E/\partial a=[E(a+\pi/2)-E(a-\pi/2)]/2$ exactly \citep{mitarai2018circuit,schuld2019evaluating}. The chain rule maps the $n+n(n-1)/2$ angles onto $f$ and $c$ with the weights of eq.~\eqref{eq:twolocal}; the envelope parameters are not gate angles and use central differences, as a device would. Closed-form shifted evaluations agree with genuinely shifted circuits to $2.8\times10^{-9}$. Four steps cost 112 circuit evaluations per atom; on planted signals they recover a 6\,Hz burst at 6.01\,Hz from a 6.50\,Hz seed and reduce reconstruction error by about 25\%. A cheaper rule, used on hardware, is a three-point coordinate search (two evaluations per coordinate, keep the best of three); it costs 8 evaluations per step and turns out to be \emph{better} than the gradient (\S\ref{sec:control}), which is the second of the effects we later have to control for.
+The captured energy $E(\theta)=|\braket{\psi_\theta}{r}|^2/\norm{\psi_\theta}^2$ depends on every phase-gate angle $a$ through a factor $e^{ia}$ multiplying part of the overlap, so $E=A+B\cos a+C\sin a$ and $\partial E/\partial a=[E(a+\pi/2)-E(a-\pi/2)]/2$ exactly \citep{mitarai2018circuit,schuld2019evaluating}. The chain rule maps the $n+n(n-1)/2$ angles onto $f$ and $c$ with the weights of eq.~\eqref{eq:twolocal}; the envelope parameters are not gate angles and use central differences, as a device would. Closed-form shifted evaluations agree with genuinely shifted circuits to $2.8\times10^{-9}$. Each step costs 112 circuit evaluations; four steps on planted signals recover a 6\,Hz burst at 6.01\,Hz from a 6.50\,Hz seed and reduce reconstruction error by about 25\%. A cheaper rule, used on hardware, is a three-point coordinate search (two evaluations per coordinate, keep the best of three); it costs 8 evaluations per step and turns out to be \emph{better} than the gradient (\S\ref{sec:control}), which is the second of the effects we later have to control for.
 
 \subsection{Functional parity}
 \label{sec:parity}
@@ -282,27 +281,8 @@ On a device the bill is circuits $\times$ shots $\times$ two-qubit gates, and th
 \label{fig:device}
 \end{figure}
 
-\paragraph{Speed.} Table~\ref{tab:speed} prices the same job (four EEGMAT windows, six atoms, OMP) on every engine. The circuits work: run shot by shot in a simulator with the coarse window grids, they reach the exact simulation's error (\speedQAerErr\ versus \speedQSimErr). On a Heron processor the optimised circuits would take \speedHeron\ per window, and three published techniques (zero repetition delay, multi-programming \speedPack\ circuits per chip \citep{niu2023multiprogramming,ohkura2022simultaneous}, and adaptive shot allocation by successive elimination \citep{huang2025gambling}, which we ran and which cut shots \speedAdaptiveShots$\times$ at identical error) bring that to \speedAllThree\ --- still about 140$\times$ slower than the classical engine on a CPU and 12,000$\times$ slower than the batched GPU engine. Per shot, the 250\,$\mu$s repetition delay dwarfs the 16--96\,$\mu$s circuit, and each circuit needs thousands of shots to estimate a distribution an FFT computes exactly in microseconds.
+\paragraph{Speed.} Table~\ref{tab:speed} (Appendix~\ref{app:hw}) prices the same job (four EEGMAT windows, six atoms, OMP) on every engine. The circuits work: run shot by shot in a simulator with the coarse window grids, they reach the exact simulation's error (\speedQAerErr\ versus \speedQSimErr). On a Heron processor the optimised circuits would take \speedHeron\ per window, and three published techniques (zero repetition delay, multi-programming \speedPack\ circuits per chip \citep{niu2023multiprogramming,ohkura2022simultaneous}, and adaptive shot allocation by successive elimination \citep{huang2025gambling}, which we ran and which cut shots \speedAdaptiveShots$\times$ at identical error) bring that to \speedAllThree\ --- still about 140$\times$ slower than the classical engine on a CPU and 12,000$\times$ slower than the batched GPU engine. Per shot, the 250\,$\mu$s repetition delay dwarfs the 16--96\,$\mu$s circuit, and each circuit needs thousands of shots to estimate a distribution an FFT computes exactly in microseconds.
 
-\begin{table}[t]
-\caption{Time per window for the same decomposition job. Device rows price the circuits the simulator run actually executed, at the device's calibrated gate and measurement durations; queueing and compilation excluded.}
-\label{tab:speed}
-\centering\small
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{@{}lrrr@{}}
-\toprule
-engine & per window & vs classical CPU & recon.\ error \\
-\midrule
-classical engine, GPU, batch 1,024 & \speedClGPUBatched & 82$\times$ faster & \speedClGPUErr \\
-classical engine, CPU & \speedClCPU & -- & \speedClCPUErr \\
-\qact\ exact simulation, GPU, batch 1,024 (the dequantised program) & \speedQSimBatched & 630$\times$ faster & \speedQSimErr \\
-\qact\ circuits shot by shot, simulator (\speedCircuitsPerWindow\ circuits) & \speedQAer & 971$\times$ slower & \speedQAerErr \\
-IBM Heron, optimised circuits (estimate) & \speedHeron & 13,700$\times$ slower & \\
-\quad + zero repetition delay, multi-programming, adaptive shots & \speedAllThree & 144$\times$ slower & \\
-IBM Heron, original design (estimate) & \speedHeronOrig & $1.1\times10^6\times$ slower & \\
-\bottomrule
-\end{tabular}}
-\end{table}
 
 \section{Discussion}
 \paragraph{What survives.} Three things are genuinely quantum-native in \qact\ and none is an advantage. The frequency axis is free, which saves a constant factor the classical engine buys with a larger grid. The dictionary is gate-native, which removes half of the QRAM assumption in quantum matching pursuit; the other half, the signal, remains, and Proposition~\ref{prop:coherent} shows the residual can be kept coherent at the price of a success probability that equals the unexplained energy. Short atoms run on today's hardware with the right selection, which is a statement about circuit design under noise, not about speed. Everything else that looked like a win had a classical explanation, found by a control, and the sequence is the useful part of the paper: a strong-looking result on real data (17 of 18 subjects, $p<10^{-4}$) was wrong for a reason only the third control revealed, and the pattern recurred for the refiner and the seed band. \citet{bowles2024better} and \citet{schuld2022quantum} argue that quantum learning needs matched baselines and a goal other than advantage; a representation is where the baseline is easiest to match exactly, because the classical peer is a program, not a model class.
@@ -374,6 +354,26 @@ classical, seed grid to 78\,Hz + backfit 1 & \fairBfLowOneErrSix & \fairBfLowOne
 
 \section{Hardware details}
 \label{app:hw}
+\begin{table}[h]
+\caption{Time per window for the same decomposition job. Device rows price the circuits the simulator run actually executed, at the device's calibrated gate and measurement durations; queueing and compilation excluded.}
+\label{tab:speed}
+\centering\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+engine & per window & vs classical CPU & recon.\ error \\
+\midrule
+classical engine, GPU, batch 1,024 & \speedClGPUBatched & 82$\times$ faster & \speedClGPUErr \\
+classical engine, CPU & \speedClCPU & -- & \speedClCPUErr \\
+\qact\ exact simulation, GPU, batch 1,024 (the dequantised program) & \speedQSimBatched & 630$\times$ faster & \speedQSimErr \\
+\qact\ circuits shot by shot, simulator (\speedCircuitsPerWindow\ circuits) & \speedQAer & 971$\times$ slower & \speedQAerErr \\
+IBM Heron, optimised circuits (estimate) & \speedHeron & 13,700$\times$ slower & \\
+\quad + zero repetition delay, multi-programming, adaptive shots & \speedAllThree & 144$\times$ slower & \\
+IBM Heron, original design (estimate) & \speedHeronOrig & $1.1\times10^6\times$ slower & \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
 Circuits are built from Qiskit library components (\texttt{StatePreparation}, \texttt{QFTGate}, \texttt{UCRYGate}) and transpiled with the preset pass manager at optimisation level 3 to the device target (heavy-hex coupling, native CZ, RZ, SX, X, mid-circuit measurement and feed-forward). Gate counts in Fig.~\ref{fig:hardware} are from a Heron target; noisy simulation uses that backend's calibrated noise model. The device run used \texttt{\qpuBackend} through the open plan with dynamical decoupling (XY4) on both jobs and gate and measurement twirling (16 randomisations) on the unitary-QFT job; the dynamic-circuit job could not be twirled. The exact target for every circuit, its transpiled gate counts, the fake-backend prediction, the device counts and the job identifiers are in \texttt{paper/iclr2027/results/}.
 
 \end{document}

@@ -54,29 +54,27 @@ def fmt_p(p):
 def fig_hardware():
     rows = json.load(open(ROOT / "results" / "qact_hardware.json"))
     kinds = ["baseline", "folded", "aqft", "semiclassical", "windowed"]
-    labels = ["baseline", "folded", "approx.\nQFT", "semiclass.\nQFT", "windowed"]
+    labels = ["baseline", "folded", "aQFT", "scQFT", "windowed"]
     widths = [1.5, 2.7, 3.9, 5.1]
-    fig, axes = plt.subplots(1, 3, figsize=(7.0, 2.1))
+    fig, axes = plt.subplots(1, 3, figsize=(7.0, 1.9))
     cz = [np.mean([r["cz"] for r in rows if r["kind"] == k]) for k in kinds]
     fid = [np.mean([r["fidelity"] for r in rows if r["kind"] == k]) for k in kinds]
     sel = [np.mean([r["sel_quality"] for r in rows if r["kind"] == k]) for k in kinds]
     x = np.arange(len(kinds))
     axes[0].bar(x, cz, color=GREY)
     axes[0].set_ylabel("two-qubit gates (CZ)")
-    axes[0].set_xticks(x); axes[0].set_xticklabels(labels, fontsize=6.5, rotation=30, ha="right")
+    axes[0].set_xticks(x); axes[0].set_xticklabels(labels, fontsize=6.5, rotation=35, ha="right")
     axes[1].bar(x - 0.2, fid, 0.4, color=BLUE, label="Hellinger fidelity")
     axes[1].bar(x + 0.2, sel, 0.4, color=RED, label="selected-atom energy")
-    axes[1].set_ylim(0, 1.15); axes[1].set_xticks(x); axes[1].set_xticklabels(labels, fontsize=6.5, rotation=30, ha="right")
+    axes[1].set_ylim(0, 1.15); axes[1].set_xticks(x); axes[1].set_xticklabels(labels, fontsize=6.5, rotation=35, ha="right")
     axes[1].legend(loc="upper left", frameon=False)
     axes[1].set_title("Heron noise model, mean of 12 cases", fontsize=8)
     for k, col, mk in (("folded", GREY, "s"), ("windowed", BLUE, "D")):
         y = [np.mean([r["sel_quality"] for r in rows if r["kind"] == k and r["logdt"] == w]) for w in widths]
         axes[2].plot(widths, y, marker=mk, color=col, label=k)
-    axes[2].set_xlabel("envelope width $\\log\\Delta t$ (log-samples)")
+    axes[2].set_xlabel("envelope width $\\log\\Delta t$")
     axes[2].set_ylabel("selected-atom energy"); axes[2].set_ylim(0, 1.05)
-    axes[2].legend(frameon=False, loc="upper right")
-    for w, k, dy in zip(widths, ("6 q\n142 CZ", "7 q\n291 CZ", "9 q\n1181 CZ", "9 q\n1181 CZ"), (0.12, 0.12, 0.12, 0.12)):
-        axes[2].annotate(k, (w, dy), fontsize=6, ha="center", va="bottom", color="0.35")
+    axes[2].legend(frameon=False, loc="lower left", fontsize=7)
     fig.tight_layout()
     fig.savefig(FIG / "fig_hardware.pdf", bbox_inches="tight")
     plt.close(fig)
@@ -89,17 +87,29 @@ def fig_hardware():
 # ----------------------------------------------------------------------------- real device
 def fig_device():
     files = sorted(glob.glob(str(RES / "qpu_selection_2*.json")) + glob.glob(str(RES / "qpu_selection_marrakesh*.json")))
+    standin = False
     if not files:
-        print("no device results yet")
-        macro("qpuN", "--"); return None
+        files = sorted(glob.glob(str(RES / "qpu_selection_dryrun_*.json")))
+        standin = True
+        if not files:
+            print("no device results yet")
+            macro("qpuN", "--"); return None
     d = json.load(open(files[-1]))
     rows = d["rows"]
+    if standin:
+        # layout stand-in only: device := prediction, marked as such in the figure
+        for r in rows:
+            r.setdefault("device", dict(r["fake_noisy"], counts={}, job_id="none"))
+            r.setdefault("cz_device", r["cz"])
+        d.setdefault("backend", "prediction only")
+        d.setdefault("jobs", {})
+        d.setdefault("quota_before_s", 0.0); d.setdefault("quota_after_s", 0.0)
     short = [r for r in rows if r["qubits"] <= 7]
     long_ = [r for r in rows if r["qubits"] > 7]
     macro("qpuBackend", d["backend"].replace("_", "\\_"))
     macro("qpuN", str(len(rows)))
     macro("qpuShots", f"{d['shots']:,}")
-    macro("qpuJobs", ", ".join(v[0] if isinstance(v, (list, tuple)) else str(v) for v in d["jobs"].values()))
+    macro("qpuJobs", ", ".join(v[0] if isinstance(v, (list, tuple)) else str(v) for v in d["jobs"].values()) or "--")
     macro("qpuShortN", str(len(short)))
     macro("qpuShortPeakOK", str(sum(r["device"]["peak_ok"] for r in short)))
     macro("qpuShortSel", f"{np.mean([r['device']['selected_atom_energy'] for r in short]):.2f}")
@@ -129,14 +139,14 @@ def fig_device():
     p = np.zeros(2 ** m)
     for k, v in cnt.items():
         p[int(k.split()[-1], 2)] += v
-    p /= p.sum()
+    p = p / p.sum() if p.sum() > 0 else p
     # exact target: recompute from the saved case description is not possible without
     # the window, so the exact peak probability and index are read from the record
     ax = axes[0]
     ax.bar(np.arange(2 ** m), p, color=BLUE, width=0.8, label=f"{d['backend']} ({d['shots']:,} shots)")
     ax.axvline(case["want_peak_index"], color=RED, ls="--", lw=1, label="exact in-band peak")
     ax.set_xlabel("measured frequency bin $k'$ (window register)"); ax.set_ylabel("probability")
-    ax.set_title(f"6-qubit windowed circuit, {case['cz_device']} CZ: device histogram", fontsize=8.5)
+    ax.set_title(f"6-qubit windowed circuit, {case['cz_device']} CZ: device histogram" + (" (STAND-IN)" if standin else ""), fontsize=8.5)
     ax.legend(frameon=False, fontsize=7)
     ax = axes[1]
     for v, col, mk in (("dyn", BLUE, "o"), ("uni", RED, "s")):

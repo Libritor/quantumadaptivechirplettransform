@@ -1,0 +1,130 @@
+{
+ "prereg": "paper/iclr2027/PREREG_QPU_LAW.md",
+ "addendum": "paper/iclr2027/notes/qpu_law_prereg_addendum.md",
+ "backend": "ibm_marrakesh",
+ "instance_crn_suffix": "6223ffe6126d",
+ "calibration_last_update": "2026-09-26 02:49:59-04:00",
+ "faulty_qubits_at_submission": [],
+ "pending_jobs_at_submission": 0,
+ "qpy_file": "paper/iclr2027/results/qpu_law_batch_circuits.qpy",
+ "qpy_sha256": "d05153cc51738e87bee5d0126d9b7e4551f1967233c46d86f8a434fb54663486",
+ "design_sha256": "1c527733bbb7bd2162025ba05967cb1f7fccc5ef58dc20601a6ae3f67e2d9895",
+ "submit_script_sha256": "a0dad40f7209a99f9568d5f82732a0638f87f289a6f74b7247b6bc3818e36423",
+ "quota_before": {
+  "remaining_s": 564.0,
+  "consumed_s": 36.0,
+  "limit_s": 600.0,
+  "limit_reached": false,
+  "period": {
+   "start_time": "2026-08-29T07:03:28.713Z",
+   "end_time": "2026-09-26T07:03:28.713Z"
+  }
+ },
+ "estimated_qpu_seconds": {
+  "prereg_estimate_s": 78.0,
+  "prereg_model_s": 69.62470160257898,
+  "total_shots": 224000
+ },
+ "jobs": {
+  "J1_uni_twirl_4k": {
+   "job_id": "darmshbojkfs738ock60",
+   "submitted_utc": "2026-09-26T07:03:33+00:00",
+   "n_pubs": 34,
+   "pub_ids": [
+    "syn_7q_white_noise_uni",
+    "anch_7q_S002R01_Cz_center_uni",
+    "prim_7q_S018R02_Fz_5792_uni",
+    "prim_8q_S011R02_O2_5280_uni",
+    "prim_7q_S009R02_O1_672_uni",
+    "prim_7q_S006R02_Fz_5792_uni",
+    "prim_8q_S017R02_O2_6816_uni",
+    "syn_9q_chirp_pure_uni",
+    "prim_7q_S010R02_Pz_5280_uni",
+    "prim_7q_S020R02_Fz_4768_uni",
+    "prim_7q_S004R02_C4_8352_uni",
+    "prim_6q_S010R02_Fz_7840_uni",
+    "prim_7q_S012R01_O2_2208_uni",
+    "syn_8q_chirp_pure_uni",
+    "prim_6q_S012R02_Oz_2208_uni",
+    "prim_6q_S015R02_O2_2720_uni",
+    "prim_6q_S014R02_Fz_4256_uni",
+    "prim_7q_S015R02_C3_2208_uni",
+    "prim_6q_S011R01_O1_160_uni",
+    "prim_6q_S020R02_C4_1696_uni",
+    "prim_7q_S011R01_O2_4256_uni",
+    "prim_7q_S013R02_Cz_6304_uni",
+    "prim_6q_S006R02_O2_2208_uni",
+    "prim_6q_S013R01_Cz_7840_uni",
+    "prim_6q_S004R02_C4_5280_uni",
+    "syn_8q_chirp_snr1_uni",
+    "prim_6q_S008R01_C3_3232_uni",
+    "prim_8q_S015R02_O1_3744_uni",
+    "anch_6q_S001R01_Cz_center_uni",
+    "prim_7q_S008R02_Oz_1184_uni",
+    "prim_7q_S007R02_Oz_6816_uni",
+    "prim_8q_S007R02_O2_5792_uni",
+    "prim_6q_S009R01_C4_160_uni",
+    "prim_6q_S018R01_C4_6816_uni"
+   ],
+   "shots_per_pub": 4000,
+   "options": {
+    "default_shots": 4000,
+    "dynamical_decoupling": "XY4",
+    "twirling_gates": true,
+    "twirling_measure": true,
+    "num_randomizations": 16,
+    "shots_per_randomization": 250
+   },
+   "runtime_usage_estimation": {
+    "quantum_seconds": null
+   }
+  },
+  "J2_dyn_default_4k": {
+   "job_id": "darmshjojkfs738ock7g",
+   "submitted_utc": "2026-09-26T07:03:34+00:00",
+   "n_pubs": 6,
+   "pub_ids": [
+    "dyn_7q_S010R02_Pz_5280_dyn",
+    "dyn_7q_S020R02_Fz_4768_dyn",
+    "dyn_6q_S015R02_O2_2720_dyn",
+    "dyn_7q_S013R02_Cz_6304_dyn",
+    "dyn_6q_S004R02_C4_5280_dyn",
+    "dyn_6q_S013R01_Cz_7840_dyn"
+   ],
+   "shots_per_pub": 4000,
+   "options": {
+    "default_shots": 4000,
+    "note": "default options: DD and twirling off, as the Sep 25 dynamic job ran after DD was refused"
+   },
+   "runtime_usage_estimation": {
+    "quantum_seconds": null
+   }
+  },
+  "J3_uni_twirl_16k": {
+   "job_id": "darmshtvr3kc73ej5p60",
+   "submitted_utc": "2026-09-26T07:03:35+00:00",
+   "n_pubs": 4,
+   "pub_ids": [
+    "shot16k_7q_S012R01_O2_2208_uni",
+    "shot16k_7q_S008R02_Oz_1184_uni",
+    "shot16k_6q_S008R01_C3_3232_uni",
+    "shot16k_6q_S015R02_O2_2720_uni"
+   ],
+   "shots_per_pub": 16000,
+   "options": {
+    "default_shots": 16000,
+    "dynamical_decoupling": "XY4",
+    "twirling_gates": true,
+    "twirling_measure": true,
+    "num_randomizations": 16,
+    "shots_per_randomization": 1000
+   },
+   "runtime_usage_estimation": {
+    "quantum_seconds": null
+   }
+  }
+ },
+ "execution_mode": "batch",
+ "batch_id": "21324b38-5f95-4dc0-b1d4-79ae33e899e2",
+ "submitted_utc": "2026-09-26T07:03:33+00:00"
+}

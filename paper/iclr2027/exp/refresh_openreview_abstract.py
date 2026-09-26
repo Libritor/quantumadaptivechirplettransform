@@ -9,7 +9,7 @@ num = {}
 for f in ("numbers.tex", "numbers_denoise.tex"):
     if (P / f).exists():
         num.update(re.findall(r"\\newcommand\{\\([A-Za-z]+)\}\{([^}]*)\}", (P / f).read_text(encoding="utf-8")))
-num.update({"qact": "QACT", "act": "ACT"})
+num.update({"qact": "QACT", "act": "ACT", "log": " log"})  # "$O(N\log N)$" -> "O(N log N)"
 txt = re.sub(r"\\([A-Za-z]+)(\\ |\{\})?", lambda m: num.get(m.group(1), m.group(0)) + (" " if m.group(2) == "\\ " else ""), abs_)
 txt = txt.replace(r"\,", " ").replace("$", "").replace("--", "-").replace("~", " ").replace("\\emph{", "")
 txt = re.sub(r"\\([a-zA-Z]+)", "", txt).replace("{", "").replace("}", "").replace("  ", " ")

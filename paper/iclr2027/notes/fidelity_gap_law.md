@@ -361,7 +361,7 @@ the XEB fidelity is computable on every circuit because the target is classicall
    - pure synthetic chirp (PR 4.13): **0.620**, `S* = 2.4e4`;
    - chirp in white noise at energy SNR 1 (PR 8.45): 0.376, `S* = 6.5e4`;
    - SNR 0.1 (PR 49.1): 0.030, `S* = 1.2e6`;
-   - the real EEG window at the same `F` class (PR 42.0): 0.012, `S* ≈ 7e9`.
+   - the real EEG window at its own `F_xeb` of 0.018 to 0.020 (PR 42.0): 0.012, `S*` of 6.6e9 to 8.6e9.
 
    A 9-qubit device run on the synthetic chirp should succeed at a rate near 0.6 while the
    EEG window fails, on the same circuit depth. With the observed `F = 0.018` instead, the

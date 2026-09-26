@@ -1,0 +1,417 @@
+S001  O1 ld1.5 dyn  m=6 CZ=  138 F_xeb= 0.456 gap=0.0024 PR=  6.9 z12=  0.26 P1 pb/cond/mc=0.355/0.478/0.488 P3 cond/mc=0.924/0.930 obs rank=  4 excess=3.00 ro_excess=2.69 S*=   156468
+S001  O1 ld1.5 uni  m=6 CZ=  178 F_xeb= 0.417 gap=0.0024 PR=  6.9 z12=  0.25 P1 pb/cond/mc=0.336/0.465/0.470 P3 cond/mc=0.912/0.921 obs rank=  1 excess=1.22 ro_excess=0.98 S*=   178596
+S001  O1 ld2.7 dyn  m=7 CZ=  294 F_xeb= 0.126 gap=0.0009 PR= 11.5 z12=  0.06 P1 pb/cond/mc=0.000/0.163/0.171 P3 cond/mc=0.361/0.375 obs rank=  1 excess=2.32 ro_excess=2.13 S*=  3246178
+S001  O1 ld2.7 uni  m=7 CZ=  365 F_xeb= 0.182 gap=0.0009 PR= 11.5 z12=  0.08 P1 pb/cond/mc=0.004/0.225/0.227 P3 cond/mc=0.476/0.488 obs rank=  1 excess=1.68 ro_excess=1.48 S*=  1603127
+S001  Cz ld1.5 dyn  m=6 CZ=  138 F_xeb= 0.368 gap=0.0100 PR=  6.3 z12=  0.85 P1 pb/cond/mc=0.798/0.801/0.810 P3 cond/mc=1.000/1.000 obs rank=  1 excess=4.79 ro_excess=4.61 S*=    15056
+S001  Cz ld1.5 uni  m=6 CZ=  178 F_xeb= 0.411 gap=0.0100 PR=  6.3 z12=  0.92 P1 pb/cond/mc=0.818/0.820/0.830 P3 cond/mc=1.000/1.000 obs rank=  1 excess=1.50 ro_excess=1.24 S*=    12873
+S001  Cz ld2.7 dyn  m=7 CZ=  294 F_xeb= 0.185 gap=0.0018 PR=  9.8 z12=  0.14 P1 pb/cond/mc=0.256/0.466/0.481 P3 cond/mc=0.876/0.887 obs rank=  8 excess=2.19 ro_excess=1.98 S*=   572714
+S001  Cz ld2.7 uni  m=7 CZ=  365 F_xeb= 0.258 gap=0.0018 PR=  9.8 z12=  0.18 P1 pb/cond/mc=0.418/0.517/0.543 P3 cond/mc=0.962/0.968 obs rank=  2 excess=1.68 ro_excess=1.34 S*=   331302
+S002  O1 ld1.5 dyn  m=6 CZ=  138 F_xeb= 0.332 gap=0.0153 PR=  4.9 z12=  1.43 P1 pb/cond/mc=0.920/0.922/0.930 P3 cond/mc=1.000/1.000 obs rank=  1 excess=2.24 ro_excess=1.65 S*=     5272
+S002  O1 ld1.5 uni  m=6 CZ=  178 F_xeb= 0.345 gap=0.0153 PR=  4.9 z12=  1.48 P1 pb/cond/mc=0.927/0.929/0.933 P3 cond/mc=1.000/1.000 obs rank=  2 excess=1.42 ro_excess=1.31 S*=     4967
+S002  O1 ld2.7 dyn  m=7 CZ=  294 F_xeb= 0.151 gap=0.0169 PR=  7.3 z12=  0.99 P1 pb/cond/mc=0.757/0.813/0.820 P3 cond/mc=0.984/0.987 obs rank=  1 excess=2.33 ro_excess=2.15 S*=    11121
+S002  O1 ld2.7 uni  m=7 CZ=  365 F_xeb= 0.224 gap=0.0169 PR=  7.3 z12=  1.34 P1 pb/cond/mc=0.898/0.906/0.913 P3 cond/mc=0.999/0.999 obs rank=  1 excess=1.50 ro_excess=1.32 S*=     6063
+S002  Cz ld1.5 dyn  m=6 CZ=  138 F_xeb= 0.494 gap=0.0257 PR=  6.3 z12=  2.92 P1 pb/cond/mc=0.998/0.998/0.998 P3 cond/mc=1.000/1.000 obs rank=  1 excess=3.58 ro_excess=3.21 S*=     1266
+S002  Cz ld1.5 uni  m=6 CZ=  178 F_xeb= 0.415 gap=0.0257 PR=  6.3 z12=  2.58 P1 pb/cond/mc=0.995/0.995/0.996 P3 cond/mc=1.000/1.000 obs rank=  1 excess=1.39 ro_excess=1.14 S*=     1625
+S002  Cz ld2.7 dyn  m=7 CZ=  294 F_xeb= 0.161 gap=0.0132 PR= 11.2 z12=  0.82 P1 pb/cond/mc=0.651/0.753/0.761 P3 cond/mc=0.966/0.973 obs rank=  9 excess=1.76 ro_excess=1.67 S*=    16117
+S002  Cz ld2.7 uni  m=7 CZ=  365 F_xeb= 0.252 gap=0.0132 PR= 11.2 z12=  1.16 P1 pb/cond/mc=0.857/0.871/0.881 P3 cond/mc=0.997/0.998 obs rank=  1 excess=1.20 ro_excess=1.10 S*=     8060
+S003  O1 ld1.5 dyn  m=6 CZ=  138 F_xeb= 0.302 gap=0.0049 PR=  8.0 z12=  0.38 P1 pb/cond/mc=0.400/0.512/0.521 P3 cond/mc=0.943/0.951 obs rank=  1 excess=3.13 ro_excess=3.02 S*=    74984
+S003  O1 ld1.5 uni  m=6 CZ=  178 F_xeb= 0.363 gap=0.0049 PR=  8.0 z12=  0.44 P1 pb/cond/mc=0.446/0.544/0.549 P3 cond/mc=0.964/0.969 obs rank=  2 excess=1.56 ro_excess=1.51 S*=    56914
+S003  O1 ld2.7 dyn  m=7 CZ=  294 F_xeb= 0.190 gap=0.0011 PR= 14.1 z12=  0.09 P1 pb/cond/mc=0.094/0.360/0.372 P3 cond/mc=0.714/0.732 obs rank=  5 excess=1.95 ro_excess=1.84 S*=  1381879
+S003  O1 ld2.7 uni  m=7 CZ=  365 F_xeb= 0.218 gap=0.0011 PR= 14.1 z12=  0.10 P1 pb/cond/mc=0.139/0.388/0.405 P3 cond/mc=0.759/0.777 obs rank=  4 excess=1.47 ro_excess=1.29 S*=  1098274
+S003  Cz ld1.5 dyn  m=6 CZ=  138 F_xeb= 0.388 gap=0.0030 PR=  9.1 z12=  0.31 P1 pb/cond/mc=0.497/0.576/0.584 P3 cond/mc=0.969/0.974 obs rank=  5 excess=2.48 ro_excess=2.31 S*=   113428
+S003  Cz ld1.5 uni  m=6 CZ=  178 F_xeb= 0.341 gap=0.0030 PR=  9.1 z12=  0.28 P1 pb/cond/mc=0.459/0.552/0.554 P3 cond/mc=0.956/0.961 obs rank=  1 excess=1.22 ro_excess=1.14 S*=   139507
+S003  Cz ld2.7 dyn  m=7 CZ=  294 F_xeb= 0.121 gap=0.0005 PR= 16.6 z12=  0.03 P1 pb/cond/mc=0.000/0.113/0.125 P3 cond/mc=0.277/0.299 obs rank= 11 excess=2.01 ro_excess=1.81 S*= 12663668
+S003  Cz ld2.7 uni  m=7 CZ=  365 F_xeb= 0.185 gap=0.0005 PR= 16.6 z12=  0.04 P1 pb/cond/mc=0.001/0.149/0.157 P3 cond/mc=0.357/0.376 obs rank=  6 excess=1.60 ro_excess=1.36 S*=  5633268
+S001  O1 ld3.9 dyn  m=9 CZ= 1136 F_xeb= 0.018 gap=0.0001 PR= 42.0 z12=  0.00 P1 pb/cond/mc=0.000/0.012/0.015 P3 cond/mc=0.034/0.045 obs rank= 65 excess=1.08 ro_excess=1.08 S*=8619997591
+S001  O1 ld3.9 uni  m=9 CZ= 1197 F_xeb= 0.020 gap=0.0001 PR= 42.0 z12=  0.00 P1 pb/cond/mc=0.000/0.012/0.016 P3 cond/mc=0.035/0.048 obs rank= 94 excess=1.11 ro_excess=1.09 S*=6615354595
+
+{
+ "n_rows": 26,
+ "device_peak_ok": 13,
+ "predicted_expected_successes": 14.339794090542435,
+ "predicted_expected_successes_mc": 14.5524,
+ "predicted_expected_successes_readout_model": 12.647389449232481,
+ "brier_law": 0.20193472238241658,
+ "brier_constant": 0.25,
+ "auc_law_top1": 0.7692307692307693,
+ "auc_z_top1": 0.7869822485207101,
+ "auc_Fxeb_top1": 0.6686390532544378,
+ "device_top3": 16,
+ "predicted_top3": 20.46376540513983,
+ "auc_law_top3": 0.85625,
+ "device_top5": 20,
+ "predicted_top5": 21.83370156387177,
+ "fake_peak_ok": 19,
+ "predicted_fake_successes": 17.458961372991144,
+ "auc_law_fake": 0.8721804511278195,
+ "closed_form_vs_mc_max_abs_err_top1": 0.02530278072507741,
+ "closed_form_vs_mc_mean_abs_err_top1": 0.008184876749957826,
+ "closed_form_vs_mc_max_abs_err_top3": 0.021391335534196254,
+ "pairwise_indep_vs_mc_max_abs_err_top1": 0.2772825727817231,
+ "pairwise_indep_vs_mc_mean_abs_err_top1": 0.0972170389966899,
+ "pairwise_indep_vs_mc_max_abs_err_top3": 0.37762031622340275,
+ "median_excess_ratio_depol": 1.6765813287257711,
+ "median_excess_ratio_readout": 1.4987198525035286,
+ "median_readout_e01": 0.13,
+ "median_readout_e10": 0.113,
+ "rows_with_shots_ge_Sstar": 2,
+ "peak_ok_when_shots_ge_Sstar": 2,
+ "peak_ok_when_shots_lt_Sstar": 11,
+ "failures_predicted_safe": [
+  "S002 O1 ld1.5 uni"
+ ],
+ "fit_logF_vs_cz": {
+  "all": {
+   "eps_per_cz": 0.0029097182512809205,
+   "A": 0.5397090104646568,
+   "n": 26,
+   "r2_log": 0.8886528154333446
+  },
+  "dyn": {
+   "eps_per_cz": 0.003092530381109156,
+   "A": 0.4820094524494892,
+   "n": 13,
+   "r2_log": 0.8929814408273653
+  },
+  "uni": {
+   "eps_per_cz": 0.002869671870336222,
+   "A": 0.6281618348078776,
+   "n": 13,
+   "r2_log": 0.9791985864286904
+  }
+ },
+ "fit_small_only": {
+  "eps_per_cz": 0.003493185418720553,
+  "A": 0.6192465044068913
+ },
+ "out_of_sample_9q": [
+  {
+   "case": "S001 O1 ld3.9 dyn",
+   "cz": 1136,
+   "F_pred": 0.011707677085817885,
+   "F_xeb_obs": 0.017945563310447596,
+   "p_top1_pred": 0.011124348104970606,
+   "p_top3_pred": 0.032525024274284935,
+   "obs_rank": 65
+  },
+  {
+   "case": "S001 O1 ld3.9 uni",
+   "cz": 1197,
+   "F_pred": 0.00946083340783461,
+   "F_xeb_obs": 0.020496792610378674,
+   "p_top1_pred": 0.010852546045707546,
+   "p_top3_pred": 0.03185690525857691,
+   "obs_rank": 94
+  }
+ ],
+ "by_variant": {
+  "dyn": {
+   "median_excess_depol": 2.3163206525078066,
+   "median_excess_readout": 2.1290579998692034,
+   "peak_ok": 6,
+   "predicted": 6.967146576075227,
+   "top3_obs": 6,
+   "top3_pred": 10.04770872090063
+  },
+  "uni": {
+   "median_excess_depol": 1.4670627798901317,
+   "median_excess_readout": 1.2930729850630907,
+   "peak_ok": 7,
+   "predicted": 7.372647514467208,
+   "top3_obs": 10,
+   "top3_pred": 10.4160566842392
+  }
+ },
+ "F_from_cz_fit": {
+  "predicted_top1": 14.457741583912957,
+  "auc_top1": 0.7751479289940828,
+  "brier": 0.19670635872175363,
+  "predicted_top3": 20.748468267561233,
+  "auc_top3": 0.88125
+ },
+ "intrinsic_neighbour_ratio": {
+  "1.5": {
+   "qubits": 6,
+   "bin_step": 8,
+   "p1": 0.2482370953525582,
+   "p2": 0.20454626382248683,
+   "p2_over_p1": 0.8239955576823861,
+   "pr": 5.6970275145240485,
+   "gaussian_prediction_p2_over_p1": 0.8239955576823854
+  },
+  "2.7": {
+   "qubits": 7,
+   "bin_step": 4,
+   "p1": 0.4120880829515686,
+   "p2": 0.24171094127690484,
+   "p2_over_p1": 0.5865516409638867,
+   "pr": 3.4311639743034483,
+   "gaussian_prediction_p2_over_p1": 0.5865516409638861
+  },
+  "3.9": {
+   "qubits": 9,
+   "bin_step": 1,
+   "p1": 0.3420450104158586,
+   "p2": 0.2368419417917271,
+   "p2_over_p1": 0.6924291674472154,
+   "pr": 4.134569306575434,
+   "gaussian_prediction_p2_over_p1": 0.6924285014400983
+  }
+ },
+ "near_optimal_eta": 0.9,
+ "device_energy_ge_0p9": 17,
+ "predicted_energy_ge_0p9": 19.36355,
+ "prereg_p_top1_vs_shots": {
+  "S001 O1 ld1.5 dyn": {
+   "4000": 0.4782,
+   "16000": 0.6349,
+   "64000": 0.8416
+  },
+  "S001 O1 ld1.5 uni": {
+   "4000": 0.4652,
+   "16000": 0.6172,
+   "64000": 0.8219
+  },
+  "S001 O1 ld2.7 dyn": {
+   "4000": 0.1628,
+   "16000": 0.2844,
+   "64000": 0.449
+  },
+  "S001 O1 ld2.7 uni": {
+   "4000": 0.2248,
+   "16000": 0.3694,
+   "64000": 0.5386
+  },
+  "S001 Cz ld1.5 dyn": {
+   "4000": 0.8009,
+   "16000": 0.955,
+   "64000": 0.9997
+  },
+  "S001 Cz ld1.5 uni": {
+   "4000": 0.82,
+   "16000": 0.9666,
+   "64000": 0.9999
+  },
+  "S001 Cz ld2.7 dyn": {
+   "4000": 0.4656,
+   "16000": 0.5848,
+   "64000": 0.7081
+  },
+  "S001 Cz ld2.7 uni": {
+   "4000": 0.5173,
+   "16000": 0.6323,
+   "64000": 0.7651
+  },
+  "S002 O1 ld1.5 dyn": {
+   "4000": 0.9223,
+   "16000": 0.9979,
+   "64000": 1.0
+  },
+  "S002 O1 ld1.5 uni": {
+   "4000": 0.9287,
+   "16000": 0.9984,
+   "64000": 1.0
+  },
+  "S002 O1 ld2.7 dyn": {
+   "4000": 0.8129,
+   "16000": 0.9757,
+   "64000": 1.0
+  },
+  "S002 O1 ld2.7 uni": {
+   "4000": 0.9058,
+   "16000": 0.9962,
+   "64000": 1.0
+  },
+  "S002 Cz ld1.5 dyn": {
+   "4000": 0.9983,
+   "16000": 1.0,
+   "64000": 1.0
+  },
+  "S002 Cz ld1.5 uni": {
+   "4000": 0.995,
+   "16000": 1.0,
+   "64000": 1.0
+  },
+  "S002 Cz ld2.7 dyn": {
+   "4000": 0.7532,
+   "16000": 0.9491,
+   "64000": 0.9995
+  },
+  "S002 Cz ld2.7 uni": {
+   "4000": 0.8712,
+   "16000": 0.9897,
+   "64000": 1.0
+  },
+  "S003 O1 ld1.5 dyn": {
+   "4000": 0.5121,
+   "16000": 0.6951,
+   "64000": 0.9189
+  },
+  "S003 O1 ld1.5 uni": {
+   "4000": 0.5437,
+   "16000": 0.7407,
+   "64000": 0.9506
+  },
+  "S003 O1 ld2.7 dyn": {
+   "4000": 0.3602,
+   "16000": 0.5135,
+   "64000": 0.6346
+  },
+  "S003 O1 ld2.7 uni": {
+   "4000": 0.3877,
+   "16000": 0.5374,
+   "64000": 0.6527
+  },
+  "S003 Cz ld1.5 dyn": {
+   "4000": 0.5757,
+   "16000": 0.729,
+   "64000": 0.8917
+  },
+  "S003 Cz ld1.5 uni": {
+   "4000": 0.5519,
+   "16000": 0.7061,
+   "64000": 0.8674
+  },
+  "S003 Cz ld2.7 dyn": {
+   "4000": 0.1131,
+   "16000": 0.172,
+   "64000": 0.2502
+  },
+  "S003 Cz ld2.7 uni": {
+   "4000": 0.149,
+   "16000": 0.2183,
+   "64000": 0.3049
+  }
+ },
+ "prereg_synthetic_9q": [
+  {
+   "snr_energy": "inf",
+   "qubits": 9,
+   "peak_bin": 64,
+   "p1": 0.1710224969837113,
+   "p2": 0.11842096495885876,
+   "pr_inband": 4.13456930636722,
+   "F_fit_1136cz": {
+    "F": 0.019798183505608656,
+    "S_star_95": 23844.43013318194,
+    "p_top1_at_4000": 0.6199352270628937
+   },
+   "F_obs_9q": {
+    "F": 0.018,
+    "S_star_95": 27297.470697279638,
+    "p_top1_at_4000": 0.5956217015181483
+   }
+  },
+  {
+   "snr_energy": 1.0,
+   "qubits": 9,
+   "peak_bin": 64,
+   "p1": 0.08523825342886304,
+   "p2": 0.058666451520813206,
+   "pr_inband": 8.448736637866917,
+   "F_fit_1136cz": {
+    "F": 0.019798183505608656,
+    "S_star_95": 65281.174154187334,
+    "p_top1_at_4000": 0.3756866172102574
+   },
+   "F_obs_9q": {
+    "F": 0.018,
+    "S_star_95": 75998.980778401,
+    "p_top1_at_4000": 0.33349872662428853
+   }
+  },
+  {
+   "snr_energy": 0.1,
+   "qubits": 9,
+   "peak_bin": 64,
+   "p1": 0.015761665037308446,
+   "p2": 0.01070872767091268,
+   "pr_inband": 49.12276505828646,
+   "F_fit_1136cz": {
+    "F": 0.019798183505608656,
+    "S_star_95": 1176797.0479861395,
+    "p_top1_at_4000": 0.030485734096360382
+   },
+   "F_obs_9q": {
+    "F": 0.018,
+    "S_star_95": 1410393.6299221755,
+    "p_top1_at_4000": 0.027905198527825192
+   }
+  }
+ ],
+ "proposer_verifier": {
+  "k1": {
+   "exact_best_recovered": 13,
+   "mean_energy_ratio": 0.7837942896474426,
+   "min_energy_ratio_6_7q": 0.00015464916764557825
+  },
+  "k2": {
+   "exact_best_recovered": 16,
+   "mean_energy_ratio": 0.8499562183511737,
+   "min_energy_ratio_6_7q": 0.0017248548359181089
+  },
+  "k3": {
+   "exact_best_recovered": 16,
+   "mean_energy_ratio": 0.8578332648519283,
+   "min_energy_ratio_6_7q": 0.05308712972625151
+  },
+  "k5": {
+   "exact_best_recovered": 20,
+   "mean_energy_ratio": 0.9039956984730095,
+   "min_energy_ratio_6_7q": 0.29719343940765686
+  },
+  "k8": {
+   "exact_best_recovered": 22,
+   "mean_energy_ratio": 0.9453001039494416,
+   "min_energy_ratio_6_7q": 0.49142153247619974
+  }
+ },
+ "S_star_range_6_7q": [
+  1265.712779899795,
+  12663667.827592548
+ ],
+ "S_star_9q": [
+  8619997590.819143,
+  6615354595.389855
+ ],
+ "F_xeb_range_by_m": {
+  "6": [
+   0.30163770243541815,
+   0.49388887425292516
+  ],
+  "7": [
+   0.1208049719557878,
+   0.2577251867952764
+  ],
+  "9": [
+   0.017945563310447596,
+   0.020496792610378674
+  ]
+ },
+ "PR_inband_range_by_m": {
+  "6": [
+   4.924812010712394,
+   9.097744518005854
+  ],
+  "7": [
+   7.278967782091719,
+   16.573709202912905
+  ],
+  "9": [
+   41.97425594751695,
+   41.97425594751695
+  ]
+ },
+ "M_inband_by_m": {
+  "6": 13,
+  "7": 26,
+  "9": 104
+ },
+ "auc_gap_top1": 0.7958579881656804,
+ "auc_negPR_top1": 0.7840236686390533,
+ "variance_regimes": {
+  "signal": 18,
+  "floor": 8
+ }
+}
+wrote C:\Users\alexa\quantumadaptivechirplettransform\paper\iclr2027\results\qpu_law_check.json
